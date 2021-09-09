@@ -4,8 +4,9 @@ const mongoose = require('mongoose')
 dotenv.config({path: './backend/config.env'})
 
 const app = require('./app')
-
-const DB = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD)
+console.log(process.env.DATABASE_PASSWORD)
+// const DB = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD)
+const DB = "mongodb+srv://khizer:dtLytOXdkmcGBk3c@cluster0.znqnu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 mongoose
     .connect(DB,{

@@ -10,7 +10,7 @@ const Header = () => {
                     <span className={styles.logoCart}>Cart</span>
                 </div>
                 <button className={styles.loginButtion}>
-                    Login
+                    <span>Login</span>
                 </button>
                 <button className={styles.cartWrapper}>
                     <i class="fi-rr-shopping-cart"></i>
@@ -29,7 +29,7 @@ const Header = () => {
             </div>
             <div className={styles.desktop}>
                 <button className={styles.loginButtion}>
-                    Login
+                    <span>Login</span>
                 </button>
                 <button className={styles.cartWrapper}>
                     <i class="fi-rr-shopping-cart"></i>

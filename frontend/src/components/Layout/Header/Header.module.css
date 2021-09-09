@@ -99,7 +99,35 @@
     border-radius: 2px;
     height: 35px;
     width: 90px;
-    /* transition: all .3s ease-in-out; */
+    transition: all 0.5s;
+}
+
+.loginButtion span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    color: rgb(31, 121, 255);
+    font-weight: bold;
+    font-size: 12px;
+    transition: 0.5s;
+  }
+  
+.loginButtion span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.loginButtion:hover span {
+    padding-right: 25px;
+}
+  
+.loginButtion:hover span:after {
+    opacity: 1;
+    right: 0;
 }
 
 .cartWrapper{
