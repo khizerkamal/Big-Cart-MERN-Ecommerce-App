@@ -7,7 +7,7 @@ const AppError = require('../utils/appError')
 //     message: err.message,
 //     stack: err.stack,
 //   })
-// }
+// }  
 
 // const sendErrorProd = (err, res) => {
 //   res.status(err.statusCode).json({

@@ -3,7 +3,8 @@ const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 const APIFeatures = require('../utils/APIFeatures')
 
-exports.createProduct = catchAsync(async(req, res, next) => {
+exports.createProduct = catchAsync(async (req,res,next) => {
+    req.body.user = req.user.id;
     const newProduct = await Product.create(req.body)
 
     res.status(201).json({
@@ -19,7 +20,7 @@ exports.getAllProducts = catchAsync(async(req, res, next) => {
     
     const features = new APIFeatures(Product.find(), req.query)
         .search()
-            .filter()
+        .filter()
         .paginate()
     
     const products = await features.query;

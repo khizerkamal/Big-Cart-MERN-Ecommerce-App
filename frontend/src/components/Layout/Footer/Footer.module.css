@@ -1,0 +1,11 @@
+.footerWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+}
+.footerWrapper{
+    font-size: 15px;
+    color: #6e6e6e;
+    font-weight: bold;
+}

@@ -7,8 +7,8 @@ class APIFeatures {
     search() {
         const keyword = this.queryStr.keyword ? {
             name: {
-                $regex: this.queryStr.keyword,
-                $options: "i"
+                $regex: this.queryStr.keyword,     // used regex cuz if user enters only a will have to show result
+                $options: "i"   //case insensitive
             }
         } : {}
 
