@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
+    margin: 20px 0;
 }
 .footerWrapper{
     font-size: 15px;

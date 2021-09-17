@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <div className={styles.component}>
             {navData.map(el => (
-                <div className={styles.container}>
+                <div key={el._id} className={styles.container}>
                     <img className={styles.image} src={el.url} alt="" />
                     <h3 className={styles.text}>{el.text}</h3>
                 </div>

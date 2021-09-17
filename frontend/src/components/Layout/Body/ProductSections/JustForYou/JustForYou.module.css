@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+}
+.loaderWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

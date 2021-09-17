@@ -15,7 +15,7 @@ exports.createProduct = catchAsync(async (req,res,next) => {
     })
 })
 
-exports.getAllProducts = catchAsync(async(req, res, next) => {
+exports.getAllProducts = catchAsync(async (req,res,next) => {
     const productCount = await Product.countDocuments();
     
     const features = new APIFeatures(Product.find(), req.query)
@@ -29,9 +29,7 @@ exports.getAllProducts = catchAsync(async(req, res, next) => {
         status: 'success',
         result: products.length,
         totalProducts: productCount,
-        data: {
-            products
-        }
+        products
     })
 })
 

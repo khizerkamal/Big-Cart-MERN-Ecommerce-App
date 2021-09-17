@@ -6,7 +6,8 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(authController.protect, productController.getAllProducts)
+    // .get(authController.protect, productController.getAllProducts)
+    .get(productController.getAllProducts)
     .post(authController.protect, authController.restrictTo('admin'), productController.createProduct)
 
 router
