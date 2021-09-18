@@ -17,11 +17,11 @@ exports.createProduct = catchAsync(async (req,res,next) => {
 
 exports.getAllProducts = catchAsync(async (req,res,next) => {
     const productCount = await Product.countDocuments();
-    
+    const resPerPage = 7;
     const features = new APIFeatures(Product.find(), req.query)
         .search()
         .filter()
-        .paginate()
+        .paginate(resPerPage)
     
     const products = await features.query;
 
@@ -29,22 +29,19 @@ exports.getAllProducts = catchAsync(async (req,res,next) => {
         status: 'success',
         result: products.length,
         totalProducts: productCount,
+        resPerPage,
         products
     })
 })
 
 exports.getProduct = catchAsync(async (req,res,next) => {
     const product = await Product.findById(req.params.id);
-
     if (!product) {
         return next(new AppError('No Product found with this id', 404))
     }
-
     res.status(200).json({
         status: 'success',
-        data: {
-            product
-        }
+        product
     })
 
 })

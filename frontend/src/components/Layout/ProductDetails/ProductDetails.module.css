@@ -1,3 +1,9 @@
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -5,19 +11,18 @@
     max-width: 90%;
     /* border: 1px solid red; */
     margin-top: 60px;
-    height: 100vh;
+    margin-bottom: 60px;
 }
-@media only screen and (max-width: 720px){
-    .container{
-        flex-wrap: wrap;
-        height: 140vh;
-    }
-}
+
 .left{
     /* border: 1px solid green; */
 }
 .left img{
     max-width: 300px;
+}
+.image{
+    width: 200px;
+    /* height: px; */
 }
 .right{
     /* border: 1px solid orange; */
@@ -34,6 +39,8 @@
     font-size: 12px;
 }
 .ratingsWrapper{
+    display: flex;
+    align-items: center;
     margin: 20px 0;
     padding: 15px 0;
     border-top: 1px solid rgb(226, 226, 226);
@@ -46,6 +53,26 @@
     margin-left: 5px;
     color: rgb(145, 145, 145);
 }
+.logoWrapper{
+    width: 70px;
+    background: rgb(31, 121, 255);
+    display: flex;
+    align-items: center;
+    padding: 3px 3px;
+    border-radius: 20px;
+    font-family: 'Parisienne', cursive;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 20px;
+}
+.logoWrapper img{
+    width: 17px;
+    margin-right: 4px;
+}
+.logoBig{
+    color: #fff;
+}
+
 .price{
     font-size: 25px;
     font-weight: bold;
@@ -120,6 +147,9 @@
     margin-top: 8px;
     color: rgb(94, 94, 94);
 }
+.seller{
+    margin-top: 15px;
+}
 .reviewBtn{
     margin-top: 20px;
     display: flex;
@@ -131,4 +161,50 @@
     padding: 11px 20px;
     background:#ffa500;
     cursor: pointer;
+}
+.green{
+    color: green;
+}
+.red{
+    color: rgb(233, 92, 37);
+}
+
+/* Ratings */
+.ratings {
+    font-size: 0.8rem;
+    color: #fdcc0d;
+  }
+.ratingouter {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    color: #fdcc0d;
+  }
+  
+  .ratingouter::before {
+    content: '\f006 \f006 \f006 \f006 \f006';
+  }
+  
+  .ratinginner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+  
+  .ratinginner::before {
+    content: '\f005 \f005 \f005 \f005 \f005';
+    color: #f8ce0b;
+  }
+  
+  @media only screen and (max-width: 720px){
+    .container{
+        flex-wrap: wrap;
+    }
+    .reviewBtn{
+        margin: 0 auto;
+        margin-top: 25px;
+    }
 }

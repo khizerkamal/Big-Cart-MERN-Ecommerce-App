@@ -1,6 +1,6 @@
 .container{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .heading{
@@ -14,4 +14,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.paginationWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

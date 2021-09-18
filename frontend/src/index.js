@@ -12,7 +12,6 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 }
-
 ReactDOM.render(
   <Provider store={store}>
     <AlertProvider template={AlertTemplate} {...options}>

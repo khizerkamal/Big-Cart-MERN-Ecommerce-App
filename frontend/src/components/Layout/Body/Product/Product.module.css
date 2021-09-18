@@ -87,3 +87,35 @@
 .logoCart{
     color: rgb(226, 223, 30);
 }
+
+/* Stars Rating */
+/* Ratings */
+.ratings {
+    font-size: 0.8rem;
+    color: #fdcc0d;
+  }
+.ratingouter {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    color: #fdcc0d;
+  }
+  
+  .ratingouter::before {
+    content: '\f006 \f006 \f006 \f006 \f006';
+  }
+  
+  .ratinginner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+  
+  .ratinginner::before {
+    content: '\f005 \f005 \f005 \f005 \f005';
+    color: #f8ce0b;
+  }
+  

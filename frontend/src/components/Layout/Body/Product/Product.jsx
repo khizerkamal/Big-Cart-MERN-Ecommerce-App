@@ -16,12 +16,10 @@ const Product = ({ product }) => {
                 </div>
                 <div className={styles.details}>
                     <h3 className={styles.name}>{product.name}</h3>
-                    <div className={styles.starsWrapper}>
-                        <img src="/images/star-filled.svg" alt="star-filled" />
-                        <img src="/images/star-filled.svg" alt="star-filled" />
-                        <img src="/images/star-filled.svg" alt="star-filled" />
-                        <img src="/images/star-filled.svg" alt="star-filled" />
-                        <img src="/images/star-filled.svg" alt="star-filled" />
+                    <div className={`${styles.starsWrapper} ${styles.ratings}`}>
+                        <div className={styles.ratingouter}>
+                            <div className={styles.ratinginner} style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
+                        </div>
                         <span className={styles.reviews}>({product.numOfReviews})</span>
                     </div>
                     <h3 className={styles.price}>Rs: {product.price}</h3>
