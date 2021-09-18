@@ -7,14 +7,14 @@ import { useAlert } from 'react-alert'
 import styles from './JustForYou.module.css'
 import { Pagination } from '@mui/material';
 
-const JustForYou = () => {
+const JustForYou = ({ match }) => {
     const [ currentPage,setCurrentPage ] = useState(1)
     const { loading,products,totalProducts,resPerPage,error } = useSelector(state => state.products)
     const pages = Math.ceil(totalProducts / resPerPage);
     const handleChange = (event,value) => {
         setCurrentPage(value);
     };
-
+    const keyword = match.params.keyword;
     const dispatch = useDispatch();
     const alert = useAlert();
     // Getting All Products from DB and Set in Redux
@@ -22,8 +22,8 @@ const JustForYou = () => {
         if (error) {
             return alert.error(error)
         }
-        dispatch(getProducts(currentPage));
-    },[ dispatch,alert,error,currentPage ])
+        dispatch(getProducts(keyword,currentPage));
+    },[ dispatch,alert,error,currentPage,keyword ])
     return (
         <>
             {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (

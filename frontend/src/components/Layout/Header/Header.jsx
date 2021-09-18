@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './Header.module.css'
+import { Route } from 'react-router-dom'
+import Search from './Search/Search'
 
 const Header = () => {
     return (
@@ -25,10 +27,7 @@ const Header = () => {
                 <span className={styles.logoBig}>Big</span>
                 <span className={styles.logoCart}>Cart</span>
             </div>
-            <div className={styles.searchBox}>
-                <img src="/images/search-icon.png" alt="search" />
-                <input type="text" className={styles.searchInput} placeholder="Enter Product Name ..." />
-            </div>
+            <Route render={({ history }) => <Search history={history} />} />
             <div className={styles.desktop}>
                 <button className={styles.loginButtion}>
                     <span>Login</span>

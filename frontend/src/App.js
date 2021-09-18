@@ -12,6 +12,7 @@ function App() {
           <Header />
           <Route path="/" component={Body} exact />
           <Route path="/product/:id" component={ProductDetails} />
+          <Route path="/search/:keyword" component={Body} />
           <Footer />
         </div>
     </Router>
