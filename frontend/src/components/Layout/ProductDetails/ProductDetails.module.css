@@ -1,0 +1,134 @@
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    max-width: 90%;
+    /* border: 1px solid red; */
+    margin-top: 60px;
+    height: 100vh;
+}
+@media only screen and (max-width: 720px){
+    .container{
+        flex-wrap: wrap;
+        height: 140vh;
+    }
+}
+.left{
+    /* border: 1px solid green; */
+}
+.left img{
+    max-width: 300px;
+}
+.right{
+    /* border: 1px solid orange; */
+    max-width: 500px;
+}
+.name{
+    color: rgb(75, 75, 75);
+    font-weight: bold;
+    font-size: 25px;
+    /* margin-bottom: 5px; */
+}
+.productId{
+    color: rgb(102, 102, 102);
+    font-size: 12px;
+}
+.ratingsWrapper{
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+.ratingsWrapper img{
+    width: 12px;
+}
+.reviews{
+    margin-left: 5px;
+    color: rgb(145, 145, 145);
+}
+.price{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(41, 41, 41);
+    margin: 20px 0;
+}
+.addToCartWrapper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.subtractButton{
+    background: rgb(223, 42, 42);
+    border-radius: 3px;
+    width: 23px;
+    height: 25px;
+    color: #fff;
+}
+.quantity{
+    margin: 0 15px;
+    color: rgb(100, 100, 100);
+}
+.addButton{
+    background: rgb(36, 120, 231);
+    border-radius: 3px;
+    font-size: 15px;
+    width: 23px;
+    height: 25px;
+    color: #fff;
+}
+.AddProdButton{
+    margin: 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 30px;
+    padding: 9px 20px;
+    background:#ffa500;
+    cursor: pointer;
+}
+.AddProdButton img{
+    width: 15px;
+    background: none;
+    margin-right: 5px;
+}
+.statusWrapper{
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    font-size: 15px;
+    color: rgb(102, 101, 101);
+}
+.status{
+    margin-left: 8px;
+    font-weight: bold;
+    color: rgb(53, 53, 53);
+}
+.descriptionWrapper{
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+.descriptionHeading{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(51, 51, 51);
+}
+.description{
+    font-size: 16px;
+    margin-top: 8px;
+    color: rgb(94, 94, 94);
+}
+.reviewBtn{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 5px;
+    padding: 11px 20px;
+    background:#ffa500;
+    cursor: pointer;
+}
