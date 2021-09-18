@@ -49,16 +49,4 @@ body{
   background-clip: padding-box;
   border-radius: 5px;
 }
-/* Pagination */
-.page-item.active .page-link {
-  background-color: #fa9c23;
-  border-color: #fa9c23;
-}
 
-.page-link {
-  color: #fa9c23;
-}
-
-.page-link:hover {
-  color: #fa9c23;
-}

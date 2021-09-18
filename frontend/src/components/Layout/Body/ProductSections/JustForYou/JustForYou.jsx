@@ -4,17 +4,16 @@ import Product from '../../Product/Product';
 import { getProducts } from '../../../../../store/actions/productsAction';
 import Loader from '../../../Loader/Loader';
 import { useAlert } from 'react-alert'
-import Pagination from 'react-js-pagination'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './JustForYou.module.css'
+import { Pagination } from '@mui/material';
 
 const JustForYou = () => {
     const [ currentPage,setCurrentPage ] = useState(1)
     const { loading,products,totalProducts,resPerPage,error } = useSelector(state => state.products)
-
-    function setCurrentPageNo(pageNumber) {
-        setCurrentPage(pageNumber)
-    }
+    const pages = Math.ceil(totalProducts / resPerPage);
+    const handleChange = (event,value) => {
+        setCurrentPage(value);
+    };
 
     const dispatch = useDispatch();
     const alert = useAlert();
@@ -41,16 +40,11 @@ const JustForYou = () => {
                     </div>
                     <div className={styles.paginationWrapper}>
                         <Pagination
-                            activePage={currentPage}
-                            itemsCountPerPage={resPerPage}
-                            totalItemsCount={totalProducts}
-                            onChange={setCurrentPageNo}
-                            nextPageText={'Next'}
-                            prevPageText={'Prev'}
-                            firstPageText={'First'}
-                            lastPageText={'Last'}
-                            itemClass="page-item"
-                            linkClass="page-link"
+                            count={pages}
+                            page={currentPage}
+                            onChange={handleChange}
+                            showFirstButton={true}
+                            showLastButton={true}
                         />
                     </div>
                 </div>
