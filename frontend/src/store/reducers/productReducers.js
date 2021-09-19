@@ -22,8 +22,7 @@ export const productReducer = (state = { products: [] },action) => {
             return {
                 loading: false,
                 products: action.payload.products,
-                totalProducts: action.payload.totalProducts,
-                // resPerPage: action.payload.resPerPage
+                totalProducts: action.payload.totalProducts
             }
         case ALL_PRODUCTS_FAIL:
             return {
@@ -79,7 +78,8 @@ export const searchProductReducer = (state = { searchedProducts: [] },action) =>
             return {
                 loading: false,
                 products: action.payload.products,
-                totalProducts: action.payload.totalProducts
+                totalProducts: action.payload.totalProducts,
+                filteredProductsCount: action.payload.filteredProductsCount
             }
         case SEARCH_PRODUCTS_FAIL:
             return {

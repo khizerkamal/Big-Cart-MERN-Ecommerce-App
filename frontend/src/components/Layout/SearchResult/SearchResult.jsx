@@ -20,8 +20,9 @@ const SearchResult = ({ match }) => {
         "Clothes/Shoes","Beauty/Health","Sports","Outdoor","Home" ]
     const keyword = match.params.keyword;
 
-    const { loading,products,totalProducts,error } = useSelector(state => state.searchedProducts)
-    const resPerPage = 15;
+    const { loading,products,totalProducts,error,filteredProductsCount } = useSelector(state => state.searchedProducts)
+    const resPerPage = 20;
+    const count = filteredProductsCount;
     const pages = Math.ceil(totalProducts / resPerPage);
     const handleChange = (event,value) => {
         setCurrentPage(value);
@@ -96,13 +97,14 @@ const SearchResult = ({ match }) => {
                         </div>
                     </div>
                     <div className={styles.paginationWrapper}>
-                        <Pagination
+                        {resPerPage <= count && (<Pagination
                             count={pages}
                             page={currentPage}
                             onChange={handleChange}
                             showFirstButton={true}
                             showLastButton={true}
                         />
+                        )}
                     </div>
                 </div>
             )}

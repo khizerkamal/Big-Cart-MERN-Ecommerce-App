@@ -3,9 +3,8 @@
     /* border: 1px solid rgb(177, 25, 25); */
 }
 .heading{
-    display: flex;
-    justify-content: center;
     margin-top: 20px;
+    margin-left: 20px;
     font-size: 18px;
     margin-bottom: 10px;
     font-weight: bold;
@@ -31,9 +30,16 @@
     /* border: 1px solid rgb(7, 134, 29); */
 
 }
+@media only screen and (max-width: 720px){
+    .searchPanelWrapper{
+        flex: 0 0 8em;
+        margin-left: 2px;
+        margin-right: 13px;
+    }
+}
 .productsPanelWrapper{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
     /* border: 1px solid rgb(23, 3, 97); */
