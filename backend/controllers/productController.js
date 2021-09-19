@@ -17,11 +17,10 @@ exports.createProduct = catchAsync(async (req,res,next) => {
 
 exports.getAllProducts = catchAsync(async (req,res,next) => {
     const productCount = await Product.countDocuments();
-    const resPerPage = 7;
     const features = new APIFeatures(Product.find(), req.query)
         .search()
         .filter()
-        .paginate(resPerPage)
+        .paginate()
     
     const products = await features.query;
 
@@ -29,7 +28,7 @@ exports.getAllProducts = catchAsync(async (req,res,next) => {
         status: 'success',
         result: products.length,
         totalProducts: productCount,
-        resPerPage,
+        // resPerPage,
         products
     })
 })

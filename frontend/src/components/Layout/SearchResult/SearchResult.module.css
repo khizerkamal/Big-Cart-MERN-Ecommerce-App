@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.searchPanelWrapper{
+    margin-left: 70px;
+    margin-right: 150px;
+    padding: 50px;
+    background:rgb(232, 246, 247);
+    min-width: 200px;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+}
+.loaderWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.paginationWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.productsPanelWrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
