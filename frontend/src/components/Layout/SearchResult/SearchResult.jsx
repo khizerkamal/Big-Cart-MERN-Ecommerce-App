@@ -14,6 +14,10 @@ const Range = createSliderWithTooltip(Slider.Range);
 
 const SearchResult = ({ match }) => {
     const [ currentPage,setCurrentPage ] = useState(1)
+    const [ price,setPrice ] = useState([ 1,1000 ])
+    const [ category,setCategory ] = useState('')
+    const categories = [ "Electronics","Cameras","Laptops","Accessories","Books","Food","Headphones",
+        "Clothes/Shoes","Beauty/Health","Sports","Outdoor","Home" ]
     const keyword = match.params.keyword;
 
     const { loading,products,totalProducts,error } = useSelector(state => state.searchedProducts)
@@ -25,15 +29,20 @@ const SearchResult = ({ match }) => {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    const [ price,setPrice ] = useState([ 1,1000 ])
+
 
     // Getting All Products from DB and Set in Redux
     useEffect(() => {
-        // if (error) {
-        //     return alert.error(error)
-        // }
-        dispatch(searchedProducts(currentPage,resPerPage,keyword,price));
-    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price ])
+        if (error) {
+            return alert.error(error)
+        }
+        if (price !== [ 1,1000 ]) {
+            return setTimeout(() => {
+                dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category));
+            },2000);
+        }
+        dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category));
+    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,category ])
     return (
         <>
             {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
@@ -43,22 +52,40 @@ const SearchResult = ({ match }) => {
                     </div>
                     <div className={styles.container}>
                         <div className={styles.searchPanelWrapper}>
-                            <Range
-                                marks={{
-                                    1: '$1',
-                                    1000: '$1000'
-                                }}
-                                min={1}
-                                max={1000}
-                                defaultValue={[ 1,1000 ]}
-                                tipFormatter={value => `$${value}`}
-                                tipProps={{
-                                    placement: "top",
-                                    visible: true
-                                }}
-                                value={price}
-                                onChange={price => setPrice(price)}
-                            />
+                            <h3 className={styles.priceHeading}>Price</h3>
+                            <div className={styles.priceFilterWrapper}>
+                                <Range
+                                    marks={{
+                                        1: '$1',
+                                        1000: '$1000'
+                                    }}
+                                    min={1}
+                                    max={1000}
+                                    defaultValue={[ 1,1000 ]}
+                                    tipFormatter={value => `$${value}`}
+                                    tipProps={{
+                                        placement: "top",
+                                        visible: true
+                                    }}
+                                    value={price}
+                                    onChange={price => setPrice(price)}
+                                />
+                            </div>
+                            <div className={styles.line}></div>
+                            <div className={styles.categoryFilterWrapper}>
+                                <h3 className={styles.categoryHeading}>Category</h3>
+                                {
+                                    categories.map(category => (
+                                        <button
+                                            className={styles.categoryButton}
+                                            key={category}
+                                            onClick={() => setCategory(category)}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))
+                                }
+                            </div>
                         </div>
                         <div className={styles.productsPanelWrapper}>
                             {

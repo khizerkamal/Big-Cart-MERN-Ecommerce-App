@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Header.module.css'
-import { Route } from 'react-router-dom'
+import { Route,Link } from 'react-router-dom'
 import Search from './Search/Search'
 
 const Header = () => {
@@ -22,11 +22,13 @@ const Header = () => {
                     </span>
                 </button>
             </div>
-            <div className={`${styles.logo} ${styles.desktop}`}>
-                <img src="images/logo.svg" alt="logo" />
-                <span className={styles.logoBig}>Big</span>
-                <span className={styles.logoCart}>Cart</span>
-            </div>
+            <Link to="/" style={{ textDecoration: "none" }}>
+                <div className={`${styles.logo} ${styles.desktop}`}>
+                    <img src="images/logo.svg" alt="logo" />
+                    <span className={styles.logoBig}>Big</span>
+                    <span className={styles.logoCart}>Cart</span>
+                </div>
+            </Link>
             <Route render={({ history }) => <Search history={history} />} />
             <div className={styles.desktop}>
                 <button className={styles.loginButtion}>

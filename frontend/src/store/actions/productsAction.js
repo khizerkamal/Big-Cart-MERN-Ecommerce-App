@@ -46,10 +46,14 @@ export const getProductDetail = (id) => async (dispatch) => {
     }
 }
 
-export const searchedProducts = (currentPage, limit, keyword='', price ) => async (dispatch) => {
+export const searchedProducts = (currentPage, limit, keyword='', price, category ) => async (dispatch) => {
     try {
         dispatch({ type: SEARCH_PRODUCTS_REQUEST })
         let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&limit=${limit}&price[lte]=${price[ 1 ]}&price[gte]=${price[ 0 ]}`
+        if (category) {
+            link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&limit=${limit}
+            &price[lte]=${price[ 1 ]}&price[gte]=${price[ 0 ]}&category=${category}`
+        }
         const { data } = await axios.get(link)
         dispatch({
             type: SEARCH_PRODUCTS_SUCCESS,
