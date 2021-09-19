@@ -8,7 +8,7 @@ import { login,clearErrors } from '../../../../store/actions/userActions'
 import MetaData from '../../MetaData'
 import Loader from '../../Loader/Loader'
 
-const Login = ({ history,onClose }) => {
+const Login = ({ onClose }) => {
     const [ email,setEmail ] = useState('')
     const [ password,setPassword ] = useState('')
     const { isAuthenticated,error,loading } = useSelector(state => state.auth)
@@ -18,18 +18,19 @@ const Login = ({ history,onClose }) => {
 
     const submit = () => {
         // e.preventDefault();
+        if (isAuthenticated) return onClose();
         dispatch(login(email,password))
         onClose();
     }
 
     useEffect(() => {
-        if (isAuthenticated) history.push('/');
+        if (isAuthenticated) return;
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
 
-    },[ dispatch,alert,isAuthenticated,error,history ])
+    },[ dispatch,alert,isAuthenticated,error ])
 
     return (
         <div className={styles.modalMask}>
