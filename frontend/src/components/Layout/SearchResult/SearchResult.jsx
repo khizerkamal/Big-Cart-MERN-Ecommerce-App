@@ -16,6 +16,8 @@ const SearchResult = ({ match }) => {
     const [ currentPage,setCurrentPage ] = useState(1)
     const [ price,setPrice ] = useState([ 1,1000 ])
     const [ category,setCategory ] = useState('')
+    const [ ratings,setRatings ] = useState(0)
+
     const categories = [ "Electronics","Cameras","Laptops","Accessories","Books","Food","Headphones",
         "Clothes/Shoes","Beauty/Health","Sports","Outdoor","Home" ]
     const keyword = match.params.keyword;
@@ -39,11 +41,11 @@ const SearchResult = ({ match }) => {
         }
         if (price !== [ 1,1000 ]) {
             return setTimeout(() => {
-                dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category));
+                dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category,ratings));
             },2000);
         }
-        dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category));
-    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,category ])
+        dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category,ratings));
+    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,category,ratings ])
     return (
         <>
             {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
@@ -85,6 +87,31 @@ const SearchResult = ({ match }) => {
                                             {category}
                                         </button>
                                     ))
+                                }
+                            </div>
+                            <div className={styles.line}></div>
+                            <div className={styles.starFilterWrapper}>
+                                <h3 className={styles.categoryHeading}>Rating</h3>
+                                {
+                                    <ul>
+                                        {
+                                            [ 5,4,3,2,1 ].map(star => (
+                                                <li
+                                                    className={styles.star}
+                                                    key={star}
+                                                    onClick={() => setRatings(star)}
+                                                >
+                                                    <div className={`${styles.starsWrapper} ${styles.ratings}`}>
+                                                        <div className={styles.ratingouter}>
+                                                            <div
+                                                                className={styles.ratinginner}
+                                                                style={{ width: `${star * 20}%` }}></div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
                                 }
                             </div>
                         </div>
