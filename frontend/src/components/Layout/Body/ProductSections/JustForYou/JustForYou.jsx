@@ -37,7 +37,7 @@ const JustForYou = ({ match }) => {
                     <div className={styles.container}>
                         {
                             products && products.map(product => {
-                                return <Product key={product._id} product={product} />
+                                return <Product margin={false} key={product._id} product={product} />
                             })
                         }
                     </div>

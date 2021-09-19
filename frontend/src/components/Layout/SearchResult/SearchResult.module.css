@@ -1,9 +1,13 @@
+.body{
+    background: #fff;
+}
 .container{
     display: flex;
     /* border: 1px solid rgb(177, 25, 25); */
 }
 .heading{
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    padding-top: 20px;
     margin-left: 20px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -14,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 .paginationWrapper{
     display: flex;
@@ -21,13 +26,13 @@
     margin-top: 20px;
 }
 .searchPanelWrapper{
-    margin-left: 30px;
-    margin-right: 50px;
+    margin-left: 50px;
     margin-top: 20px;
     padding: 10px;
-    background:rgb(244, 254, 255);
+    background:#fff;
     flex: 0 0 15em;
-    /* border: 1px solid rgb(7, 134, 29); */
+    border: 1px solid rgb(235, 235, 235);
+    /* box-shadow: 0 0 11px rgba(197, 197, 197, 0.2);  */
 
 }
 @media only screen and (max-width: 720px){
@@ -41,7 +46,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 10px;
     /* border: 1px solid rgb(23, 3, 97); */
 }
 .line{
@@ -109,4 +114,7 @@
     border-radius: 5px;
     margin-top: 5px;
     margin-right: 4px;
+  }
+  .prod{
+      margin: 100px;
   }

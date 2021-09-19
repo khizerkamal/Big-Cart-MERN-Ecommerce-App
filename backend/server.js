@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 
-dotenv.config({path: './backend/config.env'})
+dotenv.config({path: './config.env'})
 
 const app = require('./app')
 console.log(process.env.DATABASE_PASSWORD)

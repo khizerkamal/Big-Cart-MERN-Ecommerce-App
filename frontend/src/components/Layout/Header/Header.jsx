@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import styles from './Header.module.css'
 import { Route,Link } from 'react-router-dom'
 import Search from './Search/Search'
+import Login from '../User/Login/Login'
 
 const Header = () => {
+    const [ showModal,setShowModal ] = useState(false)
     return (
         <div className={styles.headerWrapper}>
             <div className={styles.mobile}>
@@ -12,7 +14,7 @@ const Header = () => {
                     <span className={styles.logoBig}>Big</span>
                     <span className={styles.logoCart}>Cart</span>
                 </div>
-                <button className={styles.loginButtion}>
+                <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
                     <span>Login</span>
                 </button>
                 <button className={styles.cartWrapper}>
@@ -31,9 +33,11 @@ const Header = () => {
             </Link>
             <Route render={({ history }) => <Search history={history} />} />
             <div className={styles.desktop}>
-                <button className={styles.loginButtion}>
+                {/* <Link to='/login'> */}
+                <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
                     <span>Login</span>
                 </button>
+                {/* </Link> */}
                 <button className={styles.cartWrapper}>
                     <img src="/images/shopping-cart.svg" alt="cart" />
                     <span className={styles.cartCount}>
@@ -41,6 +45,7 @@ const Header = () => {
                     </span>
                 </button>
             </div>
+            {showModal && <Login onClose={() => setShowModal(false)} />}
         </div>
     )
 }

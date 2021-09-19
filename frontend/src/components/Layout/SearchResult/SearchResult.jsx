@@ -33,109 +33,111 @@ const SearchResult = ({ match }) => {
     const dispatch = useDispatch();
     const alert = useAlert();
 
-
+    let flag = true;
     // Getting All Products from DB and Set in Redux
     useEffect(() => {
         if (error) {
             return alert.error(error)
         }
-        if (price !== [ 1,1000 ]) {
+        if (!flag) {
             return setTimeout(() => {
                 dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category,ratings));
-            },2000);
+            },1000);
         }
         dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category,ratings));
     },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,category,ratings ])
     return (
-        <>
-            {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
-                <div>
-                    <div className={styles.headingWrapper}>
-                        <h1 className={styles.heading}>Your Searched {keyword} </h1>
+        <div className={styles.body}>
+            <div className={styles.headingWrapper}>
+                <h1 className={styles.heading}>Your Searched {keyword} </h1>
+            </div>
+            <div className={styles.container}>
+                <div className={styles.searchPanelWrapper}>
+                    <h3 className={styles.priceHeading}>Price</h3>
+                    <div className={styles.priceFilterWrapper}>
+                        <Range
+                            marks={{
+                                1: '$1',
+                                1000: '$1000'
+                            }}
+                            min={1}
+                            max={1000}
+                            defaultValue={[ 1,1000 ]}
+                            tipFormatter={value => `$${value}`}
+                            tipProps={{
+                                placement: "top",
+                                visible: true
+                            }}
+                            value={price}
+                            onChange={price => {
+                                setPrice(price)
+                                flag = false
+                            }
+                            }
+                        />
                     </div>
-                    <div className={styles.container}>
-                        <div className={styles.searchPanelWrapper}>
-                            <h3 className={styles.priceHeading}>Price</h3>
-                            <div className={styles.priceFilterWrapper}>
-                                <Range
-                                    marks={{
-                                        1: '$1',
-                                        1000: '$1000'
-                                    }}
-                                    min={1}
-                                    max={1000}
-                                    defaultValue={[ 1,1000 ]}
-                                    tipFormatter={value => `$${value}`}
-                                    tipProps={{
-                                        placement: "top",
-                                        visible: true
-                                    }}
-                                    value={price}
-                                    onChange={price => setPrice(price)}
-                                />
-                            </div>
-                            <div className={styles.line}></div>
-                            <div className={styles.categoryFilterWrapper}>
-                                <h3 className={styles.categoryHeading}>Category</h3>
+                    <div className={styles.line}></div>
+                    <div className={styles.categoryFilterWrapper}>
+                        <h3 className={styles.categoryHeading}>Category</h3>
+                        {
+                            categories.map(category => (
+                                <button
+                                    className={styles.categoryButton}
+                                    key={category}
+                                    onClick={() => setCategory(category)}
+                                >
+                                    {category}
+                                </button>
+                            ))
+                        }
+                    </div>
+                    <div className={styles.line}></div>
+                    <div className={styles.starFilterWrapper}>
+                        <h3 className={styles.categoryHeading}>Rating</h3>
+                        {
+                            <ul>
                                 {
-                                    categories.map(category => (
-                                        <button
-                                            className={styles.categoryButton}
-                                            key={category}
-                                            onClick={() => setCategory(category)}
+                                    [ 5,4,3,2,1 ].map(star => (
+                                        <li
+                                            className={styles.star}
+                                            key={star}
+                                            onClick={() => setRatings(star)}
                                         >
-                                            {category}
-                                        </button>
+                                            <div className={`${styles.starsWrapper} ${styles.ratings}`}>
+                                                <div className={styles.ratingouter}>
+                                                    <div
+                                                        className={styles.ratinginner}
+                                                        style={{ width: `${star * 20}%` }}></div>
+                                                </div>
+                                            </div>
+                                        </li>
                                     ))
                                 }
-                            </div>
-                            <div className={styles.line}></div>
-                            <div className={styles.starFilterWrapper}>
-                                <h3 className={styles.categoryHeading}>Rating</h3>
-                                {
-                                    <ul>
-                                        {
-                                            [ 5,4,3,2,1 ].map(star => (
-                                                <li
-                                                    className={styles.star}
-                                                    key={star}
-                                                    onClick={() => setRatings(star)}
-                                                >
-                                                    <div className={`${styles.starsWrapper} ${styles.ratings}`}>
-                                                        <div className={styles.ratingouter}>
-                                                            <div
-                                                                className={styles.ratinginner}
-                                                                style={{ width: `${star * 20}%` }}></div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
-                                }
-                            </div>
-                        </div>
-                        <div className={styles.productsPanelWrapper}>
-                            {
-                                products && products.map(product => {
-                                    return <Product key={product._id} product={product} />
-                                })
-                            }
-                        </div>
-                    </div>
-                    <div className={styles.paginationWrapper}>
-                        {resPerPage <= count && (<Pagination
-                            count={pages}
-                            page={currentPage}
-                            onChange={handleChange}
-                            showFirstButton={true}
-                            showLastButton={true}
-                        />
-                        )}
+                            </ul>
+                        }
                     </div>
                 </div>
-            )}
-        </>
+                {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
+                    <div className={styles.productsPanelWrapper}>
+                        {
+                            products && products.map(product => {
+                                return <Product margin={true} key={product._id} product={product} />
+                            })
+                        }
+                    </div>
+                )}
+            </div>
+            <div className={styles.paginationWrapper}>
+                {resPerPage <= count && (<Pagination
+                    count={pages}
+                    page={currentPage}
+                    onChange={handleChange}
+                    showFirstButton={true}
+                    showLastButton={true}
+                />
+                )}
+            </div>
+        </div>
     )
 }
 
