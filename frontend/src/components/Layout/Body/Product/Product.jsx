@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Product.module.css'
 import { Link } from 'react-router-dom'
 
-const Product = ({ product, margin }) => {
+const Product = ({ product,margin }) => {
     return (
         <Link style={{ textDecoration: "none" }} to={`/product/${product._id}`}>
             <div className={`${styles.container} ${margin ? styles.marginedContainer : ''}`}>
@@ -10,7 +10,7 @@ const Product = ({ product, margin }) => {
                     <img src={product.images[ 0 ].url} alt="" />
                 </div>
                 <div className={styles.logoWrapper}>
-                    <img src="images/logo.svg" alt="logo" />
+                    <img src="/images/logo.svg" alt="logo" />
                     <span className={styles.logoBig}>Big</span>
                     <span className={styles.logoCart}>Cart</span>
                 </div>

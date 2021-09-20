@@ -11,6 +11,7 @@ import Loader from '../../Loader/Loader'
 const Login = ({ onClose }) => {
     const [ email,setEmail ] = useState('')
     const [ password,setPassword ] = useState('')
+    const [signupModal, setSignupModal] = useState(false)
     const { isAuthenticated,error,loading } = useSelector(state => state.auth)
 
     const alert = useAlert();
@@ -42,6 +43,7 @@ const Login = ({ onClose }) => {
                     <img src="/images/login.svg" alt="login" />
                 </div>
                 <div className={styles.right}>
+                    <div className={`${signupModal ? styles.hide : ''}`}>
                     <h2>Login</h2>
                     <form className={styles.form}>
                         <div className={styles.inputWrapper}>
@@ -75,15 +77,16 @@ const Login = ({ onClose }) => {
                         <div className={styles.loginButtonWrapper}>
                             <button onClick={submit} className={styles.loginButton}>Login</button>
                         </div>
-                        <Link
-                            onClick={onClose}
-                            to="/user/signup"
+                        <p
+                            onClick={() => setSignupModal(true)}
                             style={{ textDecoration: "none" }}
                             className={styles.signup}
                         >
                             New to BigCart? Create an account
-                        </Link>
+                        </p>
                     </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>
