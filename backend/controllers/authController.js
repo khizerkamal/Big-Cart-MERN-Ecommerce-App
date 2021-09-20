@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { promisify } = require('util')
 const crypto = require('crypto')
+import cloudinary from 'cloudinary'
 
 const User = require('../models/userModel')
 const catchAsync = require('../utils/catchAsync')
@@ -30,14 +31,18 @@ const createSendToken = (user,statusCode,res) => {
 
 exports.signup = catchAsync(async (req,res,next) => {
     const { name, email, password } = req.body;
-
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder: 'avatars',
+        width: 150,
+        crop: "scale",
+    })
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: 'kdknvsdkvn',
-            url: 'vsdvsdvsdsdv'
+            public_id: result.public_id,
+            url: result.secure_url
         }
     })
 
