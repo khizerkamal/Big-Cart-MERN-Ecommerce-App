@@ -56,13 +56,13 @@ const Signup = ({ onClose }) => {
     }
 
     useEffect(() => {
-        if (isAuthenticated) return;
+        if (isAuthenticated) onClose();
         // if (error) {
         //     alert.error(error);
         //     dispatch(clearErrors());
         // }
-
-    },[ dispatch,alert,isAuthenticated,error,history ])
+        // if (flag) onClose();
+    },[ dispatch,alert,isAuthenticated,error,history,onClose ])
     return (
         <div className={styles.right}>
             <MetaData title={'Register User'} />

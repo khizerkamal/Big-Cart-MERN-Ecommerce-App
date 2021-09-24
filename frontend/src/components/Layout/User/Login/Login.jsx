@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 
 import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
-import MetaData from '../../MetaData'
-import Loader from '../../Loader/Loader'
 import Signup from '../Signup/Signup'
 
 const Login = ({ onClose }) => {
@@ -18,21 +16,19 @@ const Login = ({ onClose }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const submit = () => {
-        // e.preventDefault();
+    const submit = (e) => {
+        e.preventDefault();
         if (isAuthenticated) return onClose();
         dispatch(login(email,password))
-        onClose();
     }
 
     useEffect(() => {
-        if (isAuthenticated) return;
+        if (isAuthenticated) onClose();
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-
-    },[ dispatch,alert,isAuthenticated,error ])
+    },[ dispatch,alert,isAuthenticated,error,onClose ])
 
     return (
         <div className={styles.modalMask}>
@@ -46,7 +42,7 @@ const Login = ({ onClose }) => {
                 <div className={styles.right}>
                     <div className={`${signupModal ? styles.hide : ''}`}>
                         <h2>Login</h2>
-                        <form className={styles.form}>
+                        <form onSubmit={submit} className={styles.form}>
                             <div className={styles.inputWrapper}>
                                 <div className={styles.inputBox}>
                                     <img src="/images/envelope.svg" alt="user" />
@@ -76,7 +72,9 @@ const Login = ({ onClose }) => {
                                 Forgot Password?
                             </Link>
                             <div className={styles.loginButtonWrapper}>
-                                <button onClick={submit} className={styles.loginButton}>Login</button>
+                                <button type="submit" className={styles.loginButton}>
+                                    {loading ? "Loading..." : "Login"}
+                                </button>
                             </div>
                             <p
                                 onClick={() => setSignupModal(true)}

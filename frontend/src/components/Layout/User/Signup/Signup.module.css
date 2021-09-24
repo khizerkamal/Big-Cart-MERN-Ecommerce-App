@@ -98,12 +98,15 @@
 }
 .border{
     border: 2px solid #0077ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 .avatarImage{
-    height: 90%;
-    width: 90%;
-    /* we explicitly define height and width so not tp stretch image   */
-    object-fit: cover; 
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 .avatarInput{
     display: none;
