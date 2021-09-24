@@ -78,6 +78,9 @@
     color: #fff;
     width: 100px;
 }
+.loadingButton{
+    background:rgb(169, 197, 238);
+}
 .avatarSection{
     display: flex;
     align-items: center;

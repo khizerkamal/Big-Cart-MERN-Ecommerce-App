@@ -12,7 +12,7 @@ import Signup from '../Signup/Signup'
 const Login = ({ onClose }) => {
     const [ email,setEmail ] = useState('')
     const [ password,setPassword ] = useState('')
-    const [signupModal, setSignupModal] = useState(false)
+    const [ signupModal,setSignupModal ] = useState(false)
     const { isAuthenticated,error,loading } = useSelector(state => state.auth)
 
     const alert = useAlert();
@@ -45,50 +45,50 @@ const Login = ({ onClose }) => {
                 </div>
                 <div className={styles.right}>
                     <div className={`${signupModal ? styles.hide : ''}`}>
-                    <h2>Login</h2>
-                    <form className={styles.form}>
-                        <div className={styles.inputWrapper}>
-                            <div className={styles.inputBox}>
-                                <img src="/images/user.svg" alt="user" />
-                                <input
-                                    type="text"
-                                    placeholder="Enter Your Email"
-                                    value={email}
-                                    onChange={e => setEmail(e.target.value)}
-                                />
+                        <h2>Login</h2>
+                        <form className={styles.form}>
+                            <div className={styles.inputWrapper}>
+                                <div className={styles.inputBox}>
+                                    <img src="/images/envelope.svg" alt="user" />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Your Email"
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className={styles.inputBox}>
+                                    <img src="/images/password.svg" alt="password" />
+                                    <input
+                                        type="password"
+                                        placeholder="Enter Your Password"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className={styles.inputBox}>
-                                <img src="/images/password.svg" alt="password" />
-                                <input
-                                    type="password"
-                                    placeholder="Enter Your Password"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                />
+                            <Link
+                                onClick={onClose}
+                                to="/user/forgotPassword"
+                                style={{ textDecoration: "none" }}
+                                className={styles.forgotPassword}
+                            >
+                                Forgot Password?
+                            </Link>
+                            <div className={styles.loginButtonWrapper}>
+                                <button onClick={submit} className={styles.loginButton}>Login</button>
                             </div>
-                        </div>
-                        <Link
-                            onClick={onClose}
-                            to="/user/forgotPassword"
-                            style={{ textDecoration: "none" }}
-                            className={styles.forgotPassword}
-                        >
-                            Forgot Password?
-                        </Link>
-                        <div className={styles.loginButtonWrapper}>
-                            <button onClick={submit} className={styles.loginButton}>Login</button>
-                        </div>
-                        <p
-                            onClick={() => setSignupModal(true)}
-                            style={{ textDecoration: "none" }}
-                            className={styles.signup}
-                        >
-                            New to BigCart? Create an account
-                        </p>
-                    </form>
+                            <p
+                                onClick={() => setSignupModal(true)}
+                                style={{ textDecoration: "none" }}
+                                className={styles.signup}
+                            >
+                                New to BigCart? Create an account
+                            </p>
+                        </form>
                     </div>
                     <div className={signupModal ? styles.displaySignup : styles.hide}>
-                        <Signup />
+                        <Signup onClose={onClose} />
                     </div>
                 </div>
             </div>

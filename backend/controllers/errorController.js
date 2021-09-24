@@ -98,8 +98,17 @@ module.exports = (err, req, res, next) => {
     let error = { ...err }
 
     if (error.name === 'CastError') error = handleCastErrorDB(error)
-    if (error.code === 11000) error = handleDuplicateFieldsDB(error)
-    if (error.name === 'ValidationError') error = handleValidationErrorDB(error)
+    // Handling Mongoose Validation Error
+    if (err.name === 'ValidationError') {
+      const message = Object.values(err.errors).map(value => value.message);
+      error = new AppError(message, 400)
+  }
+
+  // Handling Mongoose duplicate key errors
+  if (err.code === 11000) {
+      const message = `Duplicate ${Object.keys(err.keyValue)} entered`
+      error = new AppError(message, 400)
+  }
     if (error.name === 'JsonWebTokenError') error = handleJWTError()
     if (error.name === 'TokenExpiredError') error = handleJWTExpiredError()
 
