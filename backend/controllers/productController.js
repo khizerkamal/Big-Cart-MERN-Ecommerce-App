@@ -51,7 +51,7 @@ exports.getProduct = catchAsync(async (req,res,next) => {
 exports.updateProduct = catchAsync(async (req,res,next) => {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true, // To get back updated data
-        runValidators: true, //to run validatores specified in schema
+        runValidators: true, //to run validators specified in schema
       })
 
     if (!product) {

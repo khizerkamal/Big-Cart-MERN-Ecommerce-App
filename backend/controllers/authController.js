@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { promisify } = require('util')
 const crypto = require('crypto')
-import cloudinary from 'cloudinary'
+const cloudinary = require('cloudinary')
 
 const User = require('../models/userModel')
 const catchAsync = require('../utils/catchAsync')
@@ -58,8 +58,7 @@ exports.login = catchAsync(async (req,res,next) => {
     }
 
     // 2) Check if user exists && password is correct
-    const user = await User.findOne({ email }).select('+password')
-
+    const user = await User.findOne({ email }).select('+password') 
     if (!user || !await user.correctPassword(password, user.password)) {
         return next(new AppError('Incorrect email or password ', 401))
     }
@@ -115,35 +114,26 @@ exports.updateProfile = catchAsync(async (req,res,next) => {
         name: req.body.name,
         email: req.body.email
     }
-
     // UPDATE AVATAR TODO
-
     const user = await User.findByIdAndUpdate(req.user.id,updatedUserData,{
         new: true,
         runValidators: true,
         useFindAndModify: false
     })
-
     res.status(200).json({
         message: 'success'
     })
 })
 
-
 //////// PROTECTING ROUTES ////////
 exports.protect = catchAsync(async (req,res,next) => {
-    
     const { token } = req.cookies;
-
     if (!token) {
         return next(new AppError('You are not logged in! PLease log in to get access.', 401))
     }
-
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
     req.user = await User.findById(decoded.id)
-
     next()
-
 })
 
 ////// Authorizing Roles ///////
@@ -173,10 +163,9 @@ exports.forgotPassword = catchAsync(async (req,res,next) => {
     try {
         await sendEmail({
           email: user.email,
-          subject: 'Big-Cart Password R (valid for 10 min)',
+          subject: 'Big-Cart Password Reset (valid for 10 min)',
           message,
         })
-    
         res.status(200).json({
           status: 'success',
           message: 'Token sent to email!',
@@ -185,7 +174,6 @@ exports.forgotPassword = catchAsync(async (req,res,next) => {
         user.passwordResetToken = undefined
         user.passwordResetExpires = undefined
         await user.save({ validateBeforeSave: false })
-    
         next(
           new AppError('There was an error sending the email. Try again later!', 500)
         )
@@ -200,7 +188,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
       .update(req.params.token)
       .digest('hex')
   
-    console.log(hashedToken)
+    // console.log(hashedToken)
     const user = await User.findOne({
       resetPasswordToken: hashedToken,
       resetPasswordExpire: { $gt: Date.now() },

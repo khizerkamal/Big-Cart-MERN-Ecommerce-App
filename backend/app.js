@@ -2,7 +2,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const cloudinary = require ('cloudinary')
+const fileUpload = require ('express-fileupload')
 
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
@@ -14,15 +14,10 @@ const globalErrorHandler = require('./controllers/errorController')
 const app = express();
 
 app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(fileUpload())
 app.use(cookieParser())
 
-//Setting up Cloudinary Configuration
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
 
 if (process.env.NODE_ENV == 'development') {
     app.use(morgan('dev'))

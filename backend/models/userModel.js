@@ -54,7 +54,6 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date
-
 })
 
 // Encrypting Password before saving into DB
@@ -62,9 +61,7 @@ userSchema.pre('save',async function (next) {  //cannot use this inside arrow fu
     if (!this.isModified('password')) {
         return next()
     }
-
     this.password = await bcrypt.hash(this.password,12)
-    
     //this.passwordConfirm = undefined;
     next()
 })

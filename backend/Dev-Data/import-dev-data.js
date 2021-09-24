@@ -4,9 +4,7 @@ const dotenv = require('dotenv');
 const Product = require('../models/productModel');
 
 dotenv.config({ path: './config.env' });
-
 const DB = "mongodb+srv://khizer:dtLytOXdkmcGBk3c@cluster0.znqnu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
 mongoose
   .connect(DB, {
     useNewUrlParser: true,

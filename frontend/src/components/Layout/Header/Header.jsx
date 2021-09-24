@@ -33,11 +33,9 @@ const Header = () => {
             </Link>
             <Route render={({ history }) => <Search history={history} />} />
             <div className={styles.desktop}>
-                {/* <Link to='/login'> */}
                 <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
                     <span>Login</span>
                 </button>
-                {/* </Link> */}
                 <button className={styles.cartWrapper}>
                     <img src="/images/shopping-cart.svg" alt="cart" />
                     <span className={styles.cartCount}>

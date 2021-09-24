@@ -7,6 +7,7 @@ import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
 import MetaData from '../../MetaData'
 import Loader from '../../Loader/Loader'
+import Signup from '../Signup/Signup'
 
 const Login = ({ onClose }) => {
     const [ email,setEmail ] = useState('')
@@ -35,7 +36,7 @@ const Login = ({ onClose }) => {
 
     return (
         <div className={styles.modalMask}>
-            <div className={styles.modalWrapper}>
+            <div className={`${styles.modalWrapper} ${signupModal ? styles.h70 : ''}`}>
                 <div onClick={onClose} className={styles.closeButton}>
                     <img src="/images/close.png" alt="close" />
                 </div>
@@ -86,7 +87,9 @@ const Login = ({ onClose }) => {
                         </p>
                     </form>
                     </div>
-                    
+                    <div className={signupModal ? styles.displaySignup : styles.hide}>
+                        <Signup />
+                    </div>
                 </div>
             </div>
         </div>

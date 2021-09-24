@@ -16,7 +16,6 @@ export const Body = ({ match }) => {
     }
     const { loading,products,totalProducts,error } = useSelector(state => state.products)
    
-
     return (
         <>
             <MetaData title="Online Shopping Site" />

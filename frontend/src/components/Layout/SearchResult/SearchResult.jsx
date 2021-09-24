@@ -3,10 +3,11 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useAlert } from 'react-alert'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
+import { Pagination } from '@mui/material';
+
 import { searchedProducts } from '../../../store/actions/productsAction'
 import Loader from '../Loader/Loader'
 import styles from './SearchResult.module.css'
-import { Pagination } from '@mui/material';
 import Product from '../Body/Product/Product';
 
 const { createSliderWithTooltip } = Slider;
@@ -45,7 +46,7 @@ const SearchResult = ({ match }) => {
             },1000);
         }
         dispatch(searchedProducts(currentPage,resPerPage,keyword,price,category,ratings));
-    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,category,ratings ])
+    },[ dispatch,alert,error,currentPage,keyword,resPerPage,price,flag,category,ratings ])
     return (
         <div className={styles.body}>
             <div className={styles.headingWrapper}>
