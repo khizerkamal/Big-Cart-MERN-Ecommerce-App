@@ -1,0 +1,47 @@
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+.heading{
+    margin: 30px 50px;
+    font-weight: bold;
+    color: rgb(29, 29, 29);
+}
+.left{
+    display: flex;
+    flex-direction: column;
+}
+.left img{
+    width: 250px;
+    /* border: 5px solid rgb(241, 170, 17); */
+    border-radius: 50%;
+    margin-bottom: 50px;
+}
+.editProfileBtn{
+    padding: 10px 60px;
+    background:rgb(241, 170, 17);
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+.right h1{
+    color: rgb(29, 29, 29);
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.right h3{
+    color: rgb(53, 53, 53);
+    margin-bottom: 25px;
+}
+.cpbtn{
+    padding: 10px 100px;
+    background:rgb(31, 121, 255);
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
