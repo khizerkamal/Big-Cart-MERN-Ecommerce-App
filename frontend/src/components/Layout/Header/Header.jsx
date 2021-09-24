@@ -27,7 +27,7 @@ const Header = () => {
         <div className={styles.headerWrapper}>
             <div className={styles.mobile}>
                 <div className={styles.logo}>
-                    <img src="images/logo.svg" alt="logo" />
+                    <img src="/images/logo.svg" alt="logo" />
                     <span className={styles.logoBig}>Big</span>
                     <span className={styles.logoCart}>Cart</span>
                 </div>
