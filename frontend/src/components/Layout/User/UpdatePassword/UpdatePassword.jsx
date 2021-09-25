@@ -51,18 +51,18 @@ const UpdatePassword = ({ onClose }) => {
                             <form className={styles.form} onSubmit={submit} encType='multipart/form-data'>
                                 <div className={styles.inputWrapper}>
                                     <div className={styles.inputBox}>
-                                        <img src="/images/user.svg" alt="user" />
+                                        <img src="/images/password.svg" alt="user" />
                                         <input
-                                            type="text"
+                                            type="password"
                                             placeholder="Enter Old Password"
                                             value={oldPassword}
                                             onChange={e => setOldPassword(e.target.value)}
                                         />
                                     </div>
                                     <div className={styles.inputBox}>
-                                        <img src="/images/envelope.svg" alt="email" />
+                                        <img src="/images/password.svg" alt="email" />
                                         <input
-                                            type="text"
+                                            type="password"
                                             placeholder="Enter New Password"
                                             value={password}
                                             onChange={e => setPassword(e.target.value)}

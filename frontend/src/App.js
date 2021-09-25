@@ -11,6 +11,7 @@ import SearchResult from './components/Layout/SearchResult/SearchResult';
 import { loadUser } from './store/actions/userActions';
 import Profile from './components/Layout/User/Profile/Profile';
 import ProtectedRoute from './Route/ProtectedRoute';
+import ResetPassword from './components/Layout/User/ResetPassword/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" component={Body} exact />
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/search/:keyword" component={SearchResult} />
+          <Route path="/resetPassword/:token" component={ResetPassword} />
           <ProtectedRoute path="/user/me" component={Profile} exact />
           <Footer />
         </div>

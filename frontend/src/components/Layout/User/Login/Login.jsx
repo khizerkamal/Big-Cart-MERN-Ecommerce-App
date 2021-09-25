@@ -28,13 +28,13 @@ const Login = ({ onClose }) => {
         dispatch(login(email,password))
     }
 
-    // useEffect(() => {
-    //     if (isAuthenticated) onClose();
-    //     if (error) {
-    //         alert.error(error);
-    //         dispatch(clearErrors());
-    //     }
-    // },[ dispatch,alert,isAuthenticated,error,onClose ])
+    useEffect(() => {
+        if (isAuthenticated) onClose();
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+    },[ dispatch,alert,isAuthenticated,error,onClose ])
 
     return (
         <div className={styles.modalMask}>

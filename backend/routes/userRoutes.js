@@ -13,7 +13,7 @@ router
 router.get('/logout',authController.protect,authController.logout)
 
 router.post('/forgotPassword',authController.forgotPassword)
-router.patch('/resetPassword/:token',authController.resetPassword)
+router.put('/resetPassword/:token',authController.resetPassword)
 
 router.get('/me',authController.protect,authController.getUserProfile)
 router.put('/updatePassword',authController.protect,authController.updatePassword)
