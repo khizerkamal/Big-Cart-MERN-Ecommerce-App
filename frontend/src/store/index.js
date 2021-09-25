@@ -2,7 +2,7 @@ import { createStore,combineReducers,applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { productReducer, productDetailsReducer, searchProductReducer } from './reducers/productReducers';
-import { authReducer, userReducer } from './reducers/userReducers'
+import { authReducer, userReducer, forgotPasswordReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
     products: productReducer,
@@ -10,6 +10,7 @@ const reducer = combineReducers({
     searchedProducts: searchProductReducer,
     auth: authReducer,
     user: userReducer,
+    forgotPassword: forgotPasswordReducer,
 })
 
 let initalState = {}

@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom'
 import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
 import Signup from '../Signup/Signup'
+import ForgotPassword from '../ForgotPassword/ForgotPassword'
 
 const Login = ({ onClose }) => {
     const [ email,setEmail ] = useState('')
     const [ password,setPassword ] = useState('')
     const [ signupModal,setSignupModal ] = useState(false)
+    const [ forgotPasswordModal,setForgotPasswordModal ] = useState(false)
     const { isAuthenticated,error,loading } = useSelector(state => state.auth)
 
     const alert = useAlert();
@@ -26,13 +28,13 @@ const Login = ({ onClose }) => {
         dispatch(login(email,password))
     }
 
-    useEffect(() => {
-        if (isAuthenticated) onClose();
-        if (error) {
-            alert.error(error);
-            dispatch(clearErrors());
-        }
-    },[ dispatch,alert,isAuthenticated,error,onClose ])
+    // useEffect(() => {
+    //     if (isAuthenticated) onClose();
+    //     if (error) {
+    //         alert.error(error);
+    //         dispatch(clearErrors());
+    //     }
+    // },[ dispatch,alert,isAuthenticated,error,onClose ])
 
     return (
         <div className={styles.modalMask}>
@@ -44,7 +46,7 @@ const Login = ({ onClose }) => {
                     <img src="/images/login.svg" alt="login" />
                 </div>
                 <div className={styles.right}>
-                    <div className={`${signupModal ? styles.hide : ''}`}>
+                    <div className={`${signupModal || forgotPasswordModal ? styles.hide : ''}`}>
                         <h2>Login</h2>
                         <form onSubmit={submit} className={styles.form}>
                             <div className={styles.inputWrapper}>
@@ -67,14 +69,12 @@ const Login = ({ onClose }) => {
                                     />
                                 </div>
                             </div>
-                            <Link
-                                onClick={onClose}
-                                to="/user/forgotPassword"
-                                style={{ textDecoration: "none" }}
+                            <p
+                                onClick={() => setForgotPasswordModal(true)}
                                 className={styles.forgotPassword}
                             >
                                 Forgot Password?
-                            </Link>
+                            </p>
                             <div className={styles.loginButtonWrapper}>
                                 <button type="submit" className={styles.loginButton}>
                                     {loading ? "Loading..." : "Login"}
@@ -91,6 +91,9 @@ const Login = ({ onClose }) => {
                     </div>
                     <div className={signupModal ? styles.displaySignup : styles.hide}>
                         <Signup onClose={onClose} />
+                    </div>
+                    <div className={forgotPasswordModal ? styles.displayFP : styles.hide}>
+                        <ForgotPassword onClose={onClose} />
                     </div>
                 </div>
             </div>

@@ -96,6 +96,7 @@
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 10px;
+    cursor: pointer;
     color: rgb(36, 36, 36);
 }
 .signup{
@@ -109,6 +110,9 @@
 }
 .hide{
     display: none;
+}
+.displayFP{
+    margin-top: 65px;
 }
 @media only screen and (max-width: 920px){
     .modalWrapper{
