@@ -5,9 +5,11 @@ import styles from './Profile.module.css'
 import MetaData from '../../MetaData'
 import Loader from '../../Loader/Loader'
 import UpdateProfile from '../UpdateProfile/UpdateProfile'
+import UpdatePassword from '../UpdatePassword/UpdatePassword'
 
 const Profile = () => {
-    const [ showModal,setShowModal ] = useState(false)
+    const [ updateProfileModal,setUpdateProfileModal ] = useState(false)
+    const [ updatePasswordModal,setUpdatePasswordModal ] = useState(false)
     const { loading,user } = useSelector(state => state.auth)
     return (
         <>
@@ -20,7 +22,7 @@ const Profile = () => {
                             <div className={styles.left}>
                                 <img src={user.avatar && user.avatar.url} alt="avatar" />
                                 <button
-                                    onClick={() => setShowModal(true)}
+                                    onClick={() => setUpdateProfileModal(true)}
                                     className={styles.editProfileBtn}
                                 >
                                     Edit Profile
@@ -37,11 +39,17 @@ const Profile = () => {
                                     {user.role !== 'admin' && (
                                         <button className={styles.mobtn}>My Orders</button>
                                     )}
-                                    <button className={styles.cpbtn}>Change Password</button>
+                                    <button
+                                        className={styles.cpbtn}
+                                        onClick={() => setUpdatePasswordModal(true)}
+                                    >
+                                        Change Password
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        {showModal && <UpdateProfile onClose={() => setShowModal(false)} />}
+                        {updateProfileModal && <UpdateProfile onClose={() => setUpdateProfileModal(false)} />}
+                        {updatePasswordModal && <UpdatePassword onClose={() => setUpdatePasswordModal(false)} />}
                     </>
                 )
             }

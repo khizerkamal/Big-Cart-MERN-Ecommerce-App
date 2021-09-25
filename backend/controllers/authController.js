@@ -23,7 +23,7 @@ const createSendToken = (user,statusCode,res) => {
     user.password = undefined;
 
     res.status(statusCode).json({
-        status: 'success',
+        success: true,
         token,
         user
     })
@@ -54,7 +54,7 @@ exports.login = catchAsync(async (req,res,next) => {
 
     // 1) Check if email and password exist
     if (!email || !password) {
-        return new AppError('Please enter email & password', 400)
+        return next(new AppError('Please enter email & password', 400))
     }
 
     // 2) Check if user exists && password is correct
@@ -92,17 +92,14 @@ exports.getUserProfile = catchAsync(async (req,res,next) => {
 
 // Update/Change Password
 exports.updatePassword = catchAsync(async (req,res,next) => {
-    
     const user = await User.findById(req.user.id).select('+password')
     if (!req.body.oldPassword) {
-        return new AppError('Please enter your current password', 404)
+        return next(new AppError('Please enter your current password', 404))
     }    
     const isMatch = await user.correctPassword(req.body.oldPassword, user.password)
     if(!isMatch) return next(new AppError('Old password is incorrect'))
-    
     user.password = req.body.password;
     await user.save();
-
     createSendToken(user,200,res);
 })
 

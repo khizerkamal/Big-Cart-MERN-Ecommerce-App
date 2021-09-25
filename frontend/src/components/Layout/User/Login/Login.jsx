@@ -17,6 +17,10 @@ const Login = ({ onClose }) => {
     const dispatch = useDispatch();
 
     const submit = (e) => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
         e.preventDefault();
         if (isAuthenticated) return onClose();
         dispatch(login(email,password))

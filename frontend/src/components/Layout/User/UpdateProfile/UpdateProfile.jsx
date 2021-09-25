@@ -36,7 +36,7 @@ const UpdateProfile = ({ onClose }) => {
         dispatch({
             type: UPDATE_PROFILE_RESET
         })
-    },[ user,alert,error,dispatch ])
+    },[ user,alert,error,dispatch,isUpdated,onClose ])
 
     const submit = (e) => {
         e.preventDefault();
