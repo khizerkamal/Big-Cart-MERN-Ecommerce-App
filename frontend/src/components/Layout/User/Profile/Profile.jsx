@@ -1,11 +1,13 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import styles from './Profile.module.css'
 import MetaData from '../../MetaData'
 import Loader from '../../Loader/Loader'
+import UpdateProfile from '../UpdateProfile/UpdateProfile'
 
 const Profile = () => {
+    const [ showModal,setShowModal ] = useState(false)
     const { loading,user } = useSelector(state => state.auth)
     return (
         <>
@@ -17,7 +19,12 @@ const Profile = () => {
                         <div className={styles.container}>
                             <div className={styles.left}>
                                 <img src={user.avatar && user.avatar.url} alt="avatar" />
-                                <button className={styles.editProfileBtn}>Edit Profile</button>
+                                <button
+                                    onClick={() => setShowModal(true)}
+                                    className={styles.editProfileBtn}
+                                >
+                                    Edit Profile
+                                </button>
                             </div>
                             <div className={styles.right}>
                                 <h1>Full Name</h1>
@@ -34,6 +41,7 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
+                        {showModal && <UpdateProfile onClose={() => setShowModal(false)} />}
                     </>
                 )
             }
