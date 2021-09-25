@@ -119,7 +119,7 @@ exports.updateProfile = catchAsync(async (req,res,next) => {
         useFindAndModify: false
     })
     res.status(200).json({
-        message: 'success'
+        success: true
     })
 })
 

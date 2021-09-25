@@ -52,11 +52,14 @@ const Header = () => {
             <div className={styles.desktop}>
                 {user && !loading ? (
                     <>
-                        <div className={styles.userWrapper}>
+                        <div
+                            onMouseEnter={() => setShowDrawer(!showDrawer)}
+                            onMouseLeave={() => setShowDrawer(!showDrawer)}
+                            className={styles.userWrapper}
+                        >
                             <span className={styles.username}>{user.name}</span>
                             <div className={styles.dropDownWrapper}>
                                 <Avatar
-                                    onMouseEnter={() => setShowDrawer(!showDrawer)}
                                     alt="avatar"
                                     src={user.avatar && user.avatar.url}
                                     className={styles.avatar}
@@ -120,6 +123,7 @@ const Header = () => {
                 </button>
             </div>
             {showModal && <Login onClose={() => setShowModal(false)} />}
+            {/* {showModal && <Route path='/login' component={Login} />} */}
         </div >
     )
 }

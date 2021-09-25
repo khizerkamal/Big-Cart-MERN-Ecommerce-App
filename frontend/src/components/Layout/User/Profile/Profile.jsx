@@ -10,7 +10,7 @@ const Profile = () => {
     return (
         <>
             {
-                loading ? <div><Loader /></div> : (
+                loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
                     <>
                         <MetaData title="My Profile" />
                         <h1 className={styles.heading}>Your Profile</h1>
@@ -25,8 +25,13 @@ const Profile = () => {
                                 <h1>Email Address</h1>
                                 <h3>{user.email}</h3>
                                 <h1>Joined On</h1>
-                                <h3>{user.createdAt}</h3>
-                                <button className={styles.cpbtn}>Change Password</button>
+                                <h3>{String(user.createdAt).substring(0,10)}</h3>
+                                <div className={styles.flexColumn}>
+                                    {user.role !== 'admin' && (
+                                        <button className={styles.mobtn}>My Orders</button>
+                                    )}
+                                    <button className={styles.cpbtn}>Change Password</button>
+                                </div>
                             </div>
                         </div>
                     </>

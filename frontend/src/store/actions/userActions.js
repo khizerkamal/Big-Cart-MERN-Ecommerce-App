@@ -11,6 +11,10 @@ import {
     LOAD_USER_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_RESET,
+    UPDATE_PROFILE_FAIL,
     CLEAR_ERRORS,
 } from '../constants/userConstants'
 
@@ -67,6 +71,27 @@ export const loadUser = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+export const updateProfile = (userData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_PROFILE_REQUEST })
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'   // Because of avatar of pic
+            }
+        }
+        const { data } = await axios.put('/api/v1/user/updateProfile',userData,config)
+        dispatch({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: data.success
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PROFILE_FAIL,
             payload: error.response.data.message
         })
     }

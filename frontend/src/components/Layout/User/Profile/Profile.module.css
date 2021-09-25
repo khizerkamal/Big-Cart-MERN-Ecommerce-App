@@ -1,3 +1,9 @@
+.loaderWrapper{
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+}
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -18,13 +24,13 @@
     align-items: center;
     justify-content: center;
     object-fit: contain;
-    border: 3px solid rgb(241, 170, 17);
+    border: 3px solid rgb(31, 121, 255);
     border-radius: 50%;
     margin-bottom: 50px;
 }
 .editProfileBtn{
     padding: 10px 60px;
-    background:rgb(241, 170, 17);
+    background:rgb(31, 121, 255);
     border-radius: 3px;
     color: #fff;
     font-size: 16px;
@@ -50,9 +56,31 @@
     border: none;
     outline: none;
 }
+.mobtn{
+    padding: 10px 100px;
+    background:rgb(31, 121, 255);
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+}
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
 @media only screen and (max-width: 720px) {
+    .heading{
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+    }
     .container{
         flex-wrap: wrap;
+    }
+    .left img{
+        margin-bottom: 30px;
     }
     .editProfileBtn{
         margin-bottom: 20px;
