@@ -12,7 +12,7 @@ import styles from './JustForYou.module.css'
 const JustForYou = ({ match }) => {
     const [ currentPage,setCurrentPage ] = useState(1)
     const { loading,products,totalProducts,error } = useSelector(state => state.products)
-    const resPerPage = 7;
+    const resPerPage = 6;
     const pages = Math.ceil(totalProducts / resPerPage);
     const handleChange = (event,value) => {
         setCurrentPage(value);

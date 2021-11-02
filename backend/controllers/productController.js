@@ -45,7 +45,6 @@ exports.getProduct = catchAsync(async (req,res,next) => {
         status: 'success',
         product
     })
-
 })
 
 exports.updateProduct = catchAsync(async (req,res,next) => {

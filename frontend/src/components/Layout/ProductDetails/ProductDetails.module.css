@@ -203,6 +203,9 @@
     .container{
         flex-wrap: wrap;
     }
+    .name{
+        margin-top: 40px;
+    }
     .reviewBtn{
         margin: 0 auto;
         margin-top: 25px;

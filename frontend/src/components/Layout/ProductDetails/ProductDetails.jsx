@@ -1,14 +1,16 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect,useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { useAlert } from 'react-alert'
 
 import { getProductDetail,clearErrors } from '../../../store/actions/productsAction'
+import { addItemToCart } from '../../../store/actions/cartActions'
 import Loader from '../Loader/Loader'
 import Carousel from 'react-material-ui-carousel'
 import MetaData from '../MetaData'
 import styles from './ProductDetails.module.css'
 
 const ProductDetails = ({ match }) => {
+    const [ quantity,setQuantity ] = useState(1)
     const dispatch = useDispatch();
     const alert = useAlert();
     const { loading,error,product } = useSelector(state => state.productDetails)
@@ -21,11 +23,30 @@ const ProductDetails = ({ match }) => {
         }
     },[ dispatch,alert,error,match.params.id ])
 
+    const addToCart = () => {
+        dispatch(addItemToCart(match.params.id,quantity))
+        alert.success("Added Successfully")
+    }
+
+    const increaseQty = () => {
+        const count = document.getElementById('count').innerText;
+        if ((count * 1) >= product.stock) return;
+        const qty = (count * 1) + 1;
+        setQuantity(qty)
+    }
+
+    const decreaseQty = () => {
+        const count = document.getElementById('count').innerText;
+        if ((count * 1) <= 1) return;
+        const qty = (count * 1) - 1;
+        setQuantity(qty);
+    }
+
     return (
         <>
             {loading ? <div className={styles.loader}><Loader /></div> : (
                 <>
-                    <MetaData title={product.name}/>
+                    <MetaData title={product.name} />
                     <div className={styles.container}>
                         <div className={styles.left}>
                             {/* <Carousel
@@ -71,10 +92,17 @@ const ProductDetails = ({ match }) => {
                             </div>
                             <h1 className={styles.price}>$ {product.price}</h1>
                             <div className={styles.addToCartWrapper}>
-                                <button className={styles.subtractButton}>-</button>
-                                <span className={styles.quantity}>1</span>
-                                <button className={styles.addButton}>+</button>
-                                <button className={styles.AddProdButton}>
+
+                                <button className={styles.subtractButton} onClick={decreaseQty}>-</button>
+                                {/* <input value={quantity} type="number" readOnly className={styles.quantity} id="count" /> */}
+                                <span className={styles.quantity} id="count">{quantity}</span>
+                                <button className={styles.addButton} onClick={increaseQty}>+</button>
+
+                                <button
+                                    className={styles.AddProdButton}
+                                    disable={product.stock === 0}
+                                    onClick={addToCart}
+                                >
                                     <img src="/images/shopping-cart.svg" alt="cart" />
                                     Add to Cart
                                 </button>

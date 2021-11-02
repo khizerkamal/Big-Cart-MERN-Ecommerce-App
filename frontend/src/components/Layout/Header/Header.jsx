@@ -16,11 +16,16 @@ const Header = () => {
 
     const dispatch = useDispatch();
     const alert = useAlert();
+    const history = useHistory();
     const { user,loading } = useSelector(state => state.auth)
-
+    const { cartItems } = useSelector(state => state.cart)
     const logoutHandler = () => {
         dispatch(logout());
         alert.success("Logged Out Successfully.")
+    }
+
+    const gotoCartPage = () => {
+        history.push('/cart')
     }
 
     return (
@@ -34,10 +39,10 @@ const Header = () => {
                 <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
                     <span>Login</span>
                 </button>
-                <button className={styles.cartWrapper}>
+                <button className={styles.cartWrapper} onClick={gotoCartPage} >
                     <img src="/images/shopping-cart.svg" alt="cart" />
                     <span className={styles.cartCount}>
-                        45
+                        {cartItems.length}
                     </span>
                 </button>
             </div>
@@ -115,10 +120,10 @@ const Header = () => {
                     </button>
                 )}
 
-                <button className={styles.cartWrapper}>
+                <button className={styles.cartWrapper} onClick={gotoCartPage}>
                     <img src="/images/shopping-cart.svg" alt="cart" />
                     <span className={styles.cartCount}>
-                        45
+                        {cartItems.length}
                     </span>
                 </button>
             </div>

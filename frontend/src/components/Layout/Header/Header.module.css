@@ -42,8 +42,8 @@
     align-items: center;
     padding: 2px 10px;
     min-width: 500px;
-    border-right: 3px solid rgb(241, 170, 17);
-    border-left: 3px solid rgb(241, 170, 17);
+    /* border-right: 3px solid rgb(241, 170, 17);
+    border-left: 3px solid rgb(241, 170, 17); */
 
     /* border-radius: 20px; */
 }

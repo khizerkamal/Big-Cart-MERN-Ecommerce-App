@@ -108,7 +108,8 @@ const SearchResult = ({ match }) => {
                                                 <div className={styles.ratingouter}>
                                                     <div
                                                         className={styles.ratinginner}
-                                                        style={{ width: `${star * 20}%` }}></div>
+                                                        style={{ width: `${star * 20}%` }}>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>

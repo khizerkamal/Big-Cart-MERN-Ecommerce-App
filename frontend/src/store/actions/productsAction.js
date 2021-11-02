@@ -71,4 +71,4 @@ export const searchedProducts = (currentPage=1, limit, keyword='', price, catego
 // CLear Errors
 export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS})
-}
+}   
