@@ -3,6 +3,7 @@ import { BrowserRouter as Router,Route } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
 import './App.css';
+import ToggleSwitch from './ToggleSwitch'
 import { Body } from './components/Layout/Body/Body';
 import Footer from './components/Layout/Footer/Footer';
 import Header from './components/Layout/Header/Header';
@@ -23,12 +24,9 @@ function App() {
     <Router>
         <div className="App">
           <Header />
-          <Route path="/" component={Body} exact />
-          <Route path="/cart" component={Cart}/>
-          <Route path="/product/:id" component={ProductDetails} />
-          <Route path="/search/:keyword" component={SearchResult} />
-          <Route path="/resetPassword/:token" component={ResetPassword} />
-          <ProtectedRoute path="/user/me" component={Profile} exact />
+          <ToggleSwitch/>
+          {/* <Route path="/resetPassword/:token" component={ResetPassword} />
+          <ProtectedRoute path="/user/me" component={Profile} exact /> */}
           <Footer />
         </div>
     </Router>

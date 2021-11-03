@@ -1,15 +1,34 @@
-import React,{ useState,useEffect } from 'react'
+import React from 'react'
 import { Route,Link,useHistory } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 
 import styles from './Cart.module.css'
 import MetaData from '../MetaData'
+import { addItemToCart,removeItemFromCart } from '../../../store/actions/cartActions'
 
 const Cart = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
+
     const { cartItems } = useSelector(state => state.cart)
+
+    const increaseQty = (id,quantity,stock) => {
+        const newQty = quantity + 1;
+        if (newQty > stock) return;
+        dispatch(addItemToCart(id,newQty));
+    }
+
+    const decreaseQty = (id,quantity) => {
+        const newQty = quantity - 1;
+        if (newQty <= 0) return;
+        dispatch(addItemToCart(id,newQty));
+    }
+
+    const removeCartItemHandler = (id) => {
+        dispatch(removeItemFromCart(id))
+    }
+
     return (
         <>
             <MetaData title={"Your Cart"} />
@@ -19,7 +38,7 @@ const Cart = () => {
                         <div className={styles.itemsSection}>
                             <h1 className={styles.myCart}>My Cart({cartItems.length})</h1>
                             {cartItems.map(item => (
-                                <div className={styles.productWrapper}>
+                                <div className={styles.productWrapper} key={item.product}>
                                     <div className={styles.itemWrapper}>
                                         <div className={styles.imageWrapper}>
                                             <img className={styles.image} src={item.image} alt="product" />
@@ -29,11 +48,22 @@ const Cart = () => {
                                             <h1 className={styles.price}>${item.price}</h1>
                                         </div>
                                         <div className={styles.qtyControlWrapper}>
-                                            <button className={styles.subtractButton}>-</button>
-                                            <span className={styles.quantity} id="count">1</span>
-                                            <button className={styles.addButton}>+</button>
+                                            <button
+                                                onClick={() => decreaseQty(item.product,item.quantity)}
+                                                className={styles.subtractButton}
+                                            >-</button>
+                                            <span className={styles.quantity} id="count">{item.quantity}</span>
+                                            <button
+                                                className={styles.addButton}
+                                                onClick={() => increaseQty(item.product,item.quantity,item.stock)}
+                                            >+</button>
                                         </div>
-                                        <img className={styles.removeImg} src="/images/bin.png" alt="" />
+                                        <img
+                                            className={styles.removeImg}
+                                            src="/images/bin.png"
+                                            onClick={() => removeCartItemHandler(item.product)}
+                                            alt="deleteItem"
+                                        />
                                     </div>
                                 </div>
                             ))}
@@ -53,15 +83,19 @@ const Cart = () => {
                             </div>
                             <div className={styles.flexEnd}>
                                 <div className={`${styles.bold} ${styles.subTotal}`}>SUBTOTAL</div>
-                                <div>$9876</div>
+                                <div>
+                                    {
+                                        cartItems.reduce((acc, item) => (acc + item.quantity * 1), 0)
+                                    } (Units)
+                                </div>
                             </div>
                             <div className={styles.flexEnd}>
                                 <div className={`${styles.bold} ${styles.lg}`}>Shipping</div>
-                                <div className={styles.sm}>$68</div>
+                                <div className={styles.sm}>TBD</div>
                             </div>
                             <div className={styles.flexEnd}>
                                 <div className={`${styles.bold} ${styles.lg}`}>Sales Tax</div>
-                                <div className={styles.sm}>$67</div>
+                                <div className={styles.sm}>TBD</div>
                             </div>
                             <div className={styles.flexEnd}>
                                 <div className={`${styles.bold} ${styles.lg}`}>Discount</div>
@@ -69,7 +103,12 @@ const Cart = () => {
                             </div>
                             <div className={`${styles.flexEnd} ${styles.total}`}>
                                 <div className={styles.bold}>ESTIMATED TOTAL</div>
-                                <div>$9876</div>
+                                <div>
+                                    ${
+                                        cartItems.reduce((acc,item) =>
+                                            (acc + item.quantity * item.price),0).toFixed(2)
+                                    }
+                                </div>
                             </div>
                             <button className={styles.checkoutBtn}>CHECKOUT</button>
                             <div className={styles.helpWrapper}>

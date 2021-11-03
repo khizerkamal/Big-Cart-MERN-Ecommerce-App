@@ -4,6 +4,7 @@ import { useAlert } from 'react-alert'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import { Pagination } from '@mui/material';
+import { useParams } from 'react-router'
 
 import { searchedProducts } from '../../../store/actions/productsAction'
 import Loader from '../Loader/Loader'
@@ -13,7 +14,7 @@ import Product from '../Body/Product/Product';
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
-const SearchResult = ({ match }) => {
+const SearchResult = () => {
     const [ currentPage,setCurrentPage ] = useState(1)
     const [ price,setPrice ] = useState([ 1,1000 ])
     const [ category,setCategory ] = useState('')
@@ -21,7 +22,7 @@ const SearchResult = ({ match }) => {
 
     const categories = [ "Electronics","Cameras","Laptops","Accessories","Books","Food","Headphones",
         "Clothes/Shoes","Beauty/Health","Sports","Outdoor","Home" ]
-    const keyword = match.params.keyword;
+    const {keyword} = useParams();
 
     const { loading,products,totalProducts,error,filteredProductsCount } = useSelector(state => state.searchedProducts)
     const resPerPage = 20;

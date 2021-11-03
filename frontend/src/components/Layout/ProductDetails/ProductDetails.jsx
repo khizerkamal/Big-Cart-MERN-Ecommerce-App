@@ -8,23 +8,25 @@ import Loader from '../Loader/Loader'
 import Carousel from 'react-material-ui-carousel'
 import MetaData from '../MetaData'
 import styles from './ProductDetails.module.css'
+import { useParams } from 'react-router';
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
     const [ quantity,setQuantity ] = useState(1)
     const dispatch = useDispatch();
     const alert = useAlert();
+    const { id } = useParams();
     const { loading,error,product } = useSelector(state => state.productDetails)
 
     useEffect(() => {
-        dispatch(getProductDetail(match.params.id))
+        dispatch(getProductDetail(id))
         if (error) {
             alert.error(error)
             dispatch(clearErrors())
         }
-    },[ dispatch,alert,error,match.params.id ])
+    },[ dispatch,alert,error,id ])
 
     const addToCart = () => {
-        dispatch(addItemToCart(match.params.id,quantity))
+        dispatch(addItemToCart(id,quantity))
         alert.success("Added Successfully")
     }
 

@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { Route,Link,useHistory } from 'react-router-dom'
+import { Route,Link,useHistory, useLocation } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 
@@ -17,6 +17,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const history = useHistory();
+    const location = useLocation();
     const { user,loading } = useSelector(state => state.auth)
     const { cartItems } = useSelector(state => state.cart)
     const logoutHandler = () => {
@@ -115,9 +116,17 @@ const Header = () => {
                         </div>
                     </>
                 ) : !loading && (
-                    <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
-                        <span>Login</span>
-                    </button>
+                        <Link
+                        to={{
+                            pathname: `/login`,
+                            state: { background: location }
+                          }}
+                        >
+                        <button className={styles.loginButtion}>
+                            <span>Login</span>
+                        </button>
+                    </Link>
+
                 )}
 
                 <button className={styles.cartWrapper} onClick={gotoCartPage}>

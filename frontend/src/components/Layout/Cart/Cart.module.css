@@ -71,6 +71,7 @@
 }
 .removeImg{
     margin: 0 40px;
+    cursor: pointer;
 }
 /* -------CART SUMMARY -------- */
 .cartSummaryWrapper{

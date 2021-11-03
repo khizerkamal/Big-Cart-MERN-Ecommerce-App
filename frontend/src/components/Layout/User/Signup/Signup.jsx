@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch,useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 import styles from './Signup.module.css'
 import { register,clearErrors } from '../../../../store/actions/userActions'
@@ -25,7 +25,7 @@ const Signup = ({ onClose }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        if (isAuthenticated) return onClose();
+        if (isAuthenticated) return history.goBack();
         if (!name || !email || !password || !avatar) {
             return alert.error("Please Fill All The Fields")
         }
@@ -56,8 +56,8 @@ const Signup = ({ onClose }) => {
     }
 
     useEffect(() => {
-        if (isAuthenticated) onClose();
-    },[ isAuthenticated,onClose ])
+        if (isAuthenticated) history.goBack();
+    },[ isAuthenticated,onClose, history ])
     return (
         <div className={styles.right}>
             <MetaData title={'Register User'} />

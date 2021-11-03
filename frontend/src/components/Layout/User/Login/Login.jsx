@@ -1,7 +1,7 @@
 import React,{ useState,useEffect } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch,useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
@@ -17,6 +17,12 @@ const Login = ({ onClose }) => {
 
     const alert = useAlert();
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    let back = e => {
+        e.stopPropagation();
+        history.goBack();
+    };
 
     const submit = (e) => {
         if (error) {
@@ -24,22 +30,22 @@ const Login = ({ onClose }) => {
             dispatch(clearErrors());
         }
         e.preventDefault();
-        if (isAuthenticated) return onClose();
+        if (isAuthenticated) return history.goBack();
         dispatch(login(email,password))
     }
 
     useEffect(() => {
-        if (isAuthenticated) onClose();
+        if (isAuthenticated) history.goBack();
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-    },[ dispatch,alert,isAuthenticated,error,onClose ])
+    },[ dispatch,alert,isAuthenticated,error ])
 
     return (
         <div className={styles.modalMask}>
             <div className={`${styles.modalWrapper} ${signupModal ? styles.h70 : ''}`}>
-                <div onClick={onClose} className={styles.closeButton}>
+                <div onClick={back} className={styles.closeButton}>
                     <img src="/images/close.png" alt="close" />
                 </div>
                 <div className={styles.left}>
@@ -90,10 +96,10 @@ const Login = ({ onClose }) => {
                         </form>
                     </div>
                     <div className={signupModal ? styles.displaySignup : styles.hide}>
-                        <Signup onClose={onClose} />
+                        <Signup />
                     </div>
                     <div className={forgotPasswordModal ? styles.displayFP : styles.hide}>
-                        <ForgotPassword onClose={onClose} />
+                        <ForgotPassword />
                     </div>
                 </div>
             </div>

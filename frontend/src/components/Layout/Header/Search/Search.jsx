@@ -22,7 +22,7 @@ const Search = ({history}) => {
                 className={styles.searchInput}
                 placeholder="Enter Product Name ..."
             />
-        </form>
+        </form> 
     )
 }
 
