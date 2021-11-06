@@ -1,14 +1,14 @@
 import React,{ useState,useEffect } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch,useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useLocation } from 'react-router-dom'
 
 import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
 import Signup from '../Signup/Signup'
 import ForgotPassword from '../ForgotPassword/ForgotPassword'
 
-const Login = ({ onClose }) => {
+const Login = () => {
     const [ email,setEmail ] = useState('')
     const [ password,setPassword ] = useState('')
     const [ signupModal,setSignupModal ] = useState(false)
@@ -18,29 +18,28 @@ const Login = ({ onClose }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
 
     let back = e => {
         e.stopPropagation();
         history.goBack();
     };
 
-    const submit = (e) => {
-        if (error) {
-            alert.error(error);
-            dispatch(clearErrors());
-        }
-        e.preventDefault();
-        if (isAuthenticated) return history.goBack();
-        dispatch(login(email,password))
-    }
+    const redirect = location.search ? location.search.split('=')[ 1 ] : '/'
+    // console.log(location.search) // ?redirect=shipping
 
     useEffect(() => {
-        if (isAuthenticated) history.goBack();
+        if (isAuthenticated) history.push(redirect);
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-    },[ dispatch,alert,isAuthenticated,error ])
+    },[ dispatch,alert,isAuthenticated,error,history ])
+
+    const submit = (e) => {
+        e.preventDefault();
+        dispatch(login(email,password))
+    }
 
     return (
         <div className={styles.modalMask}>

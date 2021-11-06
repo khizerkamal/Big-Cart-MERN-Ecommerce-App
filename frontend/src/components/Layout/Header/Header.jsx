@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { Route,Link,useHistory, useLocation } from 'react-router-dom'
+import { Route,Link,useHistory,useLocation } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 
@@ -20,6 +20,7 @@ const Header = () => {
     const location = useLocation();
     const { user,loading } = useSelector(state => state.auth)
     const { cartItems } = useSelector(state => state.cart)
+
     const logoutHandler = () => {
         dispatch(logout());
         alert.success("Logged Out Successfully.")
@@ -37,9 +38,16 @@ const Header = () => {
                     <span className={styles.logoBig}>Big</span>
                     <span className={styles.logoCart}>Cart</span>
                 </div>
-                <button onClick={() => setShowModal(true)} className={styles.loginButtion}>
-                    <span>Login</span>
-                </button>
+                <Link
+                    to={{
+                        pathname: `/login`,
+                        state: { background: location }
+                    }}
+                >
+                    <button className={styles.loginButtion}>
+                        <span>Login</span>
+                    </button>
+                </Link>
                 <button className={styles.cartWrapper} onClick={gotoCartPage} >
                     <img src="/images/shopping-cart.svg" alt="cart" />
                     <span className={styles.cartCount}>
@@ -116,12 +124,12 @@ const Header = () => {
                         </div>
                     </>
                 ) : !loading && (
-                        <Link
+                    <Link
                         to={{
-                            pathname: `/login`,
+                            pathname: '/login',
                             state: { background: location }
-                          }}
-                        >
+                        }}
+                    >
                         <button className={styles.loginButtion}>
                             <span>Login</span>
                         </button>
@@ -136,7 +144,7 @@ const Header = () => {
                     </span>
                 </button>
             </div>
-            {showModal && <Login onClose={() => setShowModal(false)} />}
+            {/* {showModal && <Login onClose={() => setShowModal(false)} />} */}
             {/* {showModal && <Route path='/login' component={Login} />} */}
         </div >
     )

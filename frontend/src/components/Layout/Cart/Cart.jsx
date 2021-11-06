@@ -10,8 +10,10 @@ import { addItemToCart,removeItemFromCart } from '../../../store/actions/cartAct
 const Cart = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
+    const history = useHistory();
 
     const { cartItems } = useSelector(state => state.cart)
+    const { isAuthenticated } = useSelector(state => state.auth)
 
     const increaseQty = (id,quantity,stock) => {
         const newQty = quantity + 1;
@@ -29,6 +31,14 @@ const Cart = () => {
         dispatch(removeItemFromCart(id))
     }
 
+    const checkoutHandler = () => {
+        if (isAuthenticated) {
+            history.push('/shipping')
+        } else {
+            history.push('/login')
+            alert.error("Login First")
+        }
+    }
     return (
         <>
             <MetaData title={"Your Cart"} />
@@ -85,7 +95,7 @@ const Cart = () => {
                                 <div className={`${styles.bold} ${styles.subTotal}`}>SUBTOTAL</div>
                                 <div>
                                     {
-                                        cartItems.reduce((acc, item) => (acc + item.quantity * 1), 0)
+                                        cartItems.reduce((acc,item) => (acc + item.quantity * 1),0)
                                     } (Units)
                                 </div>
                             </div>
@@ -110,7 +120,12 @@ const Cart = () => {
                                     }
                                 </div>
                             </div>
-                            <button className={styles.checkoutBtn}>CHECKOUT</button>
+                            <button
+                                className={styles.checkoutBtn}
+                                onClick={checkoutHandler}
+                            >
+                                CHECKOUT
+                            </button>
                             <div className={styles.helpWrapper}>
                                 <h3 className={styles.help}>Need help? Call us at 1-000-000</h3>
                             </div>

@@ -1,0 +1,96 @@
+.container{
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto;
+}
+.container h2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.pointer {
+    width: 200px;
+    height: 40px;
+    position: relative;
+    background: red;
+  }
+.pointer:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+  .pointer:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid red;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 2%;
+    padding: 20px 30px;
+    max-width: 400px;
+}
+.form input{
+    padding-left: 15px; 
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    background:rgb(241, 241, 241);
+}
+.country{
+    padding-left: 15px; 
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    background:rgb(241, 241, 241);
+}
+.inputBox{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    min-width: 250px;
+    background:rgb(241, 241, 241);
+    margin-bottom: 15px;
+}
+.inputBox img{
+    width: 18px;
+}
+.loginButtonWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.loginButton{
+    padding: 10px;
+    border-radius: 2px;
+    background: rgb(31, 121, 255);
+    color: #fff;
+    width: 100px;
+}
+
+@media only screen and (max-width: 720px){
+    .form{
+        padding: 20px;
+    }
+}

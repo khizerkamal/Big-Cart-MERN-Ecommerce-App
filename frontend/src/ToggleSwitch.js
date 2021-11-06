@@ -7,6 +7,7 @@ import SearchResult from './components/Layout/SearchResult/SearchResult';
 import Login from './components/Layout/User/Login/Login';
 import Profile from './components/Layout/User/Profile/Profile';
 import ResetPassword from './components/Layout/User/ResetPassword/ResetPassword';
+import Shipping from './components/Shipping/Shipping';
 import ProtectedRoute from './Route/ProtectedRoute';
 
 const ToggleSwitch = () => {
@@ -15,13 +16,14 @@ const ToggleSwitch = () => {
     return (
         <div>
       <Switch location={background || location}>
-        <Route exact path="/" children={<Body />} />
-        <Route path="/cart" children={<Cart />} />
-        <Route path="/product/:id" children={<ProductDetails />} />
-        <Route path="/search/:keyword" children={<SearchResult/>} />
-        <Route path="/product/:id" children={<ProductDetails />} />
-        <Route path="/resetPassword/:token" children={<ResetPassword />} />
-        <ProtectedRoute path="/user/me" children={<Profile />} />
+        <Route path="/" children={<Body />} exact/>
+        <Route path="/cart" children={<Cart />} exact/>
+        <Route path="/product/:id" children={<ProductDetails />} exact/>
+        <Route path="/search/:keyword" children={<SearchResult/>} exact/>
+        <Route path="/product/:id" children={<ProductDetails/>} />
+        <Route path="/resetPassword/:token" children={<ResetPassword/>} />
+        <ProtectedRoute path="/user/me" component={Profile} exact/>
+        <ProtectedRoute path="/shipping" component = {Shipping} exact/>
         <Route path="/login" children={<Login />} />
       </Switch>
 

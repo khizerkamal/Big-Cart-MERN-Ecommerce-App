@@ -10,6 +10,7 @@ router
 router
     .route('/login')
     .post(authController.login)
+    
 router.get('/logout',authController.protect,authController.logout)
 
 router.post('/forgotPassword',authController.forgotPassword)

@@ -4,16 +4,9 @@ import {useDispatch} from 'react-redux'
 
 import './App.css';
 import ToggleSwitch from './ToggleSwitch'
-import { Body } from './components/Layout/Body/Body';
 import Footer from './components/Layout/Footer/Footer';
 import Header from './components/Layout/Header/Header';
-import ProductDetails from './components/Layout/ProductDetails/ProductDetails';
-import Cart from './components/Layout/Cart/Cart';
-import SearchResult from './components/Layout/SearchResult/SearchResult';
 import { loadUser } from './store/actions/userActions';
-import Profile from './components/Layout/User/Profile/Profile';
-import ProtectedRoute from './Route/ProtectedRoute';
-import ResetPassword from './components/Layout/User/ResetPassword/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +18,6 @@ function App() {
         <div className="App">
           <Header />
           <ToggleSwitch/>
-          {/* <Route path="/resetPassword/:token" component={ResetPassword} />
-          <ProtectedRoute path="/user/me" component={Profile} exact /> */}
           <Footer />
         </div>
     </Router>
