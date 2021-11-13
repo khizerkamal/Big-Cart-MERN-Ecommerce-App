@@ -7,7 +7,8 @@ import SearchResult from './components/Layout/SearchResult/SearchResult';
 import Login from './components/Layout/User/Login/Login';
 import Profile from './components/Layout/User/Profile/Profile';
 import ResetPassword from './components/Layout/User/ResetPassword/ResetPassword';
-import Shipping from './components/Shipping/Shipping';
+import Shipping from './components/CheckoutSteps/Shipping/Shipping';
+import ConfirmOrder from './components/CheckoutSteps/ConfirmOrder/ConfirmOrder';
 import ProtectedRoute from './Route/ProtectedRoute';
 
 const ToggleSwitch = () => {
@@ -23,7 +24,8 @@ const ToggleSwitch = () => {
         <Route path="/product/:id" children={<ProductDetails/>} />
         <Route path="/resetPassword/:token" children={<ResetPassword/>} />
         <ProtectedRoute path="/user/me" component={Profile} exact/>
-        <ProtectedRoute path="/shipping" component = {Shipping} exact/>
+        <ProtectedRoute path="/shipping" component={Shipping} exact />
+        <ProtectedRoute path="/order/confirm" component={ConfirmOrder} exact/>
         <Route path="/login" children={<Login />} />
       </Switch>
 

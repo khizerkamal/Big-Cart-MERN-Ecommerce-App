@@ -5,7 +5,6 @@ const cloudinary = require ('cloudinary')
 dotenv.config({path: './config.env'})
 
 const app = require('./app')
-console.log(process.env.DATABASE_PASSWORD)
 
 //Setting up Cloudinary Configuration
 cloudinary.config({
@@ -15,7 +14,10 @@ cloudinary.config({
 })
 
 // const DB = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD)
-const DB = "mongodb+srv://khizer:dtLytOXdkmcGBk3c@cluster0.znqnu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const DB = process.env.DATABASE.replace(
+    '<PASSWORD>',
+    process.env.DATABASE_PASSWORD
+)
 
 mongoose
     .connect(DB,{

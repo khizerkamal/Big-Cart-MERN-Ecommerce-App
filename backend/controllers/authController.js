@@ -45,8 +45,7 @@ exports.signup = catchAsync(async (req,res,next) => {
             url: result.secure_url
         }
     })
-
-    createSendToken(user, 201, res)
+    createSendToken(user, 201, res) 
 })
 
 exports.login = catchAsync(async (req,res,next) => {

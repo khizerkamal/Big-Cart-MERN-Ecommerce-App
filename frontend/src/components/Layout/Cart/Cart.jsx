@@ -50,30 +50,66 @@ const Cart = () => {
                             {cartItems.map(item => (
                                 <div className={styles.productWrapper} key={item.product}>
                                     <div className={styles.itemWrapper}>
-                                        <div className={styles.imageWrapper}>
-                                            <img className={styles.image} src={item.image} alt="product" />
+                                        <div className={styles.left}>
+                                            <div className={styles.imageWrapper}>
+                                                <img className={styles.image} src={item.image} alt="product" />
+                                            </div>
+                                            <h2 className={styles.name}>{item.name}</h2>
                                         </div>
-                                        <h2 className={styles.name}>{item.name}</h2>
-                                        <div className={styles.priceWrapper}>
-                                            <h1 className={styles.price}>${item.price}</h1>
+                                        <div className={styles.right}>
+                                            <div className={styles.priceWrapper}>
+                                                <h1 className={styles.price}>${item.price}</h1>
+                                            </div>
+                                            <div className={styles.qtyControlWrapper}>
+                                                <button
+                                                    onClick={() => decreaseQty(item.product,item.quantity)}
+                                                    className={styles.subtractButton}
+                                                >-</button>
+                                                <span className={styles.quantity} id="count">{item.quantity}</span>
+                                                <button
+                                                    className={styles.addButton}
+                                                    onClick={() => increaseQty(item.product,item.quantity,item.stock)}
+                                                >+</button>
+                                            </div>
+                                            <img
+                                                className={styles.removeImg}
+                                                src="/images/bin.png"
+                                                onClick={() => removeCartItemHandler(item.product)}
+                                                alt="deleteItem"
+                                            />
                                         </div>
-                                        <div className={styles.qtyControlWrapper}>
-                                            <button
-                                                onClick={() => decreaseQty(item.product,item.quantity)}
-                                                className={styles.subtractButton}
-                                            >-</button>
-                                            <span className={styles.quantity} id="count">{item.quantity}</span>
-                                            <button
-                                                className={styles.addButton}
-                                                onClick={() => increaseQty(item.product,item.quantity,item.stock)}
-                                            >+</button>
+                                    </div>
+                                    <div className={styles.mobile}>
+                                        <div className={styles.leftMob}>
+                                            <div className={styles.imageWrapper}>
+                                                <img className={styles.image} src={item.image} alt="product" />
+                                            </div>
+                                            <div className={styles.priceWrapper}>
+                                                <h1 className={styles.price}>${item.price}</h1>
+                                            </div>
                                         </div>
-                                        <img
-                                            className={styles.removeImg}
-                                            src="/images/bin.png"
-                                            onClick={() => removeCartItemHandler(item.product)}
-                                            alt="deleteItem"
-                                        />
+                                        <div className={styles.rightMob}>
+                                            <h2 className={styles.name}>{item.name}</h2>
+                                            <div className={styles.rightBottom}>
+                                                <div className={styles.qtyControlWrapper}>
+                                                    <button
+                                                        onClick={() => decreaseQty(item.product,item.quantity)}
+                                                        className={styles.subtractButton}
+                                                    >-</button>
+                                                    <span className={styles.quantity} id="count">{item.quantity}</span>
+                                                    <button
+                                                        className={styles.addButton}
+                                                        onClick={() => increaseQty(item.product,item.quantity,item.stock)}
+                                                    >+</button>
+                                                </div>
+                                                <img
+                                                    className={styles.removeImg}
+                                                    src="/images/bin.png"
+                                                    onClick={() => removeCartItemHandler(item.product)}
+                                                    alt="deleteItem"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
