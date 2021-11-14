@@ -43,10 +43,7 @@ const ConfirmOrder = () => {
                                 </div>
                                 <div className={styles.right}>
                                     <div className={styles.priceWrapper}>
-                                        <h1 className={styles.price}>${item.price}</h1>
-                                    </div>
-                                    <div className={styles.qtyControlWrapper}>
-                                        <span className={styles.quantity} id="count">Qty: {item.quantity}</span>
+                                        <h1 className={styles.price}>{item.quantity} x ${item.price} = ${item.quantity * item.price}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -58,9 +55,9 @@ const ConfirmOrder = () => {
                                     <div className={styles.priceWrapper}>
                                         <h1 className={styles.price}>${item.price}</h1>
                                     </div>
-                                    <div className={styles.qtyControlWrapper}>
+                                    {/* <div className={styles.qtyControlWrapper}>
                                         <span className={styles.quantity} id="count">Qty: {item.quantity}</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className={styles.rightMob}>
                                     <h2 className={styles.name}>{item.name}</h2>

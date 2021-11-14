@@ -13,29 +13,36 @@ const Profile = () => {
     const { loading,user } = useSelector(state => state.auth)
     return (
         <>
+            <MetaData title="My Profile" />
             {
                 loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
                     <>
-                        <MetaData title="My Profile" />
-                        <h1 className={styles.heading}>Your Profile</h1>
                         <div className={styles.container}>
-                            <div className={styles.left}>
+                            <div className={styles.avatarWrapper}>
                                 <img src={user.avatar && user.avatar.url} alt="avatar" />
-                                <button
-                                    onClick={() => setUpdateProfileModal(true)}
-                                    className={styles.editProfileBtn}
-                                >
-                                    Edit Profile
-                                </button>
                             </div>
-                            <div className={styles.right}>
-                                <h1>Full Name</h1>
+                            <div className={styles.nameWrapper}>
                                 <h3>{user.name}</h3>
-                                <h1>Email Address</h1>
-                                <h3>{user.email}</h3>
-                                <h1>Joined On</h1>
-                                <h3>{String(user.createdAt).substring(0,10)}</h3>
-                                <div className={styles.flexColumn}>
+                            </div>
+                            <div className={styles.flexCenter}>
+                                <div className={styles.emailWrapper}>
+                                    <img src="/images/email.png" alt="" />
+                                    <h3>{user.email}</h3>
+                                </div>
+                                <div className={styles.joinedOnWrapper}>
+                                    <img src="/images/link.png" alt="" />
+                                    <h3 className={styles.joinedOn}>Joined On:</h3>
+                                    <h3 className={styles.joinedOnDate}>{String(user.createdAt).substring(0,10)}</h3>
+                                </div>
+                            </div>
+                            <div className={styles.buttonsWrapper}>
+                                <div className={styles.buttonsCenter}>
+                                    <button
+                                        onClick={() => setUpdateProfileModal(true)}
+                                        className={styles.editProfileBtn}
+                                    >
+                                        Edit Profile
+                                    </button>
                                     {user.role !== 'admin' && (
                                         <button className={styles.mobtn}>My Orders</button>
                                     )}

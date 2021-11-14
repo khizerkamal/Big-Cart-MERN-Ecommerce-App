@@ -6,27 +6,28 @@
 }
 .container{
     display: flex;
-    justify-content: space-evenly;
-}
-.heading{
-    margin: 30px 50px;
-    font-weight: bold;
-    color: rgb(29, 29, 29);
-}
-.left{
-    display: flex;
     flex-direction: column;
 }
-.left img{
-    width: 250px;
-    height: 250px;
+.avatarWrapper{
     display: flex;
-    align-items: center;
     justify-content: center;
+    margin-top: 30px;
+}
+.nameWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.nameWrapper h3{
+    font-weight: bold;
+    font-size: 24px;
+}
+.avatarWrapper img{
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     border: 3px solid rgb(31, 121, 255);
     border-radius: 50%;
-    margin-bottom: 50px;
 }
 .editProfileBtn{
     padding: 10px 60px;
@@ -34,41 +35,82 @@
     border-radius: 3px;
     color: #fff;
     font-size: 16px;
+    margin-bottom: 10px;
+    max-width: 200px;
     border: none;
     outline: none;
 }
-.right h1{
+.container h1{
     color: rgb(29, 29, 29);
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: bold;
 }
-.right h3{
-    color: rgb(53, 53, 53);
-    margin-bottom: 25px;
-}
 .cpbtn{
-    padding: 10px 100px;
+    padding: 10px 30px;
     background:rgb(31, 121, 255);
     border-radius: 3px;
+    max-width: 200px;
     color: #fff;
     font-size: 16px;
     border: none;
     outline: none;
 }
 .mobtn{
-    padding: 10px 100px;
+    padding: 10px 30px;
     background:rgb(31, 121, 255);
     border-radius: 3px;
     color: #fff;
+    max-width: 200px;
     font-size: 16px;
     margin-bottom: 10px;
     border: none;
     outline: none;
 }
-.flexColumn{
+.buttonsWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+.buttonsCenter{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+}
+.flexCenter{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.emailWrapper{
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+}
+.emailWrapper img{
+    max-width: 18px;
+}
+.emailWrapper h3{
+    margin-left: 7px;
+    font-size: 15px;
+    color: rgb(112, 112, 112);
+}
+.joinedOnWrapper{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.joinedOn{
+    margin: 0 5px 0 7px;
+    font-size: 15px;
+    color: rgb(112, 112, 112);
+}
+.joinedOnDate{
+    font-size: 15px;
+    color: rgb(112, 112, 112);
+}
+.joinedOnWrapper img{
+    max-width: 18px;
 }
 @media only screen and (max-width: 720px) {
     .heading{
@@ -79,10 +121,13 @@
     .container{
         flex-wrap: wrap;
     }
-    .left img{
+    .avatarWrapper img{
         margin-bottom: 30px;
     }
     .editProfileBtn{
         margin-bottom: 20px;
+    }
+    .emailWrapper{
+        margin-left: 0px;
     }
 }
