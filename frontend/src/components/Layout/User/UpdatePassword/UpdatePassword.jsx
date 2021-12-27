@@ -47,7 +47,10 @@ const UpdatePassword = ({ onClose }) => {
                 <div className={styles.right}>
                     <div className={styles.displaySignup}>
                         <div>
-                            <h2>Update Password</h2>
+                            <div className={styles.imgWrapper}>
+                                <img src="/images/padlock.png" alt="" />
+                            </div>
+                            <h2 className={styles.heading}>UPDATE PASSWORD</h2>
                             <form className={styles.form} onSubmit={submit} encType='multipart/form-data'>
                                 <div className={styles.inputWrapper}>
                                     <div className={styles.inputBox}>

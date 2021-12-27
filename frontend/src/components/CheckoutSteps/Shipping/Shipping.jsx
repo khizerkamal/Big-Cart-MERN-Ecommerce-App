@@ -38,7 +38,10 @@ const Shipping = () => {
             <div className={styles.flexCenter}>
                 <form onSubmit={submitHandler}>
                     <div className={styles.form}>
-                        <h2>SHIPPING INFORMATION</h2>
+                        <div className={styles.headerWrapper}>
+                            <img src="/images/truck.png" alt="" />
+                            <h2>SHIPPING INFORMATION</h2>
+                        </div>
                         <div className={styles.inputBox}>
                             <img src="/images/country.png" alt="country" />
                             <select

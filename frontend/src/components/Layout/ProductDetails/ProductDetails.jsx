@@ -102,7 +102,7 @@ const ProductDetails = () => {
 
                                 <button
                                     className={styles.AddProdButton}
-                                    disable={product.stock === 0}
+                                    disabled={product.stock === 0}
                                     onClick={addToCart}
                                 >
                                     <img src="/images/shopping-cart.svg" alt="cart" />

@@ -17,8 +17,20 @@
     position: relative;
     display: flex;
 }
+.imgWrapper{
+    display: flex;
+    justify-content: center;
+}
+.imgWrapper img{
+    width: 70px;
+}
 .h70{
-    height: 52%;
+    height: 58%;
+}
+.heading{
+    font-size: 25px !important;
+    margin-top: 10px;
+    color: rgb(85, 85, 85);
 }
 .closeButton{
     position: absolute;
@@ -90,6 +102,16 @@
 @media only screen and (max-width: 720px){
     .left{
         display: none;
+    }
+    .h70{
+        height: 65%;
+    }
+    .modalMask{
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
     }
     .modalWrapper{
         width: 95%;

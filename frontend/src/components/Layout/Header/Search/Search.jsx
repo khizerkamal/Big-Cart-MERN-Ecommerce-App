@@ -1,9 +1,10 @@
-import React, { useState} from 'react'
+import React,{ useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from '../Header.module.css'
 
-const Search = ({history}) => {
-    const [ keyword, setKeyword ] = useState('')
-    
+const Search = () => {
+    const [ keyword,setKeyword ] = useState('')
+    const history = useHistory();
     function submitHandler(e) {
         e.preventDefault();
         if (keyword.trim()) {
@@ -22,7 +23,7 @@ const Search = ({history}) => {
                 className={styles.searchInput}
                 placeholder="Enter Product Name ..."
             />
-        </form> 
+        </form>
     )
 }
 

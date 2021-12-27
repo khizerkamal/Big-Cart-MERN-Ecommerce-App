@@ -4,14 +4,14 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useAlert } from 'react-alert'
 import { resetPassword,clearErrors,loadUser } from '../../../../store/actions/userActions';
 import MetaData from '../../MetaData'
-import { useParams } from 'react-router'
+import { useParams,useHistory } from 'react-router'
 
-const ResetPassword = ({ history }) => {
+const ResetPassword = () => {
     const [ password,setPassword ] = useState('')
     const [ confirmPassword,setConfirmPassword ] = useState('')
 
     const { error,success,loading } = useSelector(state => state.forgotPassword)
-
+    const history = useHistory();
     const alert = useAlert();
     const dispatch = useDispatch();
     const { token } = useParams();
@@ -24,7 +24,7 @@ const ResetPassword = ({ history }) => {
         if (success) {
             alert.success("Password Updated Successfully");
             dispatch(loadUser());
-            history.push('/')
+            // history.push('/')
         }
     },[ alert,error,dispatch,success,history ])
 

@@ -17,7 +17,10 @@ const Cart = () => {
 
     const increaseQty = (id,quantity,stock) => {
         const newQty = quantity + 1;
-        if (newQty > stock) return;
+        if (newQty > stock) {
+            alert.error("Stock Empty")
+            return;
+        }
         dispatch(addItemToCart(id,newQty));
     }
 
@@ -39,10 +42,17 @@ const Cart = () => {
             alert.error("Login First")
         }
     }
+
     return (
         <>
             <MetaData title={"Your Cart"} />
-            {cartItems.length === 0 ? <h2>Your cart is empty</h2> : (
+            {cartItems.length === 0 ? (
+                <div className={styles.emptyCartContainer}>
+                    <img src="/images/emptyCart.png" alt="emptycart" />
+                    <h1>OOPS!</h1>
+                    <h2>Your Cart is Empty...</h2>
+                </div>
+            ): (
                 <>
                     <div className={styles.container}>
                         <div className={styles.itemsSection}>

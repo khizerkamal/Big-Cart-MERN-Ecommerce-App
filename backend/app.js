@@ -7,6 +7,8 @@ const fileUpload = require ('express-fileupload')
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
 const adminRoutes = require('./routes/adminRoutes')
+const paymentRoutes = require('./routes/paymentRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 
@@ -25,8 +27,9 @@ if (process.env.NODE_ENV == 'development') {
 
 app.use('/api/v1/products',productRoutes)
 app.use('/api/v1/user',userRoutes)
-app.use('/api/v1/admin', adminRoutes)
-
+app.use('/api/v1/admin',adminRoutes)
+app.use('/api/v1/payment',paymentRoutes)
+app.use('/api/v1/order', orderRoutes)
 
 // HANDLING UNHANDLED ROUTES
 app.all('*', (req, res, next) => {

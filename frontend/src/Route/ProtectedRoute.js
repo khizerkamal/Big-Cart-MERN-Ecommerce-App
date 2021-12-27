@@ -5,7 +5,7 @@ import {useAlert} from 'react-alert'
 
 const ProtectedRoute = ({component : Component, ...rest}) => {
     const { loading,isAuthenticated } = useSelector(state => state.auth)
-    const alert = useAlert();
+    // const alert = useAlert();
     return (
         <div>
             {

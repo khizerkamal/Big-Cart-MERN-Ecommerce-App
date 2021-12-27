@@ -66,7 +66,10 @@ const UpdateProfile = ({ onClose }) => {
                 <div className={styles.right}>
                     <div className={styles.displaySignup}>
                         <div>
-                            <h2>Update Profile</h2>
+                            <div className={styles.imgWrapper}>
+                                <img src="/images/edit.png" alt="" />
+                            </div>
+                            <h2 className={styles.heading}>UPDATE PROFILE</h2>
                             <form className={styles.form} onSubmit={submit} encType='multipart/form-data'>
                                 <div className={styles.inputWrapper}>
                                     <div className={styles.inputBox}>

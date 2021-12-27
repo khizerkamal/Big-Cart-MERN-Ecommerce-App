@@ -62,7 +62,8 @@ const Header = () => {
                     <span className={styles.logoCart}>Cart</span>
                 </div>
             </Link>
-            <Route render={({ history }) => <Search history={history} />} />
+            {/* <Route render={({ history }) => <Search history={history} />} /> */}
+            <Search  />
             <div className={styles.desktop}>
                 {user && !loading ? (
                     <>

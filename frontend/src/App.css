@@ -48,4 +48,15 @@ body{
   background-clip: padding-box;
   border-radius: 5px;
 }
-
+.App{
+  position: relative;
+  min-height: 100vh;
+}
+.contentWrapper{
+  padding-bottom: 4rem;
+}
+.footerWrapper{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

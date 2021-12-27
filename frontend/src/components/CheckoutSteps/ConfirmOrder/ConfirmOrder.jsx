@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link,useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import styles from './ConfirmOrder.module.css'
@@ -9,6 +9,22 @@ import CheckoutSteps from '../CheckoutSteps'
 const ConfirmOrder = () => {
     const { cartItems,shippingInfo } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
+    const history = useHistory();
+    const itemsPrice = cartItems.reduce((acc,item) => acc + item.price * item.quantity,0)
+    const shippingPrice = itemsPrice > 200 ? 0 : 25
+    const taxPrice = Number((0.05 * itemsPrice).toFixed(2))
+    const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2)
+
+    const proceedToCheckout = () => {
+        const data = {
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
+            totalPrice
+        }
+        sessionStorage.setItem('orderInfo', JSON.stringify(data))
+        history.push('/order/payment')
+    }
 
     return (
         <div className={styles.mainContainer}>
@@ -77,29 +93,28 @@ const ConfirmOrder = () => {
                         </div>
                     </div>
                     <div className={styles.flexEnd}>
+                        <div className={`${styles.bold} ${styles.lg}`}>Items Price</div>
+                        <div className={styles.sm}>{itemsPrice}</div>
+                    </div>
+                    <div className={styles.flexEnd}>
                         <div className={`${styles.bold} ${styles.lg}`}>Shipping</div>
-                        <div className={styles.sm}>TBD</div>
+                        <div className={styles.sm}>{shippingPrice}</div>
                     </div>
                     <div className={styles.flexEnd}>
                         <div className={`${styles.bold} ${styles.lg}`}>Sales Tax</div>
-                        <div className={styles.sm}>TBD</div>
+                        <div className={styles.sm}>{taxPrice}</div>
                     </div>
                     <div className={styles.flexEnd}>
                         <div className={`${styles.bold} ${styles.lg}`}>Discount</div>
                         <div className={styles.sm}>$0</div>
                     </div>
                     <div className={`${styles.flexEnd} ${styles.total}`}>
-                        <div className={styles.bold}>ESTIMATED TOTAL</div>
-                        <div>
-                            ${
-                                cartItems.reduce((acc,item) =>
-                                    (acc + item.quantity * item.price),0).toFixed(2)
-                            }
-                        </div>
+                        <div className={styles.bold}>TOTAL</div>
+                        <div className={styles.bold}>{totalPrice}</div>
                     </div>
                     <button
                         className={styles.checkoutBtn}
-                    // onClick={next}
+                        onClick={proceedToCheckout}
                     >
                         Proceed to Payment
                     </button>

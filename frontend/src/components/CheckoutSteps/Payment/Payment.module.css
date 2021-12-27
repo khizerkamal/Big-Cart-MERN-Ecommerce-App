@@ -1,0 +1,88 @@
+.mainContainer{
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px auto;
+}
+.flexCenter{
+    display: flex;
+    justify-content: center;
+}
+.headerWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.headerWrapper img{
+    width: 60px;
+    height: 60px;
+}
+.headerWrapper h2{
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+/* .form h2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+} */
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #eeeeee;
+    padding: 20px 30px;
+    max-width: 400px;
+    box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+}
+.elements{
+    padding-left: 15px; 
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    background:rgb(241, 241, 241);
+}
+.country{
+    padding-left: 15px; 
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    background:rgb(241, 241, 241);
+}
+.inputBox{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    min-width: 250px;
+    background:rgb(241, 241, 241);
+    margin-bottom: 15px;
+}
+.inputBox img{
+    width: 18px;
+}
+.loginButtonWrapper{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.loginButton{
+    padding: 10px 7px;
+    font-size: 15px;
+    border-radius: 2px;
+    background: rgb(31, 121, 255);
+    color: #fff;
+    width: 170px;
+}
+
+@media only screen and (max-width: 720px){
+    .form{
+        padding: 20px;
+    }
+}

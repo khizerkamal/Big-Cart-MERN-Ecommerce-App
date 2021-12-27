@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import './App.css';
 import ToggleSwitch from './ToggleSwitch'
@@ -10,15 +10,21 @@ import { loadUser } from './store/actions/userActions';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(loadUser());
-  }, [dispatch])
+  },[ dispatch ])
+  
   return (
     <Router>
         <div className="App">
-          <Header />
+          <div className="contentWrapper">
+            <Header />
           <ToggleSwitch/>
-          <Footer />
+          </div>
+          <div className="footerWrapper">
+            <Footer />
+          </div>
         </div>
     </Router>
   );

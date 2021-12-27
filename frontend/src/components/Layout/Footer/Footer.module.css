@@ -3,10 +3,9 @@
     align-items: center;
     justify-content: center;
     margin: 20px 0;
-    height: 20px;
-}
-.footerWrapper{
+    height: 10px;
     font-size: 15px;
     color: #6e6e6e;
     font-weight: bold;
+    padding: 10px 10px 0px 10px;
 }
