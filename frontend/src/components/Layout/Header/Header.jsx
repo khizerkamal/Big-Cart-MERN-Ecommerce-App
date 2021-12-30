@@ -63,7 +63,7 @@ const Header = () => {
                 </div>
             </Link>
             {/* <Route render={({ history }) => <Search history={history} />} /> */}
-            <Search  />
+            <Search />
             <div className={styles.desktop}>
                 {user && !loading ? (
                     <>
@@ -92,22 +92,24 @@ const Header = () => {
                                         </Link>
                                         <hr />
                                         {
-                                            user && user.role !== "admin" ? (
-                                                <Link to="/orders/me" style={{ textDecoration: "none" }}>
-                                                    <button >
-                                                        <img src="/images/order.svg" alt="" />
-                                                        <span>Orders</span>
-                                                    </button>
-                                                </Link>
-                                            ) : (
-                                                <Link to="/dashboard" style={{ textDecoration: "none" }}>
-                                                    <button >
-                                                        <img src="/images/dashboard.svg" alt="" />
-                                                        <span>Dashboard</span>
-                                                    </button>
-                                                </Link>
+                                            user && user.role === "admin" && (
+                                                <>
+                                                    <Link to="/dashboard" style={{ textDecoration: "none" }}>
+                                                        <button >
+                                                            <img src="/images/dashboard.svg" alt="" />
+                                                            <span>Dashboard</span>
+                                                        </button>
+                                                    </Link>
+                                                    <hr />
+                                                </>
                                             )
                                         }
+                                        <Link to="/orders/me" style={{ textDecoration: "none" }}>
+                                            <button >
+                                                <img src="/images/order.svg" alt="" />
+                                                <span>Orders</span>
+                                            </button>
+                                        </Link>
                                         <hr />
                                         <Link
                                             to="/"

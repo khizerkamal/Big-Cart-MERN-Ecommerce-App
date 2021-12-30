@@ -2,6 +2,7 @@ const Order = require('../models/orderModel')
 const Product = require('../models/productModel')
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
+const mongoose = require('mongoose')
 
 // Create a new order => /api/v1/order/new
 exports.newOrder = catchAsync(async (req,res,next) => {
@@ -45,7 +46,10 @@ exports.getSingleOrder = catchAsync(async (req,res,next) => {
 
 // Get Loggedin user Orders => /api/v1/orders/me
 exports.myOrders = catchAsync(async (req,res,next) => {
-    const orders = await Order.find({user: req.user.id})
+    const orders = await Order.find({ user: req.user.id })
+    if (!orders) {
+        return next(new AppError("No Orders Found", 404))
+    }
     res.status(200).json({
         status: "success",
         orders

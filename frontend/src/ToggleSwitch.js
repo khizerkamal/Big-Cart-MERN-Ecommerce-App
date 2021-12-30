@@ -17,6 +17,7 @@ import ConfirmOrder from './components/CheckoutSteps/ConfirmOrder/ConfirmOrder';
 import ProtectedRoute from './Route/ProtectedRoute';
 import Payment from './components/CheckoutSteps/Payment/Payment';
 import SuccessPage from './components/CheckoutSteps/SuccessPage/SuccessPage'
+import OrderList from './components/Layout/Order/OrderList'
 
 const ToggleSwitch = () => {
   const [ stripeApiKey,setStripeApiKey ] = useState('');
@@ -45,6 +46,7 @@ const ToggleSwitch = () => {
           <ProtectedRoute path="/shipping" component={Shipping} exact />
           <ProtectedRoute path="/order/confirm" component={ConfirmOrder} exact />
           <ProtectedRoute path="/success" component={SuccessPage} exact />
+          <ProtectedRoute path="/orders/me" component={OrderList} exact />
           {stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
               <ProtectedRoute path="/order/payment" component={Payment} exact/>
