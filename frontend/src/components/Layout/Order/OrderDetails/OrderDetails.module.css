@@ -1,0 +1,29 @@
+.modalMask{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+}
+.modalWrapper{
+    width: 50%;
+    height: 50%;
+    /* width: 500px; */
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    z-index: 20;
+}
+.closeButton{
+    position: absolute;
+    top: 8px;
+    right: 7px;
+    background: none;
+    cursor: pointer;
+}

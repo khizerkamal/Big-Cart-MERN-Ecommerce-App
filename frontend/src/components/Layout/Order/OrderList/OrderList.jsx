@@ -1,13 +1,12 @@
 import React,{ useState,useEffect,Fragment,forwardRef } from 'react'
-import { Route,Link,useHistory } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 import MaterialTable from 'material-table'
 
 import styles from './OrderList.module.css'
-import Loader from '../Loader/Loader'
-import MetaData from '../MetaData'
-import { myOrders,clearErrors } from '../../../store/actions/orderActions'
+import Loader from '../../Loader/Loader'
+import MetaData from '../../MetaData'
+import { myOrders,clearErrors } from '../../../../store/actions/orderActions'
 //MUI TABLE ICONS
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -24,6 +23,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import OrderDetails from '../OrderDetails/OrderDetails'
+import { Link } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props,ref) => <AddBox {...props} ref={ref} />),
@@ -50,6 +51,8 @@ const OrderList = () => {
     const dispatch = useDispatch();
     const { loading,error,orders } = useSelector(state => state.myOrders)
     const { user } = useSelector(state => state.auth)
+    const [ showModal,setShowModal ] = useState(false)
+    const [ orderId,setOrderId ] = useState("")
 
     useEffect(() => {
         dispatch(myOrders(user._id));
@@ -102,7 +105,15 @@ const OrderList = () => {
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
                     ? <p style={{ color: "green" }}>{order.orderStatus}</p>
                     : <p style={{ color: "red" }}>{order.orderStatus}</p>,
-                action: <Link to={`/order/${order._id}`}>Details</Link>
+                action: <button
+                    onClick={() => {
+                        setShowModal(true)
+                        setOrderId(order._id)
+                    }}
+                    className={styles.detailsBtn}
+                >
+                    Details
+                </button>
             })
         })
         return rows;
@@ -111,7 +122,11 @@ const OrderList = () => {
     return (
         <Fragment>
             <MetaData title={"My Orders"} />
-            {orders ? loading ? <Loader /> : (
+            {loading ? (
+                <div className={styles.loader}>
+                    <Loader />
+                </div>
+            ) : (
                 <div className={styles.tableContainer}>
                     <MaterialTable
                         columns={columns}
@@ -127,7 +142,8 @@ const OrderList = () => {
                         }}
                     />
                 </div>
-            ) : <h1>No Orders</h1>}
+            )}
+            {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />}
         </Fragment>
     )
 }

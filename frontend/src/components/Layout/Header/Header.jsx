@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { Route,Link,useHistory,useLocation } from 'react-router-dom'
+import { Link,useHistory,useLocation } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
 
@@ -7,7 +7,6 @@ import { logout } from '../../../store/actions/userActions'
 import Avatar from '@mui/material/Avatar';
 import styles from './Header.module.css'
 import Search from './Search/Search'
-import Login from '../User/Login/Login'
 
 
 const Header = () => {

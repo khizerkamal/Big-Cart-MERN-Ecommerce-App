@@ -17,7 +17,7 @@ import ConfirmOrder from './components/CheckoutSteps/ConfirmOrder/ConfirmOrder';
 import ProtectedRoute from './Route/ProtectedRoute';
 import Payment from './components/CheckoutSteps/Payment/Payment';
 import SuccessPage from './components/CheckoutSteps/SuccessPage/SuccessPage'
-import OrderList from './components/Layout/Order/OrderList'
+import OrderList from './components/Layout/Order/OrderList/OrderList'
 
 const ToggleSwitch = () => {
   const [ stripeApiKey,setStripeApiKey ] = useState('');
