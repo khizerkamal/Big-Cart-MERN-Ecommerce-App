@@ -22,17 +22,14 @@
 }
 .image{
     width: 200px;
-    /* height: px; */
 }
 .right{
-    /* border: 1px solid orange; */
     max-width: 500px;
 }
 .name{
     color: rgb(75, 75, 75);
     font-weight: bold;
     font-size: 25px;
-    /* margin-bottom: 5px; */
 }
 .productId{
     color: rgb(102, 102, 102);

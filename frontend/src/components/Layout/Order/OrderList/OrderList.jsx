@@ -58,7 +58,6 @@ const OrderList = () => {
         dispatch(myOrders(user._id));
         if (error) {
             alert.error(error);
-            console.log(error)
             dispatch(clearErrors());
         }
     },[ dispatch,alert,error,user._id ])
@@ -66,40 +65,79 @@ const OrderList = () => {
     const columns = [
         {
             title: "ID",
-            field: "id"
+            field: "id",
+            cellStyle: {
+                textAlign: "center"
+            }
         },
         {
-            title: "Image",
-            field: "img"
+            title: "Date",
+            field: "date",
+            cellStyle: {
+                textAlign: "center"
+            }
         },
         {
             title: "Num Of Items",
-            field: "numOfItems"
+            field: "numOfItems",
+            cellStyle: {
+                textAlign: "center"
+            }
         },
         {
             title: "Amount",
-            field: "amount"
+            field: "amount",
+            cellStyle: {
+                textAlign: "center"
+            }
         },
         {
             title: "Status",
-            field: "status"
+            field: "status",
+            cellStyle: {
+                textAlign: "center"
+            }
         },
         {
             title: "Action",
-            field: "action"
+            field: "action",
+            cellStyle: {
+                textAlign: "center"
+            }
         }
     ];
+    function getDate(d) {
+        var day,month,year;
 
+        var result = d.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
+        if (null != result) {
+            var dateSplitted = result[ 0 ].split(result[ 1 ]);
+            day = dateSplitted[ 0 ];
+            month = dateSplitted[ 1 ];
+            year = dateSplitted[ 2 ];
+        }
+        result = d.match("[0-9]{4}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{2}");
+        if (null != result) {
+            dateSplitted = result[ 0 ].split(result[ 1 ]);
+            day = dateSplitted[ 2 ];
+            month = dateSplitted[ 1 ];
+            year = dateSplitted[ 0 ];
+        }
+
+        if (month > 12) {
+            var aux = day;
+            day = month;
+            month = aux;
+        }
+
+        return year + "/" + month + "/" + day;
+    }
     const setData = () => {
         var rows = [];
         orders && orders.forEach(order => {
             rows.push({
                 id: order._id,
-                img: <img
-                    style={{ width: "50px",height: "50px" }}
-                    src={order.orderItems[ 0 ].image}
-                    alt="product-img"
-                />,
+                date: getDate(order.paidAt),
                 numOfItems: order.orderItems.length,
                 amount: `$${order.totalPrice}`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
@@ -137,7 +175,9 @@ const OrderList = () => {
                             search: true,
                             headerStyle: {
                                 backgroundColor: '#01579b',
-                                color: '#FFF'
+                                color: '#FFF',
+                                textAlign: "center",
+                                whiteSpace: "nowrap",
                             }
                         }}
                     />

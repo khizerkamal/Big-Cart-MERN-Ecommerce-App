@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
 .modalMask{
     position: fixed;
     top: 0;
@@ -11,19 +12,180 @@
     z-index: 100;
 }
 .modalWrapper{
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 75%;
     /* width: 500px; */
     background: rgb(255, 255, 255);
     border-radius: 3px;
     position: relative;
     display: flex;
     z-index: 20;
+    border-left: 8px solid #01579b;
+    /* border-bottom: 8px solid #01579b; */
+    overflow:auto;
 }
 .closeButton{
     position: absolute;
-    top: 8px;
-    right: 7px;
+    top: 12px;
+    right: 17px;
     background: none;
     cursor: pointer;
+}
+.closeButton img{
+    width: 27px;
+    z-index: 1;
+}
+.loaderWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 78vh;
+}
+.absolute{
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+.topBar{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background: rgb(219, 219, 219);
+    border-bottom: 2px solid rgb(68, 68, 68);
+}
+.topBar h2{
+    font-family: 'Padauk', sans-serif;
+    font-weight: bold;
+}
+.container{
+    display: flex;
+}
+.left{
+    /* border: 1px solid rgb(175, 22, 22); */
+    width: 50%;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+.leftHeadingWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.leftHeadingWrapper img{
+    width: 37px;
+    height: 37px;
+    margin-right: 10px;
+}
+.leftHeadingWrapper h3{
+    font-size: 20px;
+}
+.leftContentWrapper{
+    padding: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+.leftContentElementWrapper{
+    display: flex;
+    margin-bottom: 1px;
+}
+.elementLabel{
+    width: 77px;
+    padding: 5px;
+    font-weight: bold;
+}
+.elementDetail{
+    margin-left: 10px;
+    padding: 5px;
+
+}
+.statusWrapper{
+    display: flex;
+    justify-content: center;
+}
+.red{
+    display: flex;
+    width: 70%;
+    font-size: 20px;
+    justify-content: center;
+    background: rgb(253, 195, 195);
+    color: rgb(206, 8, 8);
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+}
+.green{
+    display: flex;
+    width: 70%;
+    font-size: 20px;
+    justify-content: center;
+    background: rgb(205, 253, 195);
+    color: rgb(41, 206, 8);
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+}
+.right{
+    /* border: 1px solid green; */
+    width: 50%;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+.rightContentWrapper{
+    margin: 20px 20px 0 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(226, 226, 226);
+}
+.prodWrapper{
+    display: flex;
+    padding: 10px;
+    margin: 0 10px 10px 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(226, 226, 226);
+}
+.prodLeft{
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+.prodLeft img{
+    width: 100px;
+    height: 60px;
+    overflow: hidden;
+}
+.priceWrapper{
+    display: flex;
+    margin-top: 5px;
+    justify-content: space-evenly;
+}
+@media only screen and (max-width: 915px){
+    
+}
+@media only screen and (max-width: 720px){
+    .modalWrapper{
+        width: 95%;
+        height: 95vh;
+    }
+    .closeButton{
+        top: 10px;
+        right: 11px;
+    }
+    .closeButton img{
+        width: 18px;
+    }
+    .topBar{
+        justify-content: flex-start;
+    }
+    .topBar h2{
+        margin-left: 5px;
+        font-size: 15px;
+        font-weight: none;
+    }
+    .container{
+        flex-wrap: wrap;
+    }
 }

@@ -12,6 +12,15 @@
     background:rgb(219, 219, 219);
     padding: 8px 15px;
 }
-body{
-    background-color: rgb(245, 245, 245);
+
+@media only screen and (max-width: 915px){
+    .tableContainer{
+        margin: 30px 10px;
+    }
+}
+
+@media only screen and (max-width: 720px){
+    .tableContainer{
+        margin: 10px;
+    }
 }
