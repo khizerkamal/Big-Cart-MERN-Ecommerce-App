@@ -1,0 +1,107 @@
+.sidebar{
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: rgb(27, 27, 27);
+    box-sizing: border-box;
+    padding: 30px 5px;
+    transition: width .2s ease-in;
+}
+.sidebar.inactive{
+    width: 80px;
+}
+.sidebar .topContent{
+    position: relative;
+}
+.sidebar .topContent .toggleMenuBtn{
+    color: #333;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.sidebar.inactive .topContent .toggleMenuBtn{
+    right: -50px;
+}
+.sidebar .searchController{
+    color: #fff;
+    position: relative;
+    margin: 20px 5px;
+}
+.sidebar .searchController .searchBtn{
+    position: absolute;
+    height: 50px;
+    width: 40px;
+    background: transparent;
+    border: none;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-left: 10px;
+}
+.sidebar .searchController input[type=text]{
+    background: #333;
+    border: none;
+    outline: none;
+    height: 50px;
+    color: #fff;
+    box-sizing: border-box;
+    padding-left: 58px;
+    border-radius: 5px;
+    width: 100%;
+}
+.divider{
+    height: 1px;
+    width: 100%;
+    background: #333;
+    border-radius: 1px;
+}
+.sidebar .mainMenu .menuItem{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-left: 5px solid rgb(27, 27, 27);
+    border-right: 5px solid rgb(27, 27, 27);
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+.sidebar .mainMenu .menuItem:hover{
+    background-color: rgb(105, 105, 105);
+    border-left: 5px solid #333;
+    box-sizing: border-box;
+
+}
+.menuIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.disable{
+    display: none;
+}
+
+@media only screen and (max-width: 720px){
+    .sidebar{
+        padding: 30px 10px;
+    }
+    .sidebar.inactive{
+        width: 60px;
+    }
+    .sidebar .topContent .logo{
+        width: 30px;
+        height: 30px;
+    }
+}

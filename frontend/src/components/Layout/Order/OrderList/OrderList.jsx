@@ -178,6 +178,7 @@ const OrderList = () => {
                                 color: '#FFF',
                                 textAlign: "center",
                                 whiteSpace: "nowrap",
+                                zIndex: "1"
                             }
                         }}
                     />
