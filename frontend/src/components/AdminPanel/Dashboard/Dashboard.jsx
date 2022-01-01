@@ -10,8 +10,8 @@ const Dashboard = () => {
         history.push('/')
     }
     return (
-        <div>
-            <Header/>
+        <div className={styles.container}>
+            <Header />
             <Sidebar/>
         </div>
     )

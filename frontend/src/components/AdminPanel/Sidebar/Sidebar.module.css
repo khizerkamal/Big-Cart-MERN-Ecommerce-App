@@ -1,6 +1,6 @@
 .sidebar{
     position: fixed;
-    width: 300px;
+    width: 250px;
     height: 100%;
     background: rgb(27, 27, 27);
     box-sizing: border-box;
@@ -23,7 +23,7 @@
     cursor: pointer;
 }
 .sidebar.inactive .topContent .toggleMenuBtn{
-    right: -50px;
+    right: -30px;
 }
 .sidebar .searchController{
     color: #fff;
@@ -32,7 +32,7 @@
 }
 .sidebar .searchController .searchBtn{
     position: absolute;
-    height: 50px;
+    height: 45px;
     width: 40px;
     background: transparent;
     border: none;
@@ -47,12 +47,13 @@
     background: #333;
     border: none;
     outline: none;
-    height: 50px;
+    height: 45px;
     color: #fff;
     box-sizing: border-box;
     padding-left: 58px;
     border-radius: 5px;
     width: 100%;
+    font-size: 15px;
 }
 .divider{
     height: 1px;
@@ -68,20 +69,22 @@
     font-weight: 600;
     display: flex;
     box-sizing: border-box;
-    justify-content: center;
     align-items: center;
     height: 50px;
-    border-left: 5px solid rgb(27, 27, 27);
-    border-right: 5px solid rgb(27, 27, 27);
+    border-left: 3px solid rgb(27, 27, 27);
+    border-right: 3px solid rgb(27, 27, 27);
     border-radius: 2px;
     cursor: pointer;
     margin: 10px 0;
+    padding-left: 15px;
+}
+.productBorder{
+    border-left: 3px solid rgb(146, 146, 146);
 }
 .sidebar .mainMenu .menuItem:hover{
-    background-color: rgb(105, 105, 105);
-    border-left: 5px solid #333;
+    background-color: #333;
+    border-left: 3px solid rgb(146, 146, 146);
     box-sizing: border-box;
-
 }
 .menuIcon{
     display: flex;
@@ -91,6 +94,54 @@
 }
 .disable{
     display: none;
+}
+.enable{
+    margin-left: 15px;
+}
+.subMenu{
+    margin-left: 50px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    color: #fff;
+    border-left: 2px solid #333;
+}
+.sidebarFooter{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 15px;
+    height: 130px;
+    background-color: #333;
+    display: flex;
+}
+.sidebarFooter .avatar {
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.sidebarFooter .avatar img{
+    max-width: 100%;
+}
+.userInfo{
+    margin-left: 10px;
+    color: #fff;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 65px;
+    opacity: 1;
+    transition: opacity .2s ease-in;
+}
+.userInfo h3{
+    font-size: 18px;
+}
+.userInfo p{
+    font-size: 13px;
+}
+.userInfo.inactive{
+    opacity: 0;
 }
 
 @media only screen and (max-width: 720px){
