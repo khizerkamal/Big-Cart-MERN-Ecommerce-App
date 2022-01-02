@@ -65,7 +65,6 @@
     color: rgb(255, 255, 255);
     text-decoration: none;
     font-size: 17px;
-    display: block;
     font-weight: 600;
     display: flex;
     box-sizing: border-box;
@@ -80,6 +79,7 @@
 }
 .productBorder{
     border-left: 3px solid rgb(146, 146, 146);
+    margin: 0 !important;
 }
 .sidebar .mainMenu .menuItem:hover{
     background-color: #333;
@@ -104,6 +104,34 @@
     box-sizing: border-box;
     color: #fff;
     border-left: 2px solid #333;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .2s ease-in;
+}
+.subMenu.active{
+    box-sizing: border-box;
+    max-height: 200px;
+}
+.menuItemExpand{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    height: 50px;
+    border-left: 3px solid rgb(27, 27, 27);
+    border-right: 3px solid rgb(27, 27, 27);
+    border-radius: 2px;
+    cursor: pointer;
+    padding-left: 15px;
+}
+.menuItemExpand:hover{
+    background-color: #333;
+    border-left: 3px solid rgb(146, 146, 146);
+    box-sizing: border-box;
 }
 .sidebarFooter{
     position: absolute;

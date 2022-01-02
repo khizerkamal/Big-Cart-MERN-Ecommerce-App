@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './Sidebar.module.css'
 import { BsFillArrowLeftSquareFill,BsFillArrowRightSquareFill,BsSearch,BsBasket2,BsStar } from "react-icons/bs";
 import { MdOutlineDashboard,MdOutlineCreateNewFolder } from "react-icons/md";
@@ -10,12 +10,17 @@ import { VscSaveAll } from "react-icons/vsc";
 
 const Sidebar = () => {
     const [ inactive,setInactive ] = useState(true);
-    const {user} = useSelector(state => state.auth)
+    const [ expand,setExpand ] = useState(false)
+    const { user } = useSelector(state => state.auth)
+
     return (
         <div className={`${styles.sidebar} ${inactive ? styles.inactive : ""}`}>
             <div className={styles.topContent}>
                 <div
-                    onClick={() => setInactive(!inactive)}
+                    onClick={() => {
+                        setInactive(!inactive)
+                        if (!inactive) setExpand(false)
+                    }}
                     className={styles.toggleMenuBtn}
                 >
                     {inactive ? <BsFillArrowRightSquareFill />
@@ -40,15 +45,18 @@ const Sidebar = () => {
                         </a>
                     </li>
                     <li className={styles.menuItemWrapper}>
-                        <a className={`${styles.menuItem} ${styles.productBorder}`}>
+                        <a
+                            onClick={() => setExpand(!expand)}
+                            className={`${styles.menuItem} ${styles.productBorder}`}
+                        >
                             <div className={styles.menuIcon}>
                                 <RiProductHuntLine />
                             </div>
                             <p className={`${inactive ? styles.disable : styles.enable}`}>Products</p>
                         </a>
-                        {/* <ul className={styles.subMenu}>
+                        <ul className={`${styles.subMenu} ${expand ? styles.active : ""}`}>
                             <li>
-                                <a className={styles.menuItem}>
+                                <a className={styles.menuItemExpand}>
                                     <div>
                                         <VscSaveAll />
                                     </div>
@@ -56,14 +64,14 @@ const Sidebar = () => {
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.menuItem}>
+                                <a className={styles.menuItemExpand}>
                                     <div>
                                         <MdOutlineCreateNewFolder />
                                     </div>
                                     <p className={`${inactive ? styles.disable : styles.enable}`}>Create</p>
                                 </a>
                             </li>
-                        </ul> */}
+                        </ul>
                     </li>
                     <li className={styles.menuItemWrapper}>
                         <a className={styles.menuItem}>

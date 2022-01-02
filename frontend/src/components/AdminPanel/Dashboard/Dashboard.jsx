@@ -5,10 +5,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
-    const history = useHistory();
-    const back = () => {
-        history.push('/')
-    }
     return (
         <div className={styles.container}>
             <Header />
