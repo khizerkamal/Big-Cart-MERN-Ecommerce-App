@@ -14,7 +14,7 @@
     position: relative;
 }
 .sidebar .topContent .toggleMenuBtn{
-    color: #333;
+    color: rgb(167, 167, 167);
     font-size: 20px;
     position: absolute;
     top: 50%;

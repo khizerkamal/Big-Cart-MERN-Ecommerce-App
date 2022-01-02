@@ -93,7 +93,7 @@ const Header = () => {
                                         {
                                             user && user.role === "admin" && (
                                                 <>
-                                                    <Link to="/dashboard" style={{ textDecoration: "none" }}>
+                                                    <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
                                                         <button >
                                                             <img src="/images/dashboard.svg" alt="" />
                                                             <span>Dashboard</span>

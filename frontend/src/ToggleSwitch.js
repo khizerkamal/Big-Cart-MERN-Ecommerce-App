@@ -37,7 +37,7 @@ const ToggleSwitch = () => {
     let background = location.state && location.state.background;
     return (
       <div>
-        { location.pathname !== "/dashboard" ? <Header /> : ""}
+        { !location.pathname.includes("/admin") ? <Header /> : ""}
         <Switch location={background || location}>
           <Route path="/" children={<Body />} exact/>
           <Route path="/cart" children={<Cart />} exact/>

@@ -7,8 +7,9 @@ import styles from './Dashboard.module.css'
 const Dashboard = () => {
     return (
         <div className={styles.container}>
-            <Header />
-            <Sidebar/>
+            {/* <Header />
+            <Sidebar/> */}
+            Dashboard
         </div>
     )
 }
