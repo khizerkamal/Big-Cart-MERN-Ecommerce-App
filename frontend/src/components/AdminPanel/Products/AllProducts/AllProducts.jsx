@@ -1,12 +1,13 @@
 import React,{ useState,useEffect,Fragment,forwardRef } from 'react'
+import styles from './AllProducts.module.css'
 import { useDispatch,useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import MaterialTable from 'material-table'
 
-import styles from './OrderList.module.css'
-import Loader from '../../Loader/Loader'
-import MetaData from '../../MetaData'
-import { myOrders,clearErrors } from '../../../../store/actions/orderActions'
+import Loader from '../../../Layout/Loader/ModalLoader'
+import MetaData from '../../../Layout/MetaData'
+import { adminProducts,clearErrors } from '../../../../store/actions/productsAction'
 //MUI TABLE ICONS
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -23,8 +24,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import OrderDetails from '../OrderDetails/OrderDetails'
-import { Link } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props,ref) => <AddBox {...props} ref={ref} />),
@@ -46,21 +45,18 @@ const tableIcons = {
     ViewColumn: forwardRef((props,ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const OrderList = () => {
+const AllProducts = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
-    const { loading,error,orders } = useSelector(state => state.myOrders)
-    const { user } = useSelector(state => state.auth)
-    const [ showModal,setShowModal ] = useState(false)
-    const [ orderId,setOrderId ] = useState("")
+    const { loading,error,products } = useSelector(state => state.products)
 
     useEffect(() => {
-        dispatch(myOrders(user._id));
+        dispatch(adminProducts());
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-    },[ dispatch,alert,error,user._id ])
+    },[ dispatch,alert,error ])
 
     const columns = [
         {
@@ -71,29 +67,22 @@ const OrderList = () => {
             }
         },
         {
-            title: "Date",
-            field: "date",
+            title: "Name",
+            field: "name",
             cellStyle: {
                 textAlign: "center"
             }
         },
         {
-            title: "Num Of Items",
-            field: "numOfItems",
+            title: "Stock",
+            field: "stock",
             cellStyle: {
                 textAlign: "center"
             }
         },
         {
-            title: "Amount",
-            field: "amount",
-            cellStyle: {
-                textAlign: "center"
-            }
-        },
-        {
-            title: "Status",
-            field: "status",
+            title: "Price",
+            field: "price",
             cellStyle: {
                 textAlign: "center"
             }
@@ -106,46 +95,17 @@ const OrderList = () => {
             }
         }
     ];
-    
-    function getDate(d) {
-        var day,month,year;
-        var result = d.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
-        if (null != result) {
-            var dateSplitted = result[ 0 ].split(result[ 1 ]);
-            day = dateSplitted[ 0 ];
-            month = dateSplitted[ 1 ];
-            year = dateSplitted[ 2 ];
-        }
-        result = d.match("[0-9]{4}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{2}");
-        if (null != result) {
-            dateSplitted = result[ 0 ].split(result[ 1 ]);
-            day = dateSplitted[ 2 ];
-            month = dateSplitted[ 1 ];
-            year = dateSplitted[ 0 ];
-        }
-        if (month > 12) {
-            var aux = day;
-            day = month;
-            month = aux;
-        }
-        return year + "/" + month + "/" + day;
-    }
-
     const setData = () => {
         var rows = [];
-        orders && orders.forEach(order => {
+        products && products.forEach(product => {
             rows.push({
-                id: order._id,
-                date: getDate(order.paidAt),
-                numOfItems: order.orderItems.length,
-                amount: `$${order.totalPrice}`,
-                status: order.orderStatus && String(order.orderStatus).includes('Delivered')
-                    ? <p style={{ color: "green" }}>{order.orderStatus}</p>
-                    : <p style={{ color: "red" }}>{order.orderStatus}</p>,
+                id: product._id,
+                name: product.name,
+                stock: product.stock,
+                price: `$${product.price}`,
                 action: <button
                     onClick={() => {
-                        setShowModal(true)
-                        setOrderId(order._id)
+                       
                     }}
                     className={styles.detailsBtn}
                 >
@@ -155,37 +115,36 @@ const OrderList = () => {
         })
         return rows;
     }
-
     return (
         <Fragment>
-            <MetaData title={"My Orders"} />
-            {loading ? (
-                <div className={styles.loader}>
-                    <Loader />
-                </div>
-            ) : (
-                <div className={styles.tableContainer}>
-                    <MaterialTable
-                        columns={columns}
-                        data={setData()}
-                        title="My Orders"
-                        icons={tableIcons}
-                        options={{
-                            search: true,
-                            headerStyle: {
-                                backgroundColor: '#01579b',
-                                color: '#FFF',
-                                textAlign: "center",
-                                whiteSpace: "nowrap",
-                                zIndex: "1"
-                            }
-                        }}
-                    />
-                </div>
-            )}
-            {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />}
-        </Fragment>
+        <MetaData title={"All Products"} />
+        {loading ? (
+            <div className={styles.loader}>
+                <Loader />
+            </div>
+        ) : (
+            <div className={styles.tableContainer}>
+                <MaterialTable
+                    columns={columns}
+                    data={setData()}
+                    title="All Products"
+                    icons={tableIcons}
+                    options={{
+                        search: true,
+                        headerStyle: {
+                            backgroundColor: '#01579b',
+                            color: '#FFF',
+                            textAlign: "center",
+                            whiteSpace: "nowrap",
+                            zIndex: "1"
+                        }
+                    }}
+                />
+            </div>
+        )}
+        {/* {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />} */}
+    </Fragment>
     )
 }
 
-export default OrderList
+export default AllProducts

@@ -1,6 +1,7 @@
 const express = require('express')
 const authController = require('../controllers/authController')
 const orderController = require('../controllers/orderController')
+const productController = require('../controllers/productController')
 
 const router = express.Router();
 
@@ -19,5 +20,7 @@ router
     .get(authController.protect,authController.restrictTo('admin'),orderController.allOrders)
     .put(authController.protect,authController.restrictTo('admin'),orderController.updateOrder)
     .delete(authController.protect,authController.restrictTo('admin'),orderController.deleteOrder)
+
+router.get('/products', authController.protect,authController.restrictTo('admin'),productController.getAdminProducts)
 
 module.exports = router

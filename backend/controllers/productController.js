@@ -36,6 +36,14 @@ exports.getAllProducts = catchAsync(async (req,res,next) => {
     })
 })
 
+exports.getAdminProducts = catchAsync(async (req,res,next) => {
+    const products = await Product.find();
+    res.status(200).json({
+        status: 'success',
+        products
+    })
+})
+
 exports.getProduct = catchAsync(async (req,res,next) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
