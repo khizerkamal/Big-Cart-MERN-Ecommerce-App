@@ -5,6 +5,7 @@ import styles from '../Header.module.css'
 const Search = () => {
     const [ keyword,setKeyword ] = useState('')
     const history = useHistory();
+    
     function submitHandler(e) {
         e.preventDefault();
         if (keyword.trim()) {

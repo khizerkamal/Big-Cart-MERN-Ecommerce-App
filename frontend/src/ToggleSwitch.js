@@ -5,6 +5,7 @@ import { Switch,Route,useLocation } from 'react-router-dom'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
+// Components
 import { Body } from './components/Layout/Body/Body';
 import Cart from './components/Layout/Cart/Cart';
 import ProductDetails from './components/Layout/ProductDetails/ProductDetails';
@@ -20,7 +21,6 @@ import SuccessPage from './components/CheckoutSteps/SuccessPage/SuccessPage'
 import OrderList from './components/Layout/Order/OrderList/OrderList'
 import Header from './components/Layout/Header/Header'
 import AdminRoutes from './AdminRoutes'
-import Dashboard from './components/AdminPanel/Dashboard/Dashboard'
 
 const ToggleSwitch = () => {
   const [ stripeApiKey,setStripeApiKey ] = useState('');
@@ -43,7 +43,6 @@ const ToggleSwitch = () => {
           <Route path="/cart" children={<Cart />} exact/>
           <Route path="/product/:id" children={<ProductDetails />} exact/>
           <Route path="/search/:keyword" children={<SearchResult/>} exact/>
-          <Route path="/product/:id" children={<ProductDetails/>} />
           <Route path="/resetPassword/:token" children={<ResetPassword />} />
           <Route path="/login" children={<Login />} />
           <ProtectedRoute path="/user/me" component={Profile} exact/>
@@ -51,10 +50,10 @@ const ToggleSwitch = () => {
           <ProtectedRoute path="/order/confirm" component={ConfirmOrder} exact />
           <ProtectedRoute path="/success" component={SuccessPage} exact />
           <ProtectedRoute path="/orders/me" component={OrderList} exact />
-
           {/* ---------- ADMIN ROUTES ----------- */}
-          <AdminRoutes />
-          
+          {location.pathname.includes("/admin") && (
+              <AdminRoutes />
+          )}
           {/* ----------- STRIPE PAYMENT ROUTE ---------- */}
           {stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
@@ -62,7 +61,6 @@ const ToggleSwitch = () => {
             </Elements>
           )}
         </Switch>
-
       {/* Show the modal when a background page is set */}
       {background && <Route path="/login" children={<Login />} />}
     </div>

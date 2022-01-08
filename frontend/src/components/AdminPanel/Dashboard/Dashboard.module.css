@@ -1,0 +1,60 @@
+:root{
+    --bg-main: #333;
+}
+.bg1{
+    background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+.bg2{
+    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+.bg3{
+    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+.bg4{
+    background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+.container{
+    padding: 30px;
+    background: var(--bg-main);
+}
+.cardsWrapper{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.cardWrapper{
+    color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.cardContentWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px;
+    padding-bottom: 10px;
+    width: 190px;
+}
+.cardLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cardLeft h1{
+    font-weight: bold;
+    font-size: 34px;
+}
+.cardRight{
+    font-size: 50px;
+    display: flex;
+}
+.arrowIcon{
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: flex-end;
+}

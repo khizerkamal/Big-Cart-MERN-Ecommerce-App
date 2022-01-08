@@ -14,9 +14,7 @@ const AdminRoutes = () => {
             <Header />
             <Sidebar onCollapse={containerFluid} />
             <div className={`container ${active ? 'active' : ''}`}>
-            <Switch>
-                <ProtectedRoute path="/admin/dashboard" component={Dashboard} exact/>
-            </Switch>
+                <ProtectedRoute isAdmin={true} path="/admin/dashboard" component={Dashboard} exact/>
             </div>
         </div>
     )

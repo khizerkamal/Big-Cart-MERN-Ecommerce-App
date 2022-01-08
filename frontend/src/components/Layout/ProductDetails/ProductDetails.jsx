@@ -27,6 +27,10 @@ const ProductDetails = () => {
 
     const addToCart = () => {
         dispatch(addItemToCart(id,quantity))
+        if (error) {
+            alert.error(error)
+            dispatch(clearErrors())
+        }
         alert.success("Added Successfully")
     }
 

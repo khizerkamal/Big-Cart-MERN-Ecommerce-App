@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ Fragment, useState } from 'react'
 import { Link,useHistory,useLocation } from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux'
 import { useAlert } from 'react-alert'
@@ -65,7 +65,7 @@ const Header = () => {
             <Search />
             <div className={styles.desktop}>
                 {user && !loading ? (
-                    <>
+                    <Fragment>
                         <div
                             onMouseEnter={() => setShowDrawer(!showDrawer)}
                             onMouseLeave={() => setShowDrawer(!showDrawer)}
@@ -124,7 +124,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </Fragment>
                 ) : !loading && (
                     <Link
                         to={{

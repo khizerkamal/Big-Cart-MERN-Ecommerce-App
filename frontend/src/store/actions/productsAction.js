@@ -15,8 +15,6 @@ import {
 export const getProducts = (currentPage, limit) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCTS_REQUEST })
-        // let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&limit=${limit}&price[lte]=${price[ 1 ]}
-        // &price[gte]=${price[ 0 ]}`
         const { data } = await axios.get(`/api/v1/products?page=${currentPage}&limit=${limit}`)
         dispatch({
             type: ALL_PRODUCTS_SUCCESS,

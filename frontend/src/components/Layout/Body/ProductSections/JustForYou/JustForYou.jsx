@@ -10,18 +10,22 @@ import styles from './JustForYou.module.css'
 
 
 const JustForYou = ({ match }) => {
+    const dispatch = useDispatch();
+    const alert = useAlert();
     const [ currentPage,setCurrentPage ] = useState(1)
+
     const { loading,products,totalProducts,error } = useSelector(state => state.products)
+
     const resPerPage = 6;
     let pages = 0;
+
     if (totalProducts) {
         pages = Math.ceil(totalProducts / resPerPage);
     }
+
     const handleChange = (event,value) => {
         setCurrentPage(value);
     };
-    const dispatch = useDispatch();
-    const alert = useAlert();
 
     // Getting All Products from DB and Set in Redux
     useEffect(() => {
@@ -30,10 +34,11 @@ const JustForYou = ({ match }) => {
         }
         dispatch(getProducts(currentPage,resPerPage));
     },[ dispatch,alert,error,currentPage,resPerPage ])
+
     return (
         <>
             {loading ? <div className={styles.loaderWrapper}><Loader /></div> : (
-                <div>
+                <>
                     <div className={styles.headingWrapper}>
                         <h1 className={styles.heading}>All Products</h1>
                     </div>
@@ -53,7 +58,7 @@ const JustForYou = ({ match }) => {
                             showLastButton={true}
                         />
                     </div>
-                </div>
+                </>
             )}
         </>
     )
