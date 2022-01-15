@@ -206,9 +206,13 @@
     display: flex;
     align-items: center;
     width: 150px;
+    box-sizing: border-box;
 }
 .drp_box button:hover{
     background:rgb(224, 224, 224);
+    border: 2px solid rgb(124, 124, 124);
+    box-sizing: border-box;
+    padding: 13px;
 }
 button >img{
     width: 17px;

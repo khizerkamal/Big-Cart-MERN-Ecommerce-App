@@ -8,7 +8,6 @@ router
     .route('/')
     // .get(authController.protect, productController.getAllProducts)
     .get(productController.getAllProducts)
-    .post(authController.protect, authController.restrictTo('admin'), productController.createProduct)
 
 router
     .route('/:id')
@@ -16,5 +15,17 @@ router
     .patch(authController.protect, authController.restrictTo('admin'), productController.updateProduct)
     .delete(authController.protect, authController.restrictTo('admin'), productController.deleteProduct)
 
+router.delete('/review/:productId/:id', authController.protect,productController.deleteProductReview)
+
+router
+    .route('/review')
+    .put(authController.protect,productController.createProductReview)
+    // .delete(authController.protect,productController.deleteProductReview)
+
+router
+    .route('/review/:id')
+    .get(authController.protect,productController.getProductReviews)
+
+    
 module.exports = router;
 

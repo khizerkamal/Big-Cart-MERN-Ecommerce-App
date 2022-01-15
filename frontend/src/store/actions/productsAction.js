@@ -6,6 +6,9 @@ import {
     ADMIN_PRODUCTS_REQUEST,
     ADMIN_PRODUCTS_SUCCESS,
     ADMIN_PRODUCTS_FAIL,
+    CREATE_PRODUCT_REQUEST,
+    CREATE_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_FAIL,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -82,6 +85,30 @@ export const searchedProducts = (currentPage=1, limit, keyword='', price, catego
             type: SEARCH_PRODUCTS_FAIL,
             payload: error.response.data.message
         })
+    }
+}
+
+export const createProduct = (productData) => async (dispatch) => {
+    try {
+        dispatch({ type: CREATE_PRODUCT_REQUEST })
+
+        const config = {
+            header: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const {data} = await axios.post('/api/v1/admin/products', productData, config)
+    
+        dispatch({
+            type: CREATE_PRODUCT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: CREATE_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+        
     }
 }
 

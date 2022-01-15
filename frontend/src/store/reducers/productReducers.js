@@ -5,6 +5,10 @@ import {
     ADMIN_PRODUCTS_REQUEST,
     ADMIN_PRODUCTS_SUCCESS,
     ADMIN_PRODUCTS_FAIL,
+    CREATE_PRODUCT_REQUEST,
+    CREATE_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_FAIL,
+    CREATE_PRODUCT_RESET,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -39,6 +43,39 @@ export const productReducer = (state = { products: [] },action) => {
                 loading: false,
                 error: action.payload
             }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state;
+    }
+}
+
+export const createProductReducer = (state = {product: {}}, action) => {
+    switch (action.type) {
+        case CREATE_PRODUCT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case CREATE_PRODUCT_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.status,
+                product: action.payload.product
+            }
+        case CREATE_PRODUCT_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+            case CREATE_PRODUCT_RESET:
+                return {
+                    ...state,
+                    success: false
+                }
         case CLEAR_ERRORS:
             return {
                 ...state,
