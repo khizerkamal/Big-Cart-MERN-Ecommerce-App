@@ -107,13 +107,17 @@
     font-size: 13px;
     border-radius: 30px;
     padding: 9px 20px 9px 0;
-    background:#ffa500;
+    background: var(--bg-secondary);
     cursor: pointer;
 }
 .AddProdButton img{
     width: 15px;
     background: none;
     margin-right: 5px;
+}
+.disabled{
+    opacity: 0.5;
+    cursor: no-drop;
 }
 .statusWrapper{
     margin: 20px 0;

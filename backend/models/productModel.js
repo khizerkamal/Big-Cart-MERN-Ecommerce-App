@@ -87,6 +87,10 @@ const productSchema = new mongoose.Schema({
             comment: {
                 type: String,
                 required: [ true,'Please enter comment.' ]
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now()
             }
         }
     ],

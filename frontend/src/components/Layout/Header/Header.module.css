@@ -7,7 +7,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 12px 25px;
-    background: rgb(31, 121, 255);
+    background: var(--bg-primary);
     position: sticky;
     top: 0;
     z-index: 5;

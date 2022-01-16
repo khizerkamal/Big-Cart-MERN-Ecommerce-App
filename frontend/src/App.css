@@ -3,6 +3,10 @@ html {
   font-size: 16px;
 }
 
+:root{
+  --bg-primary: rgb(31, 121, 255);
+  --bg-secondary: #FF9F00;
+}
 /* *, *:before, *:after {
   box-sizing: inherit;
 } */
@@ -67,6 +71,7 @@ body{
 .container.active{
   margin: 0 0 0 250px;
 }
+
 @media only screen and (max-width: 720px){
   .container{
     margin: 0 0 0 60px;

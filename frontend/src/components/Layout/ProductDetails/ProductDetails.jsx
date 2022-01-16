@@ -4,18 +4,22 @@ import { useAlert } from 'react-alert'
 
 import { getProductDetail,clearErrors } from '../../../store/actions/productsAction'
 import { addItemToCart } from '../../../store/actions/cartActions'
+import { NEW_REVIEW_RESET } from '../../../store/constants/productConstants'
 import Loader from '../Loader/Loader'
 import Carousel from 'react-material-ui-carousel'
 import MetaData from '../MetaData'
 import styles from './ProductDetails.module.css'
 import { useParams } from 'react-router';
+import ReviewModal from './ReviewModal/ReviewModal'
 
 const ProductDetails = () => {
     const [ quantity,setQuantity ] = useState(1)
+
     const dispatch = useDispatch();
     const alert = useAlert();
     const { id } = useParams();
     const { loading,error,product } = useSelector(state => state.productDetails)
+    const { error: reviewError,success } = useSelector(state => state.newReview)
 
     useEffect(() => {
         dispatch(getProductDetail(id))
@@ -23,7 +27,15 @@ const ProductDetails = () => {
             alert.error(error)
             dispatch(clearErrors())
         }
-    },[ dispatch,alert,error,id ])
+        if (reviewError) {
+            alert.error(reviewError);
+            dispatch(clearErrors())
+        }
+        if (success) {
+            alert.success('Reivew posted successfully')
+            dispatch({ type: NEW_REVIEW_RESET })
+        }
+    },[ dispatch,alert,error,id,success,reviewError ])
 
     const addToCart = () => {
         dispatch(addItemToCart(id,quantity))
@@ -99,13 +111,28 @@ const ProductDetails = () => {
                             <h1 className={styles.price}>$ {product.price}</h1>
                             <div className={styles.addToCartWrapper}>
 
-                                <button className={styles.subtractButton} onClick={decreaseQty}>-</button>
+                                <button
+                                    className={`
+                                    ${styles.subtractButton} 
+                                    ${product.stock === 0 ? styles.disabled : ''}
+                                `}
+                                    onClick={decreaseQty}
+                                >-</button>
                                 {/* <input value={quantity} type="number" readOnly className={styles.quantity} id="count" /> */}
                                 <span className={styles.quantity} id="count">{quantity}</span>
-                                <button className={styles.addButton} onClick={increaseQty}>+</button>
+                                <button
+                                    className={`
+                                        ${styles.addButton} 
+                                        ${product.stock === 0 ? styles.disabled : ''}
+                                    `}
+                                    onClick={increaseQty}
+                                >+</button>
 
                                 <button
-                                    className={styles.AddProdButton}
+                                    className={`
+                                        ${styles.AddProdButton} 
+                                        ${product.stock === 0 ? styles.disabled : ''}
+                                    `}
                                     disabled={product.stock === 0}
                                     onClick={addToCart}
                                 >
@@ -125,11 +152,14 @@ const ProductDetails = () => {
                                 <h3 className={styles.description}>{product.description}</h3>
                             </div>
                             <p className={styles.seller}>Sold By: <strong>{product.seller}</strong></p>
-                            <button className={styles.reviewBtn}>
-                                Submit Your Review
-                            </button>
+                            <ReviewModal />
                         </div>
                     </div>
+                    {product.reviews && product.reviews.length > 0 && (
+                        product.reviews.map(review => (
+                            <p>{review.comment}</p>
+                        ))
+                    )}
                 </>
             )}
         </>

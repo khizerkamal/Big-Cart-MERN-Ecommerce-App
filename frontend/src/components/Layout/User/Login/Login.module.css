@@ -29,6 +29,17 @@
     background: none;
     cursor: pointer;
 }
+.backButton{
+    width: 30px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    background: none;
+    cursor: pointer;
+}
+.backButton img{
+    width: 30px;
+}
 .right{
     border-left: 1px solid rgb(163, 163, 163);
     margin: 20px 0;

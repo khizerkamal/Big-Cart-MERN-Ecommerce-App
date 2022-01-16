@@ -40,12 +40,28 @@ const Login = () => {
         e.preventDefault();
         dispatch(login(email,password))
     }
+    const backFromSignup = () => {
+        setSignupModal(!signupModal)
+    }
+    const backFromForgotPassword = () => {
+        setForgotPasswordModal(!forgotPasswordModal)
+    }
 
     return (
         <div className={styles.modalMask}>
             <div className={`${styles.modalWrapper} ${signupModal ? styles.h70 : ''}`}>
                 <div onClick={back} className={styles.closeButton}>
                     <img src="/images/close.png" alt="close" />
+                </div>
+                <div onClick={backFromSignup} className={styles.backButton}>
+                    {signupModal && (
+                        <img src="/images/back.png" alt="back" />
+                    )}
+                </div>
+                <div onClick={backFromForgotPassword} className={styles.backButton}>
+                    {forgotPasswordModal && (
+                        <img src="/images/back.png" alt="back" />
+                    )}
                 </div>
                 <div className={styles.left}>
                     <img src="/images/login.svg" alt="login" />

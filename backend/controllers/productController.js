@@ -91,6 +91,7 @@ exports.deleteProduct = catchAsync(async (req,res,next) => {
 exports.createProductReview = catchAsync(async (req,res,next) => {
     const { rating,comment,productId } = req.body;
     const review = {
+        date: Date.now(),
         user: req.user._id,
         name: req.user.name,
         rating: Number(rating),
