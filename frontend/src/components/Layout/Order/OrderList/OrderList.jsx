@@ -4,6 +4,7 @@ import { useAlert } from 'react-alert'
 import MaterialTable from 'material-table'
 
 import styles from './OrderList.module.css'
+import getDate from '../../../../GetDate/GetDate'
 import Loader from '../../Loader/Loader'
 import MetaData from '../../MetaData'
 import { myOrders,clearErrors } from '../../../../store/actions/orderActions'
@@ -106,30 +107,6 @@ const OrderList = () => {
             }
         }
     ];
-    
-    function getDate(d) {
-        var day,month,year;
-        var result = d.match("[0-9]{2}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{4}");
-        if (null != result) {
-            var dateSplitted = result[ 0 ].split(result[ 1 ]);
-            day = dateSplitted[ 0 ];
-            month = dateSplitted[ 1 ];
-            year = dateSplitted[ 2 ];
-        }
-        result = d.match("[0-9]{4}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{2}");
-        if (null != result) {
-            dateSplitted = result[ 0 ].split(result[ 1 ]);
-            day = dateSplitted[ 2 ];
-            month = dateSplitted[ 1 ];
-            year = dateSplitted[ 0 ];
-        }
-        if (month > 12) {
-            var aux = day;
-            day = month;
-            month = aux;
-        }
-        return year + "/" + month + "/" + day;
-    }
 
     const setData = () => {
         var rows = [];

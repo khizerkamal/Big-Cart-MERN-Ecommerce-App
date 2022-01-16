@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { useAlert } from 'react-alert'
 
 import { getProductDetail,clearErrors } from '../../../store/actions/productsAction'
+import getDate from '../../../GetDate/GetDate'
 import { addItemToCart } from '../../../store/actions/cartActions'
 import { NEW_REVIEW_RESET } from '../../../store/constants/productConstants'
 import Loader from '../Loader/Loader'
@@ -11,6 +12,7 @@ import MetaData from '../MetaData'
 import styles from './ProductDetails.module.css'
 import { useParams } from 'react-router';
 import ReviewModal from './ReviewModal/ReviewModal'
+import Reviews from './Reviews/Reviews'
 
 const ProductDetails = () => {
     const [ quantity,setQuantity ] = useState(1)
@@ -67,10 +69,10 @@ const ProductDetails = () => {
                     <MetaData title={product.name} />
                     <div className={styles.container}>
                         <div className={styles.left}>
-                            {/* <Carousel
-                                autoPlay={true}
+                            <Carousel
+                                autoPlay={false}
                                 animation="slide"
-                                indicators={true}
+                                indicators={false}
                                 navButtonsAlwaysVisible={true}
                                 cycleNavigation={true}
                                 className={styles.container}
@@ -81,17 +83,17 @@ const ProductDetails = () => {
                                         backgroundColor: '#FFFFFF',
                                         borderRadius: 0,
                                         margin: 0,
-                                        width: 50,
+                                        width: 10,
                                     }
                                 }}
                             >
                                 {product.images && product.images.map(image => (
                                     <img className={styles.image} key={image.public_id} src={image.url} alt={product.title} />
                                 ))}
-                            </Carousel> */}
-                            {product.images && product.images.map(image => (
+                            </Carousel>
+                            {/* {product.images && product.images.map(image => (
                                 <img className={styles.image} key={image.public_id} src={image.url} alt={product.title} />
-                            ))}
+                            ))} */}
                         </div>
                         <div className={styles.right}>
                             <h2 className={styles.name}>{product.name}</h2>
@@ -156,9 +158,7 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     {product.reviews && product.reviews.length > 0 && (
-                        product.reviews.map(review => (
-                            <p>{review.comment}</p>
-                        ))
+                        <Reviews reviews={product.reviews} />
                     )}
                 </>
             )}

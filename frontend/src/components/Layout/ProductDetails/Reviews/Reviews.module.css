@@ -1,0 +1,67 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    border-top: 1px solid rgb(219, 219, 219);
+}
+.headerImgWrapper{
+    width: 45px;
+}
+.header h1{
+    margin-left: 20px;
+    font-size: 42px;
+}
+.reviewWrapper{
+    width: 50%;
+    margin: 20px auto 40px auto;
+    background: rgb(255, 244, 222);
+    padding: 10px;
+    padding-left: 20px;
+    border-left: 3px solid var(--bg-secondary);
+}
+.reviewHeaderWrapper{
+    display: flex;
+    align-items: center;
+}
+.reviewHeaderWrapper h3{
+    color: rgb(92, 92, 92);
+    margin-left: 10px;
+}
+.chip{
+    background: var(--bg-primary);
+    padding: 5px;
+    border-radius: 5px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chip span{
+    color: #fff;
+}
+.chip img{
+    width: 14px;
+    margin-left: 5px;
+}
+.comment{
+    color: rgb(92, 92, 92);
+    font-size: 18px;
+    margin: 10px;
+}
+.historyWrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+.historyWrapper span{
+    font-size: 13px;
+}
+.historyImgWrapper img{
+    width: 15px;
+    display: flex;
+    margin-right: 5px;
+}

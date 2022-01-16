@@ -9,7 +9,8 @@
     align-items: center;
 }
 .detailsBtn{
-    background:rgb(219, 219, 219);
+    background:rgb(214, 215, 255);
+    color: blue;
     padding: 8px 15px;
 }
 
