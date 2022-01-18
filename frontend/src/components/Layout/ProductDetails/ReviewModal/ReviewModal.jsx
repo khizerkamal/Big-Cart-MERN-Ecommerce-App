@@ -21,17 +21,6 @@ const ReviewModal = () => {
     const alert = useAlert();
     let { id } = useParams();
 
-    // useEffect(() => {
-    //     if (error) {
-    //         alert.error(error);
-    //         dispatch(clearErrors())
-    //     }
-    //     if (success) {
-    //         alert.success('Reivew posted successfully')
-    //         dispatch({ type: NEW_REVIEW_RESET })
-    //     }
-    // }, [dispatch, alert, error, success])
-
     const reviewHandler = () => {
         setReviewModal(!reviewModal)
         const formData = new FormData();

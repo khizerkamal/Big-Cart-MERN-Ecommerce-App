@@ -88,7 +88,9 @@ const ProductDetails = () => {
                                 }}
                             >
                                 {product.images && product.images.map(image => (
-                                    <img className={styles.image} key={image.public_id} src={image.url} alt={product.title} />
+                                    <div className={styles.carouselImgWrapper}>
+                                        <img className={styles.image} key={image.public_id} src={image.url} alt={product.title} />
+                                    </div>
                                 ))}
                             </Carousel>
                             {/* {product.images && product.images.map(image => (

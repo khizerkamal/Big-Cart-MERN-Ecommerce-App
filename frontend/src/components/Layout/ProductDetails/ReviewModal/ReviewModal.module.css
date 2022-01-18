@@ -43,9 +43,10 @@
     width: 35%;
     height: 40%;
     background: rgb(255, 255, 255);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     position: relative;
     display: flex;
+    border-bottom: 7px solid var(--bg-secondary);
 }
 .h70{
     height: 47%;
@@ -57,6 +58,7 @@
     background: none;
     cursor: pointer;
 }
+
 .contentWrapper{
     margin: 20px 0;
     padding: 0 20px;
@@ -71,10 +73,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom: 3px solid var(--bg-primary);
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(206, 206, 206);
 }
 .flexCenter{
     display: flex;
@@ -88,7 +88,7 @@
     align-items: center;
 }
 .ratingWrapper{
-    margin: 30px 0 10px 0;
+    margin: 25px 0 10px 0;
 }
 .comment{
     width: 70%;

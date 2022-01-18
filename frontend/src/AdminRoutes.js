@@ -6,6 +6,7 @@ import Header from './components/AdminPanel/Header/Header';
 import Sidebar from './components/AdminPanel/Sidebar/Sidebar';
 import AllProducts from './components/AdminPanel/Products/AllProducts/AllProducts';
 import ProtectedRoute from './Route/ProtectedRoute';
+import CreateProduct from './components/AdminPanel/Products/CreateProduct/CreateProduct';
 
 const AdminRoutes = () => {
     const [ active,setActive ] = useState(false);
@@ -16,7 +17,8 @@ const AdminRoutes = () => {
             <Sidebar onCollapse={containerFluid} />
             <div className={`container ${active ? 'active' : ''}`}>
                 <ProtectedRoute isAdmin={true} path="/admin/dashboard" component={Dashboard} exact />
-                <ProtectedRoute isAdmin={true} path="/admin/products/all" component={AllProducts} exact/>
+                <ProtectedRoute isAdmin={true} path="/admin/products/all" component={AllProducts} exact />
+                <ProtectedRoute isAdmin={true} path="/admin/products/create" component={CreateProduct} exact/>
             </div>
         </div>
     )

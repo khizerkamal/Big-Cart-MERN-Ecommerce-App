@@ -1,5 +1,5 @@
 :root{
-    --bg-main: #333;
+    --bg-main:rgb(241, 241, 241);
 }
 .bg1{
     background: linear-gradient(45deg,#4099ff,#73b4ff);

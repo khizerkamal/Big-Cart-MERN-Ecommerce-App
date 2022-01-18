@@ -20,8 +20,13 @@
 .left img{
     max-width: 300px;
 }
-.image{
+.carouselImgWrapper{
     width: 300px;
+}
+.image{
+   width: 100%;
+   height: auto;
+   object-fit: cover;
 }
 .right{
     max-width: 500px;
