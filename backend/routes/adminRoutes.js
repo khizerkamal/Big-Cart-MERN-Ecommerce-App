@@ -24,7 +24,12 @@ router
 router
     .route('/products')
     .get(authController.protect,authController.restrictTo('admin'),productController.getAdminProducts)
-    .post(authController.protect, authController.restrictTo('admin'), productController.createProduct)
+    .post(authController.protect,authController.restrictTo('admin'),productController.createProduct)
+
+router
+    .route('/products/:id')
+    .patch(authController.protect, authController.restrictTo('admin'), productController.updateProduct)
+    .delete(authController.protect, authController.restrictTo('admin'), productController.deleteProduct)
 
 
 module.exports = router

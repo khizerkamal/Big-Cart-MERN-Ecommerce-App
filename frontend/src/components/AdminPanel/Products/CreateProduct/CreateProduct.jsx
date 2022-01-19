@@ -32,7 +32,7 @@ const CreateProduct = () => {
             dispatch(clearErrors());
         }
         if (success) {
-            history.push('/admin/products');
+            history.push('/admin/products/all');
             alert.success('Product created successfully');
             dispatch({ type: CREATE_PRODUCT_RESET })
         }
@@ -136,37 +136,37 @@ const CreateProduct = () => {
                         />
                     </div>
                 </div>
-                <div className={styles.flexAlignCenter}>
-                    <div className={styles.imgInputWrapper}>
-                        <label className={styles.imagesLabel} htmlFor='customFile'>
-                            <h3 className={styles.imageHeading}>Select Product Images</h3>
-                            <img src="/images/add.png" alt="add" className={styles.addImg} />
-                        </label>
-                        <input
-                            type='file'
-                            name='product_images'
-                            className={styles.imagesInput}
-                            id='customFile'
-                            onChange={onChange}
-                            multiple
-                            accept="images/*"
-                        />
-                    </div>
-                    <div className={styles.productImagesWrapper}>
-                        {imagesPreview.map(img => (
-                            <div className={styles.productImageWrapper}>
-                                <img src={img} key={img} alt="Images Preview" className="productImg" />
-                            </div>
-                        ))}
-                    </div>
+                <div className={styles.borderedContainer}>
+                    <h3 className={styles.imageHeading}>Select Product Images</h3>
+                    <label className={styles.imagesLabel} htmlFor='customFile'>
+                        <img src="/images/add.png" alt="add" className={styles.addImg} />
+                    </label>
                 </div>
-                <button
-                    type="submit"
-                    className={styles.submitBtn}
-                    disabled={loading ? true : false}
-                >
-                    CREATE
-                </button>
+                <input
+                    type='file'
+                    name='product_images'
+                    className={styles.imagesInput}
+                    id='customFile'
+                    onChange={onChange}
+                    multiple
+                    accept="images/*"
+                />
+                <div className={styles.productImagesWrapper}>
+                    {imagesPreview.map(img => (
+                        <div className={styles.productImageWrapper}>
+                            <img src={img} key={img} alt="Images Preview" className="productImg" />
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.btnWrapper}>
+                    <button
+                        type="submit"
+                        className={styles.submitBtn}
+                        disabled={loading ? true : false}
+                    >
+                        CREATE
+                    </button>
+                </div>
             </form>
         </div>
     )

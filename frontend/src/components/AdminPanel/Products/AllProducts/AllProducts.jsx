@@ -1,13 +1,17 @@
 import React,{ useState,useEffect,Fragment,forwardRef } from 'react'
 import styles from './AllProducts.module.css'
 import { useDispatch,useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link,useHistory } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import MaterialTable from 'material-table'
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { FiEdit } from 'react-icons/fi';
 
 import Loader from '../../../Layout/Loader/ModalLoader'
 import MetaData from '../../../Layout/MetaData'
-import { adminProducts,clearErrors } from '../../../../store/actions/productsAction'
+import { adminProducts,clearErrors,deleteProduct } from '../../../../store/actions/productsAction'
+import { DELETE_PRODUCT_RESET } from '../../../../store/constants/productConstants'
+
 //MUI TABLE ICONS
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -48,7 +52,9 @@ const tableIcons = {
 const AllProducts = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
+    const history = useHistory();
     const { loading,error,products } = useSelector(state => state.products)
+    const { error: deleteError,isDeleted } = useSelector(state => state.deleteProduct)
 
     useEffect(() => {
         dispatch(adminProducts());
@@ -56,7 +62,16 @@ const AllProducts = () => {
             alert.error(error);
             dispatch(clearErrors());
         }
-    },[ dispatch,alert,error ])
+        if (deleteError) {
+            alert.error(deleteError);
+            dispatch(clearErrors());
+        }
+        if (isDeleted) {
+            alert.success("Deleted Successfully")
+            history.push('/admin/products/all')
+            dispatch({ type: DELETE_PRODUCT_RESET })
+        }
+    },[ dispatch,alert,error,deleteError,isDeleted,history ])
 
     const columns = [
         {
@@ -103,47 +118,60 @@ const AllProducts = () => {
                 name: product.name,
                 stock: product.stock,
                 price: `$${product.price}`,
-                action: <button
-                    onClick={() => {
-                       
-                    }}
-                    className={styles.detailsBtn}
-                >
-                    Details
-                </button>
+                action: (
+                    <div className={styles.btnsWrapper}>
+                        <button
+                            onClick={() => deleteProductHandler(product._id)}
+                            className={styles.editBtn}
+                        >
+                            <FiEdit />
+                        </button>
+                        <button
+                            onClick={() => deleteProductHandler(product._id)}
+                            className={styles.deleteBtn}
+                        >
+                            <RiDeleteBin5Line />
+                        </button>
+                    </div>
+                )
             })
         })
         return rows;
     }
+
+    const deleteProductHandler = (id) => {
+        dispatch(deleteProduct(id))
+    }
+
     return (
         <Fragment>
-        <MetaData title={"All Products"} />
-        {loading ? (
-            <div className={styles.loader}>
-                <Loader />
-            </div>
-        ) : (
-            <div className={styles.tableContainer}>
-                <MaterialTable
-                    columns={columns}
-                    data={setData()}
-                    title="All Products"
-                    icons={tableIcons}
-                    options={{
-                        search: true,
-                        headerStyle: {
-                            backgroundColor: '#01579b',
-                            color: '#FFF',
-                            textAlign: "center",
-                            whiteSpace: "nowrap",
-                            zIndex: "1"
-                        }
-                    }}
-                />
-            </div>
-        )}
-        {/* {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />} */}
-    </Fragment>
+            <MetaData title={"All Products"} />
+            {loading ? (
+                <div className={styles.loader}>
+                    <Loader />
+                </div>
+            ) : (
+                <div className={styles.tableContainer}>
+                    <MaterialTable
+                        columns={columns}
+                        data={setData()}
+                        title="All Products"
+                        icons={tableIcons}
+                        options={{
+                            search: true,
+                            headerStyle: {
+                                backgroundColor: '#01579b',
+                                color: '#FFF',
+                                textAlign: "center",
+                                whiteSpace: "nowrap",
+                                zIndex: "1"
+                            }
+                        }}
+                    />
+                </div>
+            )}
+            {/* {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />} */}
+        </Fragment>
     )
 }
 

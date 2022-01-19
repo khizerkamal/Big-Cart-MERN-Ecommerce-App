@@ -96,18 +96,20 @@ exports.updateProduct = catchAsync(async (req,res,next) => {
 })
 
 exports.deleteProduct = catchAsync(async (req,res,next) => {
-    const product = await Product.findByIdAndDelete(req.params.id);
+    const product = await Product.findById(req.params.id);
 
     if (!product) {
         return next(new AppError('No Product found with this id',404));
     }
-
-    res.status(204).json({
-        // 204 -> no content
-        status: 'success',
-        data: null  //In REST arch. its a practice to not send any data in delete operation
+    
+    // Deleting Product images from Cloudinary
+    for (let i = 0; i < product.images.length; i++){
+        await cloudinary.v2.uploader.destroy(product.images[i].public_id)
+    }
+    await product.remove();
+    res.status(200).json({  // 204 -> no content
+        success: true, //In REST arch. its a practice to not send any data in delete operation
     })
-
 })
 
 // ------------ REVIEWS ------------
