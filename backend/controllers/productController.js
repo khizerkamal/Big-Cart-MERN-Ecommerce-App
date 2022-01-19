@@ -78,20 +78,44 @@ exports.getProduct = catchAsync(async (req,res,next) => {
 })
 
 exports.updateProduct = catchAsync(async (req,res,next) => {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-        new: true, // To get back updated data
-        runValidators: true, //to run validators specified in schema
-      })
-
+    let product = await Product.findById(req.params.id)
     if (!product) {
         return next(new AppError('No Product found with this id',404));
     }
 
-    res.status(200).json({
-        status: 'success',
-        data: {
-            product
+    let images = []
+    if (typeof req.body.images === 'string') {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+    if (images !== undefined) {
+        // Deleting Product images from Cloudinary
+        for (let i = 0; i < product.images.length; i++){
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id)
         }
+        let imagesLinks = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: 'products'
+            });
+
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url
+            })
+        }
+        req.body.images = imagesLinks
+    }
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+    res.status(200).json({
+        success: true,
+        product
     })
 })
 

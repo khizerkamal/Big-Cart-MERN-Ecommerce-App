@@ -54,7 +54,7 @@ const AllProducts = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { loading,error,products } = useSelector(state => state.products)
-    const { error: deleteError,isDeleted } = useSelector(state => state.deleteProduct)
+    const { error: deleteError,isDeleted } = useSelector(state => state.deleteUpdateProduct)
 
     useEffect(() => {
         dispatch(adminProducts());
@@ -68,7 +68,7 @@ const AllProducts = () => {
         }
         if (isDeleted) {
             alert.success("Deleted Successfully")
-            history.push('/admin/products/all')
+            history.push('/admin/products')
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
     },[ dispatch,alert,error,deleteError,isDeleted,history ])
@@ -120,12 +120,13 @@ const AllProducts = () => {
                 price: `$${product.price}`,
                 action: (
                     <div className={styles.btnsWrapper}>
-                        <button
-                            onClick={() => deleteProductHandler(product._id)}
-                            className={styles.editBtn}
-                        >
-                            <FiEdit />
-                        </button>
+                        <Link to={`/admin/products/${product._id}`} >
+                            <button
+                                className={styles.editBtn}
+                            >
+                                <FiEdit />
+                            </button>
+                        </Link>
                         <button
                             onClick={() => deleteProductHandler(product._id)}
                             className={styles.deleteBtn}

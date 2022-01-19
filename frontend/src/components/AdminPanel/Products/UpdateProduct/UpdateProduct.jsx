@@ -1,14 +1,15 @@
 import React,{ useState,useEffect,Fragment } from 'react'
 
-import styles from './CreateProduct.module.css'
+import styles from '../CreateProduct/CreateProduct.module.css'
 import { useDispatch,useSelector } from 'react-redux'
 import { Link,useHistory } from 'react-router-dom'
+import { useParams } from 'react-router'
 import { useAlert } from 'react-alert'
 import MetaData from '../../../Layout/MetaData'
-import { createProduct,clearErrors } from '../../../../store/actions/productsAction'
-import { CREATE_PRODUCT_RESET } from '../../../../store/constants/productConstants'
+import { updateProduct,clearErrors,getProductDetail } from '../../../../store/actions/productsAction'
+import { UPDATE_PRODUCT_RESET } from '../../../../store/constants/productConstants'
 
-const CreateProduct = () => {
+const UpdateProduct = ({ match }) => {
     const [ name,setName ] = useState('');
     const [ price,setPrice ] = useState();
     const [ description,setDescription ] = useState('');
@@ -16,9 +17,14 @@ const CreateProduct = () => {
     const [ category,setCategory ] = useState('');
     const [ brand,setBrand ] = useState('');
     const [ images,setImages ] = useState([]);
+
+    const [ oldImages,setOldImages ] = useState([]);
     const [ imagesPreview,setImagesPreview ] = useState([]);
 
-    const { error,loading,product,success } = useSelector(state => state.newProduct)
+    const { error: updateError,loading,isUpdated } = useSelector(state => state.deleteUpdateProduct)
+    const { error,product } = useSelector(state => state.productDetails)
+    const { id } = useParams();
+
     const dispatch = useDispatch();
     const alert = useAlert();
     const history = useHistory();
@@ -27,16 +33,32 @@ const CreateProduct = () => {
         "Headphones","Clothes/Shoes","Beauty/Health","Sports","Outdoor","Home" ]
 
     useEffect(() => {
+        if (product && product._id !== id) {
+            dispatch(getProductDetail(id));
+        } else {
+            setName(product.name);
+            setPrice(product.price);
+            setDescription(product.description);
+            setCategory(product.category);
+            setBrand(product.seller);
+            setStock(product.stock)
+            setOldImages(product.images)
+        }
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-        if (success) {
-            history.push('/admin/products');
-            alert.success('Product created successfully');
-            dispatch({ type: CREATE_PRODUCT_RESET })
+        if (updateError) {
+            alert.error(updateError);
+            dispatch(clearErrors());
         }
-    },[ alert,dispatch,error,success,history ])
+        if (isUpdated) {
+            history.push('/admin/products');
+            alert.success('Product updated successfully');
+            dispatch(getProductDetail(id)); //minor bug solved by me
+            dispatch({ type: UPDATE_PRODUCT_RESET })
+        }
+    },[ alert,dispatch,error,history,isUpdated,product,id,updateError ])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -51,14 +73,14 @@ const CreateProduct = () => {
         images.forEach(img => {
             formData.append('images',img)
         })
-
-        dispatch(createProduct(formData))
+        dispatch(updateProduct(product._id,formData))
     }
 
     const onChange = e => {
         const files = Array.from(e.target.files)
         setImagesPreview([]);
         setImages([])
+        setOldImages([])
         files.forEach(file => {
             const reader = new FileReader();
             reader.onload = () => {
@@ -77,7 +99,7 @@ const CreateProduct = () => {
                 <div className={styles.imgWrapper}>
                     <img src="/images/stock.png" alt="stock" />
                 </div>
-                <h1>CREATE NEW PRODUCT</h1>
+                <h1>UPDATE PRODUCT</h1>
             </div>
             <form onSubmit={submitHandler} className={styles.form} >
                 <div className={styles.inputBox}>
@@ -152,6 +174,13 @@ const CreateProduct = () => {
                     accept="images/*"
                 />
                 <div className={styles.productImagesWrapper}>
+                    {oldImages && oldImages.map(img => (
+                        <div className={styles.productImageWrapper}>
+                            <img src={img.url} key={img} alt="Images Preview" className="productImg" />
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.productImagesWrapper}>
                     {imagesPreview.map(img => (
                         <div className={styles.productImageWrapper}>
                             <img src={img} key={img} alt="Images Preview" className="productImg" />
@@ -164,7 +193,7 @@ const CreateProduct = () => {
                         className={styles.submitBtn}
                         disabled={loading ? true : false}
                     >
-                        CREATE
+                        UPDATE
                     </button>
                 </div>
             </form>
@@ -172,4 +201,4 @@ const CreateProduct = () => {
     )
 }
 
-export default CreateProduct
+export default UpdateProduct
