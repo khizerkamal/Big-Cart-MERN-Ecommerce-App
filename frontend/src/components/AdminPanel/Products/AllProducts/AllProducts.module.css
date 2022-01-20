@@ -12,19 +12,25 @@
     display: flex;
 }
 .editBtn{
-    background:rgb(219, 219, 219);
     padding: 8px 15px;
-    margin-right: 10px;
+    margin: 0 3px;
     background:rgb(175, 200, 255);
     /* border: 1px solid blue; */
     color: blue;
 }
 .deleteBtn{
-    background:rgb(219, 219, 219);
     padding: 8px 15px;
     background:rgb(255, 213, 213);
+    margin: 0 3px;
     /* border: 1px solid rgb(255, 110, 110); */
     color: rgb(255, 54, 54);
+}
+.detailsBtn{
+    background:rgb(196, 255, 199);
+    padding: 8px 15px;
+    margin: 0 3px;
+    /* border: 1px solid blue; */
+    color: green;
 }
 
 @media only screen and (max-width: 915px){

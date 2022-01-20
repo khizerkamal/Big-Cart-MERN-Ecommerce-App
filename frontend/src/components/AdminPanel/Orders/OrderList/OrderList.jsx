@@ -1,16 +1,17 @@
 import React,{ useState,useEffect,Fragment,forwardRef } from 'react'
-import styles from './AllProducts.module.css'
+import styles from '../../Products/AllProducts/AllProducts.module.css'
 import { useDispatch,useSelector } from 'react-redux'
 import { Link,useHistory } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import MaterialTable from 'material-table'
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { FiEdit } from 'react-icons/fi';
+import {BiMessageSquareDetail} from 'react-icons/bi';
 
 import Loader from '../../../Layout/Loader/ModalLoader'
 import MetaData from '../../../Layout/MetaData'
-import { adminProducts,clearErrors,deleteProduct } from '../../../../store/actions/productsAction'
-import { DELETE_PRODUCT_RESET } from '../../../../store/constants/productConstants'
+import { allOrders,clearErrors } from '../../../../store/actions/orderActions'
+// import { DELETE_PRODUCT_RESET } from '../../../../store/constants/productConstants'
 
 //MUI TABLE ICONS
 import AddBox from '@material-ui/icons/AddBox';
@@ -28,6 +29,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import OrderDetails from './../../../Layout/Order/OrderDetails/OrderDetails';
 
 const tableIcons = {
     Add: forwardRef((props,ref) => <AddBox {...props} ref={ref} />),
@@ -49,55 +51,57 @@ const tableIcons = {
     ViewColumn: forwardRef((props,ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const AllProducts = () => {
+const OrderList = () => {
+    const [showModal, setShowModal] = useState(false)
+    const [orderId, setOrderId] = useState()
     const alert = useAlert();
     const dispatch = useDispatch();
     const history = useHistory();
-    const { loading,error,products } = useSelector(state => state.products)
-    const { error: deleteError,isDeleted } = useSelector(state => state.deleteUpdateProduct)
+
+    const { loading,error,orders } = useSelector(state => state.allOrder)
 
     useEffect(() => {
-        dispatch(adminProducts());
+        dispatch(allOrders());
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
-        if (deleteError) {
-            alert.error(deleteError);
-            dispatch(clearErrors());
-        }
-        if (isDeleted) {
-            alert.success("Deleted Successfully")
-            history.push('/admin/products')
-            dispatch({ type: DELETE_PRODUCT_RESET })
-        }
-    },[ dispatch,alert,error,deleteError,isDeleted,history ])
+        // if (deleteError) {
+        //     alert.error(deleteError);
+        //     dispatch(clearErrors());
+        // }
+        // if (isDeleted) {
+        //     alert.success("Deleted Successfully")
+        //     history.push('/admin/products')
+        //     dispatch({ type: DELETE_PRODUCT_RESET })
+        // }
+    },[ dispatch,alert,error ])
 
     const columns = [
         {
-            title: "ID",
-            field: "id",
+            title: "OrderId",
+            field: "orderid",
             cellStyle: {
                 textAlign: "center"
             }
         },
         {
-            title: "Name",
-            field: "name",
+            title: "No. of Items",
+            field: "numOfItems",
             cellStyle: {
                 textAlign: "center"
             }
         },
         {
-            title: "Stock",
-            field: "stock",
+            title: "Amount",
+            field: "amount",
             cellStyle: {
                 textAlign: "center"
             }
         },
         {
-            title: "Price",
-            field: "price",
+            title: "Status",
+            field: "status",
             cellStyle: {
                 textAlign: "center"
             }
@@ -112,15 +116,17 @@ const AllProducts = () => {
     ];
     const setData = () => {
         var rows = [];
-        products && products.forEach(product => {
+        orders && orders.forEach(order => {
             rows.push({
-                id: product._id,
-                name: product.name,
-                stock: product.stock,
-                price: `$${product.price}`,
+                orderid: order._id,
+                numOfItems: order.orderItems.length,
+                amount: `$${order.totalPrice}`,
+                status: order.orderStatus && String(order.orderStatus).includes('Delivered')
+                    ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
+                    : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
                 action: (
                     <div className={styles.btnsWrapper}>
-                        <Link to={`/admin/products/update/${product._id}`} >
+                        <Link to={`/admin/products/update/${order._id}`} >
                             <button
                                 className={styles.editBtn}
                             >
@@ -128,10 +134,19 @@ const AllProducts = () => {
                             </button>
                         </Link>
                         <button
-                            onClick={() => deleteProductHandler(product._id)}
+                            // onClick={() => deleteProductHandler(product._id)}
                             className={styles.deleteBtn}
                         >
                             <RiDeleteBin5Line />
+                        </button>
+                        <button
+                            onClick={() => {
+                                setShowModal(true)
+                                setOrderId(order._id)
+                            }}
+                            className={styles.detailsBtn}
+                        >
+                            <BiMessageSquareDetail />
                         </button>
                     </div>
                 )
@@ -140,40 +155,35 @@ const AllProducts = () => {
         return rows;
     }
 
-    const deleteProductHandler = (id) => {
-        dispatch(deleteProduct(id))
-    }
+    return  (
+    <Fragment>
+    <MetaData title={"ALL Orders"} />
+    {loading ? (
+        <div className={styles.loader}>
+            <Loader />
+        </div>
+    ) : (
+        <div className={styles.tableContainer}>
+            <MaterialTable
+                columns={columns}
+                data={setData()}
+                title="All Orders"
+                icons={tableIcons}
+                options={{
+                    search: true,
+                    headerStyle: {
+                        backgroundColor: '#01579b',
+                        color: '#FFF',
+                        textAlign: "center",
+                        whiteSpace: "nowrap",
+                        zIndex: "1"
+                    }
+                }}
+            />
+        </div>
+    )}
+    {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />}
+</Fragment>
+)};
 
-    return (
-        <Fragment>
-            <MetaData title={"All Products"} />
-            {loading ? (
-                <div className={styles.loader}>
-                    <Loader />
-                </div>
-            ) : (
-                <div className={styles.tableContainer}>
-                    <MaterialTable
-                        columns={columns}
-                        data={setData()}
-                        title="All Products"
-                        icons={tableIcons}
-                        options={{
-                            search: true,
-                            headerStyle: {
-                                backgroundColor: '#01579b',
-                                color: '#FFF',
-                                textAlign: "center",
-                                whiteSpace: "nowrap",
-                                zIndex: "1"
-                            }
-                        }}
-                    />
-                </div>
-            )}
-            {/* {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />} */}
-        </Fragment>
-    )
-}
-
-export default AllProducts
+export default OrderList;

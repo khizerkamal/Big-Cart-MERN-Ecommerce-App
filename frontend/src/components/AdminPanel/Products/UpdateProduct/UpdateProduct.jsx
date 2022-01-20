@@ -94,7 +94,7 @@ const UpdateProduct = ({ match }) => {
     }
     return (
         <div className={styles.pageWrapper}>
-            <MetaData title={"Create New Product"} />
+            <MetaData title={"Update Product"} />
             <div className={styles.headerWrapper}>
                 <div className={styles.imgWrapper}>
                     <img src="/images/stock.png" alt="stock" />

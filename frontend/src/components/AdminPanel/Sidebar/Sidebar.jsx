@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from 'react';
 import { useSelector } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './Sidebar.module.css'
 import { BsFillArrowLeftSquareFill,BsFillArrowRightSquareFill,BsSearch,BsBasket2,BsStar } from "react-icons/bs";
 import { MdOutlineDashboard,MdOutlineCreateNewFolder } from "react-icons/md";
@@ -52,7 +52,7 @@ const Sidebar = ({ onCollapse }) => {
                         </Link>
                     </li>
                     <li className={styles.menuItemWrapper}>
-                        <a   
+                        <a
                             onClick={expandFunc}
                             className={`${styles.menuItem} ${styles.productBorder}`}
                         >
@@ -63,7 +63,7 @@ const Sidebar = ({ onCollapse }) => {
                         </a>
                         <ul className={`${styles.subMenu} ${expand ? styles.active : ""}`}>
                             <li>
-                                <Link to={"/admin/products/all"} className={styles.menuItemExpand}>
+                                <Link to={"/admin/products"} className={styles.menuItemExpand}>
                                     <div>
                                         <VscSaveAll />
                                     </div>

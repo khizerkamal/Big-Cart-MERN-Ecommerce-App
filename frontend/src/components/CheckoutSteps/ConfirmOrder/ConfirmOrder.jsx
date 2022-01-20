@@ -19,7 +19,7 @@ const ConfirmOrder = () => {
         const data = {
             itemsPrice,
             shippingPrice,
-            taxPrice,
+            taxPrice,   
             totalPrice
         }
         sessionStorage.setItem('orderInfo', JSON.stringify(data))

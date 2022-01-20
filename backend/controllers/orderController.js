@@ -45,7 +45,7 @@ exports.getSingleOrder = catchAsync(async (req,res,next) => {
 })
 
 // Get Loggedin user Orders => /api/v1/orders/me
-exports.myOrders = catchAsync(async (req,res,next) => {
+exports.myOrders = catchAsync(async (req,res,next) => { 
     const orders = await Order.find({ user: req.user.id })
     if (!orders) {
         return next(new AppError("No Orders Found", 404))
