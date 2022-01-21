@@ -59,7 +59,7 @@ exports.myOrders = catchAsync(async (req,res,next) => {
 // Get all Orders - adminRoutes => /api/v1/admin/orders
 exports.allOrders = catchAsync(async (req,res,next) => {
     const orders = await Order.find();
-    let totalAmount;
+    let totalAmount = 0;
     orders.forEach(order => {
         totalAmount += order.totalPrice;
     })

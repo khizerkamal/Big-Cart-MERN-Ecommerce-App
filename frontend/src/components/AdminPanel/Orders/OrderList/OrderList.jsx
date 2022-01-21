@@ -172,7 +172,7 @@ const OrderList = () => {
                 options={{
                     search: true,
                     headerStyle: {
-                        backgroundColor: '#01579b',
+                        backgroundColor: '#000',
                         color: '#FFF',
                         textAlign: "center",
                         whiteSpace: "nowrap",
