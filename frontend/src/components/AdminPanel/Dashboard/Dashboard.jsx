@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import {allOrders} from '../../../store/actions/orderActions'
 import {getProducts} from '../../../store/actions/productsAction'
 import ModalLoader from '../../Layout/Loader/ModalLoader';
+import SalesChart from './Charts/SalesChart/SalesChart';
+import TopOrders from './Charts/SalesChartByCategory/TopOrders';
+import BarChart from './Charts/BarChart/BarChart';
 
 
 const Dashboard = () => {
@@ -26,11 +29,17 @@ const Dashboard = () => {
         if(order.orderStatus === "Processing") pendingOrders +=1;
     })
     const cardData = [
+        // {   
+        //     bg: "bg1",
+        //     title: "Total Users",
+        //     amount: "34",
+        //     icon: <FaUsers />,
+        // },
         {   
             bg: "bg1",
-            title: "Total Users",
-            amount: "34",
-            icon: <FaUsers />,
+            title: "Total Earning",
+            amount: totalAmount.toFixed(),
+            icon: <BsCartPlusFill />,
         },
         {   
             bg: "bg2",
@@ -51,12 +60,6 @@ const Dashboard = () => {
             icon: <AiOutlineStock />,
         }
         ,
-        {   
-            bg: "bg2",
-            title: "Total Earning",
-            amount: totalAmount.toFixed(2),
-            icon: <BsCartPlusFill />,
-        },
     ]
     useEffect(() => {
         dispatch(allOrders());
@@ -78,6 +81,19 @@ const Dashboard = () => {
                             icon={card.icon}
                         />
                     ))}
+                </div>
+                <div className={styles.chartsWrapper}>
+                    <div className={styles.lineChartWrapper}>
+                        <div className={styles.lineChart}>
+                            <SalesChart />
+                        </div>
+                    </div>
+                    <div className={styles.doughNutChartWrapper}>
+                        <TopOrders />
+                    </div>
+                </div>
+                <div className={styles.barChartWrapper}>
+                        <BarChart />
                 </div>
             </div>
            )}        
