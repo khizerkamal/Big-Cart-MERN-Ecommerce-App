@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const fileUpload = require ('express-fileupload')
+const path = require ('path')
 
 const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
@@ -30,6 +31,14 @@ app.use('/api/v1/user',userRoutes)
 app.use('/api/v1/admin',adminRoutes)
 app.use('/api/v1/payment',paymentRoutes)
 app.use('/api/v1/order', orderRoutes)
+
+// For Deployment
+if(process.env.NODE_ENV === "PRODUCTION"){
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'))
+    })
+}
 
 // HANDLING UNHANDLED ROUTES
 app.all('*', (req, res, next) => {
