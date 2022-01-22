@@ -1,11 +1,11 @@
-// const dotenv = require('dotenv')
+const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const cloudinary = require ('cloudinary')
 
-if(process.env.NODE_ENV !== 'PRODUCTION'){
-    require('dotenv').config({path: './config.env'})
-}
-
+// if(process.env.NODE_ENV !== 'PRODUCTION'){
+//     require('dotenv').config({path: './config.env'})
+// }
+dotenv.config({path: './config.env'})
 const app = require('./app')
 
 //Setting up Cloudinary Configuration
@@ -16,10 +16,7 @@ cloudinary.config({
 })
 
 // const DB = process.env.DATABASE.replace('<PASSWORD>',process.env.DATABASE_PASSWORD)
-const DB = process.env.DATABASE.replace(
-    '<PASSWORD>',
-    process.env.DATABASE_PASSWORD
-)
+const DB = process.env.DATABASE
 
 mongoose
     .connect(DB,{
