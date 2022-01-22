@@ -1,7 +1,7 @@
 const Product = require('../models/productModel')
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
-const APIFeatures = require('../utils/APIFeatures')
+const APIFeatures = require('../utils/apiFeatures')
 const cloudinary = require('cloudinary')
 
 exports.createProduct = catchAsync(async (req,res,next) => {

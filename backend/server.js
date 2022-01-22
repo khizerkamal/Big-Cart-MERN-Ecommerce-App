@@ -1,11 +1,11 @@
-const dotenv = require('dotenv')
+// const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const cloudinary = require ('cloudinary')
 
-// if(process.env.NODE_ENV !== 'PRODUCTION'){
-//     require('dotenv').config({path: './config.env'})
-// }
-dotenv.config({path: './config.env'})
+if(process.env.NODE_ENV !== 'PRODUCTION'){
+    require('dotenv').config({path: 'backend/config.env'})
+}
+
 const app = require('./app')
 
 //Setting up Cloudinary Configuration
