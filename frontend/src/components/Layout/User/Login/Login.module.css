@@ -10,9 +10,8 @@
     background: rgba(0,0,0,0.6);
 }
 .modalWrapper{
-    width: 50%;
-    height: 50%;
-    /* width: 500px; */
+    width: 60%;
+    height: 60%;
     background: rgb(255, 255, 255);
     border-radius: 10px;
     position: relative;
@@ -20,7 +19,7 @@
     z-index: 20;
 }
 .h70{
-    height: 60%;
+    height: 65%;
 }    
 .closeButton{
     position: absolute;
@@ -33,7 +32,7 @@
     width: 30px;
     position: absolute;
     top: 8px;
-    left: 50%;
+    left: 52%;
     background: none;
     cursor: pointer;
 }
@@ -41,9 +40,12 @@
     width: 30px;
 }
 .right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-left: 1px solid rgb(163, 163, 163);
     margin: 20px 0;
-    padding: 0 20px;
     width: 100%;
 }
 .right h2{
@@ -70,17 +72,17 @@
     padding-left: 10px; 
     border: none;
     outline: none;
-    font-size: 13px;
+    font-size: 14px;
     background:rgb(241, 241, 241);
 }
 .inputBox{
     display: flex;
     align-items: center;
-    width: 85%;
-    padding: 10px;
-    margin-left: 5%;
+    min-width: 300px;
+    padding: 14px;
     background:rgb(241, 241, 241);
     margin-bottom: 15px;
+    box-sizing: border-box;
 }
 .inputBox img{
     width: 12px;
@@ -123,9 +125,7 @@
 .hide{
     display: none;
 }
-.displayFP{
-    margin-top: 65px;
-}
+
 @media only screen and (max-width: 920px){
     .modalWrapper{
         width: 70%;
@@ -138,14 +138,17 @@
     .modalWrapper{
         width: 95%;
     }
+    .backButton{
+        left: 2%;
+    }
     .right{
         border-left: none;
     }
-    .inputBox{
-        width: 93.5%;
-        margin-left: 0;
-    }
     .signup{
         margin-top: 10px;
+    }
+    .inputBox{
+        min-width: 280px;
+        padding: 11px;
     }
 }

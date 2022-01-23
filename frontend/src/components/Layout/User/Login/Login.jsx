@@ -64,11 +64,16 @@ const Login = () => {
                     )}
                 </div>
                 <div className={styles.left}>
-                    <img src="/images/login.svg" alt="login" />
+                    {signupModal ? (
+                            <img src="/images/signup.gif" alt="signup" />
+                        ) : forgotPasswordModal ? (
+                            <img src="/images/forgotPassword.gif" alt="forgotPassword" />
+                        ) : <img src="/images/login.gif" alt="login" />
+                    }
                 </div>
                 <div className={styles.right}>
                     <div className={`${signupModal || forgotPasswordModal ? styles.hide : ''}`}>
-                        <h2>Login</h2>
+                        <h2>LOGIN</h2>
                         <form onSubmit={submit} className={styles.form}>
                             <div className={styles.inputWrapper}>
                                 <div className={styles.inputBox}>

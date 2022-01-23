@@ -32,6 +32,11 @@ app.use('/api/v1/admin',adminRoutes)
 app.use('/api/v1/payment',paymentRoutes)
 app.use('/api/v1/order', orderRoutes)
 
+// HANDLING UNHANDLED ROUTES
+app.all('*', (req, res, next) => {
+    next(new AppError(`Cann't Find ${req.originalUrl} on this Server!`, 404))
+})
+
 // For Deployment
 if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, '../frontend/build')))
@@ -40,10 +45,6 @@ if(process.env.NODE_ENV === "production"){
     })
 }
 
-// HANDLING UNHANDLED ROUTES
-app.all('*', (req, res, next) => {
-    next(new AppError(`Cann't Find ${req.originalUrl} on this Server!`, 404))
-})
   
 app.use(globalErrorHandler);
 

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cloudinary = require ('cloudinary')
 
 if(process.env.NODE_ENV !== 'production'){
-    require('dotenv').config({path: 'backend/config.env'})
+    require('dotenv').config({path: './config.env'})
 }
 
 const app = require('./app')

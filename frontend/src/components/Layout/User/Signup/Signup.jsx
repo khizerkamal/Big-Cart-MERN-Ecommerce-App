@@ -62,7 +62,7 @@ const Signup = ({ onClose }) => {
         <div className={styles.right}>
             <MetaData title={'Register User'} />
             <div>
-                <h2>Signup</h2>
+                <h2>SIGNUP</h2>
                 <form className={styles.form} onSubmit={submit} encType='multipart/form-data'>
                     <div className={styles.inputWrapper}>
                         <div className={styles.inputBox}>
