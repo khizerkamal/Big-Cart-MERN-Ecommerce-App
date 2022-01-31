@@ -61,14 +61,13 @@ const Header = () => {
                     <span className={styles.logoCart}>Cart</span>
                 </div>
             </Link>
-            {/* <Route render={({ history }) => <Search history={history} />} /> */}
             <Search />
             <div className={styles.desktop}>
                 {user && !loading ? (
                     <Fragment>
                         <div
-                            onMouseEnter={() => setShowDrawer(!showDrawer)}
-                            onMouseLeave={() => setShowDrawer(!showDrawer)}
+                            onMouseEnter={() => setShowDrawer(true)}
+                            onMouseLeave={() => setShowDrawer(false)}
                             className={styles.userWrapper}
                         >
                             <span className={styles.username}>{user.name}</span>
@@ -79,7 +78,7 @@ const Header = () => {
                                     className={styles.avatar}
                                 />
                                 <div
-                                    onMouseLeave={() => setShowDrawer(!showDrawer)}
+                                    onMouseLeave={() => setShowDrawer(false)}
                                     className={`${styles.drp_box} ${showDrawer ? styles.open : ''}`}
                                 >
                                     <div className={styles.listWrapper}>
@@ -125,7 +124,7 @@ const Header = () => {
                             </div>
                         </div>
                     </Fragment>
-                ) : !loading && (
+                ) : (
                     <Link
                         to={{
                             pathname: '/login',

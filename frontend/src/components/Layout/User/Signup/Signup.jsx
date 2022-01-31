@@ -58,6 +58,7 @@ const Signup = ({ onClose }) => {
     useEffect(() => {
         if (isAuthenticated) history.goBack();
     },[ isAuthenticated,onClose, history ])
+
     return (
         <div className={styles.right}>
             <MetaData title={'Register User'} />
@@ -78,7 +79,7 @@ const Signup = ({ onClose }) => {
                         <div className={styles.inputBox}>
                             <img src="/images/envelope.svg" alt="email" />
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="Enter Your Email"
                                 name="email"
                                 value={email}

@@ -52,7 +52,8 @@ const tableIcons = {
 };
 
 const OrderList = () => {
-    const [showModal, setShowModal] = useState(false)
+    const [detailModal, setDetailModal] = useState(false)
+    const [updateModal, setUpdateModal] = useState(false)
     const [orderId, setOrderId] = useState()
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -126,13 +127,17 @@ const OrderList = () => {
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
                 action: (
                     <div className={styles.btnsWrapper}>
-                        <Link to={`/admin/products/update/${order._id}`} >
+                        {/* <Link to={`/admin/products/update/${order._id}`} > */}
                             <button
+                                onClick={() => {
+                                    setUpdateModal(true)
+                                    setOrderId(order._id)
+                                }}
                                 className={styles.editBtn}
                             >
                                 <FiEdit />
                             </button>
-                        </Link>
+                        {/* </Link> */}
                         <button
                             // onClick={() => deleteProductHandler(product._id)}
                             className={styles.deleteBtn}
@@ -141,7 +146,7 @@ const OrderList = () => {
                         </button>
                         <button
                             onClick={() => {
-                                setShowModal(true)
+                                setDetailModal(true)
                                 setOrderId(order._id)
                             }}
                             className={styles.detailsBtn}
@@ -182,7 +187,8 @@ const OrderList = () => {
             />
         </div>
     )}
-    {showModal && <OrderDetails onClose={() => setShowModal(false)} orderId={orderId} />}
+    {detailModal && <OrderDetails onClose={() => setDetailModal(false)} orderId={orderId} />}
+    {updateModal && <OrderDetails onClose={() => setUpdateModal(false)} orderId={orderId} />}
 </Fragment>
 )};
 
