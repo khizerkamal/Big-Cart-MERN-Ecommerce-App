@@ -12,8 +12,7 @@ const OrderDetails = ({ onClose,orderId }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const { loading,error,order = {} } = useSelector(state => state.orderDetail)
-    const { shippingInfo,orderItems,paymentInfo,user,totalPrice,orderStatus } = order;
-    console.log(orderItems);
+    const { shippingInfo,orderItems,paymentInfo,user,totalPrice,orderStatus, itemsPrice, shippingPrice, taxPrice } = order;
 
     useEffect(() => {
         dispatch(orderDetails(orderId));
@@ -56,7 +55,19 @@ const OrderDetails = ({ onClose,orderId }) => {
                                         <h3 className={styles.elementDetail}>{shippingDetails}</h3>
                                     </div>
                                     <div className={styles.leftContentElementWrapper}>
-                                        <h3 className={styles.elementLabel}>Amount:</h3>
+                                        <h3 className={styles.elementLabel}>Items Cost:</h3>
+                                        <h3 className={styles.elementDetail}>{itemsPrice && itemsPrice}$</h3>
+                                    </div>
+                                    <div className={styles.leftContentElementWrapper}>
+                                        <h3 className={styles.elementLabel}>Tax:</h3>
+                                        <h3 className={styles.elementDetail}>{taxPrice && taxPrice}$</h3>
+                                    </div>
+                                    <div className={styles.leftContentElementWrapper}>
+                                        <h3 className={styles.elementLabel}>Shipping:</h3>
+                                        <h3 className={styles.elementDetail}>{shippingPrice && shippingPrice}$</h3>
+                                    </div>
+                                    <div className={styles.leftContentElementWrapper}>
+                                        <h3 className={styles.elementLabel}>Total:</h3>
                                         <h3 className={styles.elementDetail}>{totalPrice && totalPrice}$</h3>
                                     </div>
                                 </div>
