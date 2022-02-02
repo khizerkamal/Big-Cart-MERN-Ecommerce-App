@@ -30,6 +30,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import OrderDetails from './../../../Layout/Order/OrderDetails/OrderDetails';
+import OrderStatus from '../OrderStatus/OrderStatus'
+import getDate from '../../../../GetDate/GetDate'
 
 const tableIcons = {
     Add: forwardRef((props,ref) => <AddBox {...props} ref={ref} />),
@@ -80,8 +82,8 @@ const OrderList = () => {
 
     const columns = [
         {
-            title: "OrderId",
-            field: "orderid",
+            title: "Date",
+            field: "date",
             cellStyle: {
                 textAlign: "center"
             }
@@ -119,11 +121,13 @@ const OrderList = () => {
         var rows = [];
         orders && orders.forEach(order => {
             rows.push({
-                orderid: order._id,
+                date: getDate(order.createdAt),
                 numOfItems: order.orderItems.length,
                 amount: `$${order.totalPrice}`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
-                    ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
+                    ? <p style={{ color: 'green' }}>{order.orderStatus}</p> :
+                    order.orderStatus && String(order.orderStatus).includes('Packing') 
+                    ? <p style={{ color: 'blue' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
                 action: (
                     <div className={styles.btnsWrapper}>
@@ -188,7 +192,7 @@ const OrderList = () => {
         </div>
     )}
     {detailModal && <OrderDetails onClose={() => setDetailModal(false)} orderId={orderId} />}
-    {updateModal && <OrderDetails onClose={() => setUpdateModal(false)} orderId={orderId} />}
+    {updateModal && <OrderStatus onClose={() => setUpdateModal(false)} orderId={orderId} />}
 </Fragment>
 )};
 

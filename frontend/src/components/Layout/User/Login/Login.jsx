@@ -2,6 +2,7 @@ import React,{ useState,useEffect } from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch,useSelector } from 'react-redux'
 import { useHistory,useLocation } from 'react-router-dom'
+import { GoogleLogin } from 'react-google-login';
 
 import styles from './Login.module.css'
 import { login,clearErrors } from '../../../../store/actions/userActions'
@@ -45,6 +46,14 @@ const Login = () => {
     }
     const backFromForgotPassword = () => {
         setForgotPasswordModal(!forgotPasswordModal)
+    }
+
+    const responseSuccessGoogle = (response) => {
+        console.log(response)
+    }
+
+    const responseFailureGoogle = (response) => {
+        
     }
 
     return (
@@ -105,6 +114,15 @@ const Login = () => {
                                 <button type="submit" className={styles.loginButton}>
                                     {loading ? "Loading..." : "Login"}
                                 </button>
+                            </div>
+                            <div>
+                                <GoogleLogin
+                                    clientId="991911046882-uekb56qmqqv8tefad9tknfm6ct09u37v.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={responseSuccessGoogle}
+                                    onFailure={responseFailureGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                />,
                             </div>
                             <p
                                 onClick={() => setSignupModal(true)}

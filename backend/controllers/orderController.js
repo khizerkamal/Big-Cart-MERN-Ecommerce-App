@@ -78,19 +78,23 @@ exports.updateOrder = catchAsync(async (req,res,next) => {
     }
 
     order.orderItems.forEach(async item => {
-        await updateStock(item.product,item.quantity);
+        await updateStock(item.product,item.quantity,next);
     })
+    
     order.orderStatus = req.body.status;
     order.deliveredAt = Date.now();
     await order.save();
 
     res.status(200).json({
-        status: "success"
+        success: true
     })
 })
 
-async function updateStock(id,qty){
+async function updateStock(id,qty,next){
     const product = await Product.findById(id);
+    if(!product) {
+        return next(new AppError('Product Not Found!', 400))
+    }
     product.stock = product.stock - qty;
     await product.save({ validateBeforeSave: false});
 }
