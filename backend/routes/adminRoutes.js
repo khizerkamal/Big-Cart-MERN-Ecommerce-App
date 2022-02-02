@@ -18,7 +18,10 @@ router
 router
     .route('/orders')
     .get(authController.protect,authController.restrictTo('admin'),orderController.allOrders)
-    .put(authController.protect,authController.restrictTo('admin'),orderController.updateOrder)
+
+router
+    .route('/order/:id')
+    .patch(authController.protect,authController.restrictTo('admin'),orderController.updateOrder)
     .delete(authController.protect,authController.restrictTo('admin'),orderController.deleteOrder)
 
 router

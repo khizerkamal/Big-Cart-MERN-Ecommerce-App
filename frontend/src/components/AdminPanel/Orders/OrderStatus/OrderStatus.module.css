@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
+.modalMask{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+}
+.modalWrapper{
+    width: 40%;
+    height: 35%;
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    z-index: 20;
+    border-left: 5px solid #01579b;
+    overflow:auto;
+}
+.closeButton{
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    cursor: pointer;
+}
+.closeButton img{
+    width: 27px;
+    z-index: 1;
+}
+.loaderWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.absolute{
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+}
+.topBar{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background: rgb(219, 219, 219);
+    border-bottom: 2px solid rgb(68, 68, 68);
+}
+.topBar h2{
+    font-family: 'Padauk', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+}
+
+/* Select CSS */
+.selectWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+select {
+    background-color: white;
+    border: 2px solid var(--bg-primary);
+    border-radius: 4px;
+    width: 300px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+  
+    /* reset */
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  
+  /* arrows */
+  
+  select.classic {
+    background-image:
+      linear-gradient(45deg, transparent 50%, blue 50%),
+      linear-gradient(135deg, blue 50%, transparent 50%),
+      linear-gradient(to right, skyblue, skyblue);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+  }
+  
+  select.classic:focus {
+    background-image:
+      linear-gradient(45deg, white 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, white 50%),
+      linear-gradient(to right, gray, gray);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+    border-color: grey;
+    outline: 0;
+  }
+
+.updateBtnWrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.updateBtnWrapper button{
+  padding: 12px 40px;
+  background-color: var(--bg-primary);
+  border-radius: 50px;
+  color: #fff;
+  outline: none;
+  border: 2px solid var(--bg-primary);
+  transition: .2s all cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.updateBtnWrapper button:hover{
+  background-color: #fff;
+  color: var(--bg-primary);
+  border: 2px solid var(--bg-primary);
+}
+
+@media only screen and (max-width: 915px){
+    
+}
+@media only screen and (max-width: 720px){
+    .modalWrapper{
+        width: 95%;
+        height: 40vh;
+    }
+    .closeButton{
+        top: 10px;
+        right: 11px;
+    }
+    .closeButton img{
+        width: 18px;
+    }
+    .topBar{
+        justify-content: flex-start;
+    }
+    .topBar h2{
+        margin-left: 5px;
+        font-size: 15px;
+        font-weight: none;
+    }
+    .container{
+        flex-wrap: wrap;
+    }
+}
