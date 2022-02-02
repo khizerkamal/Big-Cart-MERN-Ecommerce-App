@@ -19,5 +19,5 @@ export default function getDate(d) {
         day = month;
         month = aux;
     }
-    return year + "/" + month + "/" + day;
+    return day + " - " + month + " - " + year;
 }
